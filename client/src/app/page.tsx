@@ -2,7 +2,9 @@ import React from 'react'
 
 function Home() {
   return (
-    <div>Home new text added</div>
+    <div>Home new text added i made some changes
+      
+    </div>
   )
 }
 
