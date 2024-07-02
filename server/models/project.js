@@ -33,10 +33,10 @@ const Schema=mongoose.Schema({
       type:Number,
       required:true
     },
-    useOfFunds:{
+    useOfFunds:[{
       type:String,
       required:true
-    },
+    }],
     expectedROI:{
       type:Number,
       required:true
@@ -46,23 +46,17 @@ const Schema=mongoose.Schema({
       required:true
     },
     legalDocuments:{
-      type:String,
+      type:mongoose.SchemaTypes.Buffer,
       required:true
     },
-    startupId:{
-      type:String,
-      required:true
-    },
+    
     //pitchDeck,Businessplan,exec_summary
     createdAt:{
       type:Date,
       required:true
     },
-    /*updatedAt:{
-      type:Date,
-      required:true
-    },*/
+
     
 });
 
-module.exports=mongoose.model('project',Schema);
+module.exports=mongoose.model('Project',Schema);

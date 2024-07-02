@@ -5,10 +5,10 @@ const Schema=mongoose.Schema({
         type:String,
         required:true
     },
-    userId:{
-      type:String,
-      required:true
-    },
+    // userId:{
+    //   type:String,
+    //   required:true
+    // },
     fullName:{
       type:String,
       required:true
@@ -25,54 +25,59 @@ const Schema=mongoose.Schema({
       type:String,
       required:true
     },
-    investmentPreferences:{
-      type:Number,
-      required:true
-    },
-    investmentMaxRange:{
-      type:String,
-      required:true
-    },
-    investmentMinRange:{
-      type:String,
-      required:true
-    },
-    stagePreference:{
-      type:String,
-      required:true
-    },
-    geographicalPreferences:{
-      type:String,
-      required:true
-    },
-    investmentType:{
-      type:String,
-      required:true
-    },
+    investmentPreferences:[
+      {
+        type:String
+      }
+    ],
+    // investmentMaxRange:{
+    //   type:Number,
+    //   required:true
+    // },
+    // investmentMinRange:{
+    //   type:Number,
+    //   required:true
+    // },
+    // stagePreference:{
+    //   type:String,
+    //   required:true
+    // },
+    // geographicalPreferences:{
+    //   type:String,
+    //   required:true
+    // },
+    // investmentType:{
+    //   type:String,
+    //   required:true
+    // },
     professionalBio:{
       type:String,
-      required:true
     },
     linkedInProfile:{
       type:String,
       required:true
     },
-    pastInvestments:{
+    pastInvestments:[{
       type:String,
-      required:true
-    },
-    expectedROI:{
-      type:Number,
-      required:true
-    },
-    involvementLevel:{
-      type:String,
-      required:true
-    },
+    }],
+    // expectedROI:{
+    //   type:Number,
+    // },
+    // involvementLevel:{
+    //   type:String,
+    //   required:true
+    // },
     accreditedInvestorStatus:{
       type:Boolean,
       required:true
     },
+    verificationDate:{
+      type:Date,
+      required:true
+    },
+    verificationDocuments:[{
+      type:mongoose.SchemaTypes.Buffer,
+    }],
     //doc Of Accreditation,proof of funds
     createdAt:{
       type:Date,
@@ -85,4 +90,4 @@ const Schema=mongoose.Schema({
     
 });
 
-module.exports=mongoose.model('investor',Schema);
+module.exports=mongoose.model('Investor',Schema);

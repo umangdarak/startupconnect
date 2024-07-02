@@ -21,14 +21,14 @@ const Schema=mongoose.Schema({
       type:Number,
       required:true
     },
-    /*location:{
+    location:{
       type:String,
       required:true
     },
-    yearFounded:{
-      type:Date,
-      required:true
-    },*/
+    // yearFounded:{
+    //   type:Date,
+    //   required:true
+    // },
     contactPerson:{
       type:String,
       required:true
@@ -49,22 +49,19 @@ const Schema=mongoose.Schema({
       type:String,
       required:true
     },*/
-    revenueCurrent:{
+    revenue:{
       type:Number,
       required:true
     },
-    revenueAnnual:{
-      type:Number,
-      required:true
-    },
-    fundingHistory:{
-      type:String,
-      required:true
-    },
-    financialProjections:{
-      type:String,
-      required:true
-    },
+    // revenueAnnual:{
+    //   type:Number,
+    //   required:true
+    // },
+    // fundingHistory:{
+    //   type:String,
+    //   required:true
+    // },
+    
     createdAt:{
       type:Date,
       required:true
@@ -76,4 +73,4 @@ const Schema=mongoose.Schema({
 
 });
 
-module.exports=mongoose.model('startup',Schema);
+module.exports=mongoose.model('Startup',Schema);
