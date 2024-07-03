@@ -75,13 +75,6 @@ const Schema=mongoose.Schema({
       type:Boolean,
       required:true
     },
-    verificationDate:{
-      type:Date,
-      required:true
-    },
-    verificationDocuments:[{
-      type:mongoose.SchemaTypes.Buffer,
-    }],
     //doc Of Accreditation,proof of funds
     createdAt:{
       type:Date,
