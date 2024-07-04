@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import '@radix-ui/themes/styles.css';
-import { Theme } from '@radix-ui/themes';
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 import { HeaderPage } from "@/app/header";
-
+import { ReduxProvider } from "@/lib/storeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -20,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Theme appearance="light">
-          <HeaderPage/>
-        {children}
-        </Theme>
-        </body>
+        <ReduxProvider>
+          <Theme appearance="light">
+            <HeaderPage />
+            {children}
+          </Theme>
+        </ReduxProvider>
+      </body>
     </html>
   );
 }
