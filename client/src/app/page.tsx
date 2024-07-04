@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import {useDispatch, useSelector } from 'react-redux';
 import { AppDispatch ,RootState} from '@/lib/store';
-import { userLogin } from '@/lib/slices/authSlice';
+import { userLogin, userLogout } from '@/lib/slices/authSlice';
 function Home() {
   const router=useRouter();
   // useEffect(()=>{
@@ -18,6 +18,9 @@ function Home() {
     }))
 
   }
+  const handleLogout=()=>{
+    dispatch(userLogout());
+  }
   const authstate=useSelector((state:RootState)=>state.auth.token)
   return (
    <div>
@@ -25,7 +28,7 @@ function Home() {
         login
     </Button>
     <Text>{authstate}</Text>
-    <Button>
+    <Button onClick={handleLogout}>
       logout
     </Button>
    </div>

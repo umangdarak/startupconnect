@@ -17,6 +17,10 @@ const Schema=mongoose.Schema({
       type:String,
       required:true
     },
+    phoneNumber:{
+      type:String,
+      required:true,
+    },
     professionalTitle:{
       type:String,
       required:true
@@ -34,28 +38,10 @@ const Schema=mongoose.Schema({
         type:String
       }
     ],
-    // investmentMaxRange:{
-    //   type:Number,
-    //   required:true
-    // },
-    // investmentMinRange:{
-    //   type:Number,
-    //   required:true
-    // },
-    // stagePreference:{
-    //   type:String,
-    //   required:true
-    // },
-    // geographicalPreferences:{
-    //   type:String,
-    //   required:true
-    // },
-    // investmentType:{
-    //   type:String,
-    //   required:true
-    // },
+   
     professionalBio:{
       type:String,
+      required:true
     },
     linkedInProfile:{
       type:String,
