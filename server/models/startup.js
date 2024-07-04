@@ -53,6 +53,10 @@ const Schema=mongoose.Schema({
       type:String,
       required:true
     },
+    linkedInProfile:{
+      type:String,
+      required:true
+    },
     /*visionStatement:{
       type:String,
       required:true
@@ -69,7 +73,13 @@ const Schema=mongoose.Schema({
     //   type:String,
     //   required:true
     // },
-    
+    verificationDate:{
+      type:Date,
+      required:true
+    },
+    verificationDocuments:[{
+      type:mongoose.SchemaTypes.Buffer,
+    }],
     createdAt:{
       type:Date,
       required:true
