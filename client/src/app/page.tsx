@@ -5,12 +5,10 @@ import React, { useEffect } from 'react'
 function Home() {
   const router=useRouter();
   useEffect(()=>{
-    router.push('/login');
-  },[])
+    router.push('/auth/login');
+  })
   return (
-    <div>Home new text added i made some changes
-      
-    </div>
+   <></>
   )
 }
 

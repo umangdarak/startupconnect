@@ -13,7 +13,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 export default function Login() {
-  const router=useRouter();
+  const router = useRouter();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [userType, setUserType] = useState<string>("buyer");
@@ -39,33 +39,17 @@ export default function Login() {
 
     return errors;
   };
-  /*const handleSubmit = async (event: React.FormEvent) => {
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const err = validate();
     setError(err);
     if (Object.keys(err).length === 0) {
-      const res = await fetch(`${url}/auth/login`, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({
-          email: email,
-          password: password,
-          userType: userType,
-        }),
-      });
-      if (!res.ok) {
-        const data = await res.json();
-        setError({ fetchError: data["error"] });
-        setAlertVisible(true);
-      }
-      const data = await res.json();
-      localStorage.setItem("userData", JSON.stringify({...data,userType:userType}));
-      router.push('/');
-
+      
     } else {
       setAlertVisible(true);
     }
-  };*/
+  };
   return (
     <div className="flex flex-row justify-center items-center h-screen w-full">
       <Box
@@ -75,7 +59,9 @@ export default function Login() {
       >
         <Card size="4" variant="ghost">
           <Box>
-            <Text className="text-3xl font-medium">Welcome to StartupConnect!</Text>
+            <Text className="text-3xl font-medium">
+              Welcome to StartupConnect!
+            </Text>
             <TextField.Root
               type="email"
               placeholder="Enter your email"
@@ -120,11 +106,11 @@ export default function Login() {
                 </Text>
               </Flex>
             </Flex>
-            {/* <div className="flex flex-row items-center w-full justify-center mt-4">
+            <div className="flex flex-row items-center w-full justify-center mt-4">
               <Button className="my-3" size="3" onClick={handleSubmit}>
                 <Text>Login</Text>
               </Button>
-            </div> */}
+            </div>
           </Box>
           <Box className="mt-4">
             <Text>
