@@ -75,7 +75,7 @@ export default function Login() {
       >
         <Card size="4" variant="ghost">
           <Box>
-            <Text className="text-3xl font-medium">Welcome to Rentify!</Text>
+            <Text className="text-3xl font-medium">Welcome to StartupConnect!</Text>
             <TextField.Root
               type="email"
               placeholder="Enter your email"
