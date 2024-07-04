@@ -11,7 +11,6 @@ import {
 } from "@radix-ui/themes";
 import React, { useState } from "react";
 import Link from "next/link";
-//import { url } from "../../../config";
 import { useRouter } from "next/navigation";
 export default function Login() {
   const router=useRouter();
