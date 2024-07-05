@@ -10,28 +10,90 @@ export default function RegisterInvestor() {
     const [professionalTitle,setProfessionalTitle]=useState<string>();
     const [company,setCompany]=useState<string>();
     const [location,setLocation]=useState<string>();
-    const [investmentPreferences,setInvestmentPreferences]=useState<string>();
     const [professionalBio,setProfessionalBio]=useState<string>();
     const [linkedInProfile,setLinkedInProfile]=useState<string>();
-    const [pastInvestments,setPastInvestments]=useState<string>();
     const [accreditedInvestorStatus,setAccreditedInvestorStatus]=useState<string>();
     const [errors,setErrors]=useState<{    email?: string;
       password?: string;
-      fetchError?: string;
       phoneNumber?:string;
-    
+      fullName?:string;
+      professionalTitle?:string;
+      company?:string;
+      location?:string;
+      investmentPreferences?:string;
+      professionalBio?:string;
+      linkedInProfile?:string;
+      pastInvestments?:string;
+      accreditedInvestorStatus?:string;
+      fetchError?: string;
     }>();
 
     const validate=()=>{
       const errors:{    email?: string;
         password?: string;
-       
         phoneNumber?:string;
+        fullName?:string;
+        professionalTitle?:string;
+        company?:string;
+        location?:string;
+        professionalBio?:string;
+        linkedInProfile?:string;
+        accreditedInvestorStatus?:string;
         fetchError?: string;
       }={}
       if(!email){
         errors["email"]="Email does not exist";
-      }else{}
+      }else if (!/\S+@\S+\.\S+/.test(email)) {
+        errors.email = "Email is invalid";
+      }
+
+      if (!password) {
+        errors.password = "Password is required";
+      } else if (password.length < 6) {
+        errors.password = "Password must be at least 6 characters";
+      }
+
+      if(!phoneNumber) {
+        errors.phoneNumber = "Phone Number is required";
+      } else if (phoneNumber.length < 11) {
+        errors.phoneNumber = "PhoneNumber must be of 10 characters";
+      }
+
+      if(!fullName) {
+        errors.fullName = "Full Name is required";
+      }// else if (fullName.length < 11) {
+      //   errors.password = "PhoneNumber must be of 10 characters";
+      // }
+
+      if(!professionalTitle) {
+        errors.professionalTitle = "Professional Title is required";
+      }
+      // } else if (professionalTitle.length < 11) {
+      //   errors.professionalTitle = "PhoneNumber must be of 10 characters";
+      // }
+
+      if(!company) {
+        errors.company = "Company Name is required";
+      }
+
+      if(!location) {
+        errors.location = "Location is required";
+      }
+
+      if(!professionalBio) {
+        errors.professionalBio = "Professional Bio is required";
+      }
+
+      if(!linkedInProfile) {
+        errors.linkedInProfile = "LinkedIn Profile is required";
+      }
+
+      if(!accreditedInvestorStatus) {
+        errors.accreditedInvestorStatus = "Accredited Investor Status is required";
+      }
+
+      
+      return errors;
     }
 
 
@@ -82,12 +144,7 @@ export default function RegisterInvestor() {
             value={location}
             onChange={(e)=>{setLocation(e.target.value);}}
             />
-            <TextField.Root
-            type='text'
-            placeholder='InvestmentPreferences'
-            value={investmentPreferences}
-            onChange={(e)=>{setInvestmentPreferences(e.target.value);}}
-            />
+      
             <TextField.Root
             type='text'
             placeholder='ProfessionalBio'
@@ -100,12 +157,7 @@ export default function RegisterInvestor() {
             value={linkedInProfile}
             onChange={(e)=>{setLinkedInProfile(e.target.value);}}
             />
-            <TextField.Root
-            type='text'
-            placeholder='PastInvestments'
-            value={pastInvestments}
-            onChange={(e)=>{setPastInvestments(e.target.value);}}
-            />
+            
             <TextField.Root
             type='text'
             placeholder='AccreditedInvestorStatus'
