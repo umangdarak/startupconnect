@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body  >
         <ReduxProvider>
           <Theme appearance="light">
             <HeaderPage />

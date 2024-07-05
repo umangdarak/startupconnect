@@ -16,7 +16,7 @@ export default function Login() {
   const router = useRouter();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const [userType, setUserType] = useState<string>("buyer");
+  const [userType, setUserType] = useState<string>("");
   const [error, setError] = useState<{
     email?: string;
     password?: string;
@@ -36,8 +36,6 @@ export default function Login() {
     } else if (password.length < 6) {
       errors.password = "Password must be at least 6 characters";
     }
-  
-
     return errors;
   };
 
@@ -52,17 +50,31 @@ export default function Login() {
     }
   };
   return (
-    <div className="flex flex-row justify-center items-center h-screen w-full">
-      <Box
+    <div className="flex flex-row justify-center items-center h-screen">
+     {userType?.length==0?
+     <div className="flex flex-col justify-center items-center border-solid border-customBlack border rounded-full p-10"
+     >
+        <Text className="text-customBlack font-mono">
+          Are you a Investor or an Entrepreneur/Startup Company?
+        </Text>
+        <div className="flex flex-row justify-between w-full px-6">
+        <Button className=" mb-5">
+          <Text className="text-white font-mono">Investor</Text>
+        </Button>
+        <Button>
+          <Text className="text-white font-mono">Entrepreneur/Startup</Text>
+        </Button></div>
+      </div>:<>Hello</>}
+
+
+
+      {/* <Box
         width="600px"
         className="border-black bg-slate-100 p-10 rounded-lg"
         height="auto"
       >
         <Card size="4" variant="ghost">
           <Box>
-            <Text className="text-3xl font-medium">
-              Welcome to StartupConnect!
-            </Text>
             <TextField.Root
               type="email"
               placeholder="Enter your email"
@@ -147,7 +159,7 @@ export default function Login() {
             </Flex>
           </AlertDialog.Content>
         </AlertDialog.Root>
-      )}
+      )} */}
     </div>
   );
 }
