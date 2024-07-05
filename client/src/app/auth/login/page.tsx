@@ -58,17 +58,13 @@ export default function Login() {
           Are you a Investor or an Entrepreneur/Startup Company?
         </Text>
         <div className="flex flex-row justify-between w-full px-6">
-        <Button className=" mb-5">
+        <Button className=" mb-5" onClick={(e)=>setUserType("Investor")}>
           <Text className="text-white font-mono">Investor</Text>
         </Button>
-        <Button>
+        <Button className="" onClick={(e)=>setUserType("Startup")}>
           <Text className="text-white font-mono">Entrepreneur/Startup</Text>
         </Button></div>
-      </div>:<>Hello</>}
-
-
-
-      {/* <Box
+      </div>:<><Box
         width="600px"
         className="border-black bg-slate-100 p-10 rounded-lg"
         height="auto"
@@ -94,31 +90,6 @@ export default function Login() {
             {error?.password && (
               <Text className="text-red-600">{error.password}</Text>
             )}
-            <Flex align="start" direction="row" gap="3" className="mt-2">
-              <Text>Are you a Buyer or Seller?</Text>
-              <Flex asChild gap="2">
-                <Text as="label" size="2">
-                  <Radio
-                    name="usertype"
-                    value="buyer"
-                    checked={userType === "buyer"}
-                    onChange={() => setUserType("buyer")}
-                  />
-                  Buyer
-                </Text>
-              </Flex>
-              <Flex asChild gap="2">
-                <Text as="label" size="2">
-                  <Radio
-                    name="usertype"
-                    value="seller"
-                    checked={userType === "seller"}
-                    onChange={() => setUserType("seller")}
-                  />
-                  Seller
-                </Text>
-              </Flex>
-            </Flex>
             <div className="flex flex-row items-center w-full justify-center mt-4">
               <Button className="my-3" size="3" onClick={handleSubmit}>
                 <Text>Login</Text>
@@ -159,7 +130,11 @@ export default function Login() {
             </Flex>
           </AlertDialog.Content>
         </AlertDialog.Root>
-      )} */}
+      )}</>}
+
+
+
+      
     </div>
   );
 }

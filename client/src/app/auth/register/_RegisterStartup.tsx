@@ -2,7 +2,7 @@
 import { Box,Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react'
 
-export default function RegisterInvestor() {
+export default function RegisterStartup() {
     const [phoneNumber,setPhoneNumber]=useState<string>();
     const [email,setEmail]=useState<string>();
     const [password,setPassword]=useState<string>();
