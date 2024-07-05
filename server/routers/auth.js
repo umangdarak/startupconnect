@@ -24,7 +24,7 @@ Router.post('/registerinvestor',(req,res)=>{
                 linkedInProfile:linkedInProfile,
                 pastInvestments:pastInvestments,
                 accreditedInvestorStatus:accreditedInvestorStatus
-            });
+            }).catch((e)=>res.state(404).json({"error":e}));
             investor.save().then(()=>{
                 res.state(200).json({"message":"User succesfully created"});
             })
@@ -36,6 +36,9 @@ Router.post('/registerinvestor',(req,res)=>{
     else{
         res.status(400).json({"error":"User Already Exists"});
     }
+});
+Router.post('/registerstartup',(req,res)=>{
+    
 })
 
 
