@@ -3,8 +3,8 @@ import { Box,Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react'
 
 export default function RegisterInvestor() {
-  const [phoneNumber,setPhoneNumber]=useState<string>();
-  const [email,setEmail]=useState<string>();
+    const [phoneNumber,setPhoneNumber]=useState<string>();
+    const [email,setEmail]=useState<string>();
     const [password,setPassword]=useState<string>();
     const [fullName,setFullName]=useState<string>();
     const [professionalTitle,setProfessionalTitle]=useState<string>();
@@ -15,9 +15,24 @@ export default function RegisterInvestor() {
     const [linkedInProfile,setLinkedInProfile]=useState<string>();
     const [pastInvestments,setPastInvestments]=useState<string>();
     const [accreditedInvestorStatus,setAccreditedInvestorStatus]=useState<string>();
-    const [errors,setErrors]=useState<[key:string,item:string]>();
-
+    const [errors,setErrors]=useState<{    email?: string;
+      password?: string;
+      fetchError?: string;
+      phoneNumber?:string;
     
+    }>();
+
+    const validate=()=>{
+      const errors:{    email?: string;
+        password?: string;
+       
+        phoneNumber?:string;
+        fetchError?: string;
+      }={}
+      if(!email){
+        errors["email"]="Email does not exist";
+      }else{}
+    }
 
 
   return (<div className='flex justify-center'>
