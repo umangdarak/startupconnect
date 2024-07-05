@@ -3,8 +3,8 @@ import { Box,Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react'
 
 export default function RegisterInvestor() {
-    const [investorId,setInvestorID]=useState<string>();
-    const [email,setEmail]=useState<string>();
+  const [phoneNumber,setPhoneNumber]=useState<string>();
+  const [email,setEmail]=useState<string>();
     const [password,setPassword]=useState<string>();
     const [fullName,setFullName]=useState<string>();
     const [professionalTitle,setProfessionalTitle]=useState<string>();
@@ -15,18 +15,16 @@ export default function RegisterInvestor() {
     const [linkedInProfile,setLinkedInProfile]=useState<string>();
     const [pastInvestments,setPastInvestments]=useState<string>();
     const [accreditedInvestorStatus,setAccreditedInvestorStatus]=useState<string>();
-    const [createdAt,setCreatedAt]=useState<string>();
+    const [errors,setErrors]=useState<[key:string,item:string]>();
 
-  return (
+    
+
+
+  return (<div className='flex justify-center'>
     <Box className='flex flex-col w-screen items-center'>
         <Text>Register!!</Text>
         <Box className='bg-slate-500 w-1/2'>
-            <TextField.Root
-            type='text'
-            placeholder='InvestorID'
-            value={investorId}
-            onChange={(e)=>{setInvestorID(e.target.value);}}
-            />
+           
             <TextField.Root
             type='email'
             placeholder='Email'
@@ -44,6 +42,12 @@ export default function RegisterInvestor() {
             placeholder='FullName'
             value={fullName}
             onChange={(e)=>{setFullName(e.target.value);}}
+            />
+            <TextField.Root
+            type='text'
+            placeholder='PhoneNumber'
+            value={phoneNumber}
+            onChange={(e)=>{setPhoneNumber(e.target.value);}}
             />
             <TextField.Root
             type='text'
@@ -93,13 +97,9 @@ export default function RegisterInvestor() {
             value={accreditedInvestorStatus}
             onChange={(e)=>{setAccreditedInvestorStatus(e.target.value);}}
             />
-            <TextField.Root
-            type='datetime-local'
-            placeholder='CreatedAt'
-            value={createdAt}
-            onChange={(e)=>{setCreatedAt(e.target.value);}}
-            />
+         
         </Box>
     </Box>
+    </div>
   )
 }

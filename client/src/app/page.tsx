@@ -7,30 +7,30 @@ import { AppDispatch ,RootState} from '@/lib/store';
 import { userLogin, userLogout } from '@/lib/slices/authSlice';
 function Home() {
   const router=useRouter();
-  // useEffect(()=>{
-  //   router.push('/auth/login');
-  // })
-  const dispatch=useDispatch<AppDispatch>();
-  const handle=()=>{
-    dispatch(userLogin({
-      user:{'works':false},
-      token: '1234455'
-    }))
+  useEffect(()=>{
+    router.push('/auth/login');
+  })
+  // const dispatch=useDispatch<AppDispatch>();
+  // const handle=()=>{
+  //   dispatch(userLogin({
+  //     user:{'works':false},
+  //     token: '1234455'
+  //   }))
 
-  }
-  const handleLogout=()=>{
-    dispatch(userLogout());
-  }
-  const authstate=useSelector((state:RootState)=>state.auth.token)
+  // }
+  // const handleLogout=()=>{
+  //   dispatch(userLogout());
+  // }
+  // const authstate=useSelector((state:RootState)=>state.auth.token)
   return (
    <div>
-    <Button onClick={handle}>
+    {/* <Button onClick={handle}>
         login
     </Button>
     <Text>{authstate}</Text>
     <Button onClick={handleLogout}>
       logout
-    </Button>
+    </Button> */}
    </div>
   )
 }
