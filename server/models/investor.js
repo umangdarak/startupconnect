@@ -5,6 +5,10 @@ const Schema=mongoose.Schema({
         type:String,
         required:true
     },
+    phoneNumber:{
+      type:String,
+      required:true,
+    },
     email:{
       type:String,
       required:true,
@@ -33,11 +37,6 @@ const Schema=mongoose.Schema({
       type:String,
       required:true
     },
-    investmentPreferences:[
-      {
-        type:String
-      }
-    ],
    
     professionalBio:{
       type:String,
@@ -47,9 +46,7 @@ const Schema=mongoose.Schema({
       type:String,
       required:true
     },
-    pastInvestments:[{
-      type:String,
-    }],
+    
     // expectedROI:{
     //   type:Number,
     // },

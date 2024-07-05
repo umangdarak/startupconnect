@@ -1,9 +1,17 @@
 const mongoose=require("mongoose");
 
 const Schema=mongoose.Schema({
+    fullName:{
+      type:String,
+      required:true
+    },
     startupId:{
         type:String,
         required:true
+    },
+    phoneNumber:{
+      type:String,
+      required:true,
     },
     email:{
       type:String,
@@ -73,13 +81,13 @@ const Schema=mongoose.Schema({
     //   type:String,
     //   required:true
     // },
-    verificationDate:{
-      type:Date,
+    patentApplicationNumber:{
+      type:String,
       required:true
     },
-    verificationDocuments:[{
-      type:mongoose.SchemaTypes.Buffer,
-    }],
+    // verificationDocuments:[{
+    //   type:mongoose.SchemaTypes.Buffer,
+    // }],
     createdAt:{
       type:Date,
       required:true
