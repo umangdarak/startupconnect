@@ -6,9 +6,9 @@ export const HeaderPage = () => {
   return (
     <div className='flex flex-row w-screen h-16 rounded-br-md rounded-bl-md'>
       <div className='flex flex-row items-center gap-3 px-10 justify-between w-full'>
-        <Link href="/auth/login" className='gap-3 px-10 button2'>
-      <Text className='  text-2xl text-customBlack'>STARTUP </Text>
-      <Text className=' text-2xl text-customBlack'>CONNECT</Text>
+        <Link href="/auth/login" className='gap-3 px-10 button1'>
+      <Text className='  text-2xl text-customBlack'>Startup </Text>
+      <Text className=' text-2xl text-customBlack'>Connect</Text>
       </Link>
       <div className='flex flex-row gap-3 '>
         <Link href="/auth/login">
