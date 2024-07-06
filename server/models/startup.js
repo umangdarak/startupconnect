@@ -25,7 +25,7 @@ const Schema=mongoose.Schema({
       type:String,
       required:true
     },
-    registrationNumber:{
+    patentApplicationNumber:{
       type:String,
       required:true
     },
@@ -57,10 +57,10 @@ const Schema=mongoose.Schema({
       type:String,
       required:true
     },
-    missionStatement:{
-      type:String,
-      required:true
-    },
+    // missionStatement:{
+    //   type:String,
+    //   required:true
+    // },
     linkedInProfile:{
       type:String,
       required:true
