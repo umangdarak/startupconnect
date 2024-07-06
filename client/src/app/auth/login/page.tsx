@@ -119,8 +119,8 @@ export default function Login() {
 
                 </div>
                 
-                <div className="my-6">
-                    <Button className="w-full rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none" onClick={handleSubmit}>Login</Button>
+                <div className="my-6 flex flex-row justify-center w-full">
+                    <Button className="button1 rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none" onClick={handleSubmit}>Login</Button>
                 </div>
                 <p className="text-center text-sm text-gray-500">Don&#x27;t have an account yet?
                     <Link href="/auth/register"
