@@ -3,13 +3,14 @@ const Investor=require('../models/investor')
 const Router=express.Router();
 const bcrypt=require('bcryptjs');
 const uid=require('uid')
-Router.post('/registerinvestor',(req,res)=>{
-    const {email,fullName,password,phoneNumber,professionalTitle,companyOrganization,location,investmentPreferences,professionalBio,linkedInProfile,pastInvestments,accreditedInvestorStatus}=req.body;
-    const userExists=Investor.findOne({email:email,fullName:fullName,phoneNumber:phoneNumber});
+Router.post('/registerinvestor',async (req,res)=>{
+    const {email,fullName,password,phoneNumber,professionalTitle,companyOrganization,location,professionalBio,linkedInProfile,accreditedInvestorStatus}=req.body;
+    const userExists=await Investor.findOne({email:email,fullName:fullName,phoneNumber:phoneNumber});
     if(!userExists){
         try{
-        const investorId=uid(16);
-        bcrypt.hash(password,10).then((pass)=>{
+        const investorId=uid.uid(16);
+        const date= Date.now();
+        bcrypt.hash(password,10).then(async(pass)=>{
             const investor=new Investor({
                 investorId:investorId,
                 fullName:fullName,
@@ -19,18 +20,20 @@ Router.post('/registerinvestor',(req,res)=>{
                 professionalTitle:professionalTitle,
                 companyOrganization:companyOrganization,
                 location:location,
-                investmentPreferences:investmentPreferences,
                 professionalBio:professionalBio,
                 linkedInProfile:linkedInProfile,
-                pastInvestments:pastInvestments,
-                accreditedInvestorStatus:accreditedInvestorStatus
-            }).catch((e)=>res.state(404).json({"error":e}));
-            investor.save().then(()=>{
-                res.state(200).json({"message":"User succesfully created"});
-            })
-        })}
+                accreditedInvestorStatus:accreditedInvestorStatus,
+                createdAt:date
+            });
+            
+            await investor.save().then(()=>{
+                res.status(200).json({"message":"User succesfully created"});
+            });
+        })
+        
+    }
         catch(e){
-            res.state(400).json({"error":e});
+            res.status(400).json({"error":e.message});
         }
     }
     else{
