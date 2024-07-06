@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body  >
         <ReduxProvider>
-          <Theme appearance="light">
+          <Theme>
             <HeaderPage />
             {children}
           </Theme>

@@ -98,12 +98,12 @@ export default function Login() {
           
            <div
     className="relative mx-auto w-full   px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
-      <Button onClick={()=>{setUserType("");setShowForm(false);}} className="bg-transparent hover:">
+      <Button onClick={()=>{setUserType("");setShowForm(false);}} className="bg-transparent button1">
             <ArrowBackIosIcon fontSize="small" sx={{ color: '#141619' }}/>
           </Button>
     <div className="w-full">
         <div className="text-center">
-            <h1 className="text-3xl font-semibold text-gray-900">Login</h1>
+            <h1 className="text-3xl font-semibold text-customBlack">Login</h1>
             {/* <p className="mt-2 text-gray-500">Sign in below to access your account</p> */}
         </div>
         <div className="mt-5">

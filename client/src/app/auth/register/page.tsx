@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import RegisterInvestor from "./_RegisterInvestor";
 import RegisterStartup from "./_RegisterStartup";
 import { motion } from "framer-motion";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
 
 export default function Register() {
   const [userType, setUserType] = useState<string>("");
@@ -50,15 +52,13 @@ export default function Register() {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, ease: "backIn" }}
-        >
-          <Button
-            onClick={() => {
-              setUserType("");
-              setShowForm(false);
-            }}
-          >
-            Back
+          className="flex flex-col items-center h-screen"
+        ><div className="flex flex-row items-start w-1/2 justify-self-center ">
+           <Button onClick={()=>{setUserType("");setShowForm(false);}} className="bg-transparent button1">
+            <ArrowBackIosIcon fontSize="small" sx={{ color: '#141619' }}/>
           </Button>
+          
+          </div>
           {userType === "Investor" ? (
             <div>
               <RegisterInvestor />
