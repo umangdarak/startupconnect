@@ -1,3 +1,5 @@
+import { TextField, TextareaAutosize } from '@mui/material';
+import { Button, TextArea } from '@radix-ui/themes';
 import React from 'react';
 
 export default function Page() {
@@ -5,134 +7,80 @@ export default function Page() {
     <div className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden" style={{ width: '75%' }}>
       <form className="py-4 px-6" action="" method="POST">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-              Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              placeholder="Enter your name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-              Email
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
-              Password
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="phoneNumber">
-              Phone Number
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="phoneNumber"
-              type="tel"
-              placeholder="Enter your phone number"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="linkedInProfile">
-              LinkedIn Profile
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="linkedInProfile"
-              type="text"
-              placeholder="LinkedIn Profile"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="companyName">
-              Company Name
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="companyName"
-              type="text"
-              placeholder="Company Name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="registrationNumber">
-              Registration Number
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="registrationNumber"
-              type="text"
-              placeholder="Registration Number"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="industry">
-              Industry
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="industry"
-              type="text"
-              placeholder="Industry"
-            />
-          </div>
-          <div className="col-span-2 mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="companyDescription">
-              Company Description
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="companyDescription"
-              type="text"
-              placeholder="Company Description"
-            />
-          </div>
-          <div className="col-span-2 mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="contactPerson">
-              Person In Contact
-            </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="contactPerson"
-              type="text"
-              placeholder="Person In Contact"
-            />
-          </div>
-          <div className="col-span-2 mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="message">
-              Message
-            </label>
-            <textarea
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="message"
-              placeholder="Enter any additional information"
-            ></textarea>
-          </div>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Name">
+            Name
+          </label>
+        <TextField type="text" required id="outlined-basic" name="Name" placeholder="Enter your Name" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
-        <div className="flex items-center justify-center mb-4">
-          <button
-            className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Submit
-          </button>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Email">
+            Email
+          </label>
+        <TextField type="email" required id="outlined-basic" name="Email" placeholder="Enter your Mail" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Password">
+            Password
+          </label>
+        <TextField type="password" required id="outlined-basic" name="Password" placeholder="Enter your Password" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Phone Number">
+            Phone Number
+          </label>
+        <TextField type="text" required id="outlined-basic" name="Phone Number" placeholder="Enter your Password" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="LinkedIn Profile">
+            LinkedIn Profile
+          </label>
+        <TextField type="text" required id="outlined-basic" name="LinkedIn Profile" placeholder="Enter your LinkedIn Profile" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Company Name">
+            Company Name
+          </label>
+        <TextField type="text" required id="outlined-basic" name="Comapny Name" placeholder="Enter your Company Name" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        {/* <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Registration Number">
+            Registration Number
+          </label>
+        <TextField type="text" required id="outlined-basic" name="Registered Number" placeholder="Enter your Registered Number" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div> */}
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Patent Application Number">
+            Patent Application Number
+          </label>
+        <TextField type="text" required id="outlined-basic" name="Patent Application Number" placeholder="Enter your Patent Application Number" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Industry">
+            Industry
+          </label>
+        <TextField type="text" required id="outlined-basic" name="Industry" placeholder="Enter your Industry" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4 flex-col flex col-span-2">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Person In Contact">
+            Contact Person
+        </label>
+        <div className='flex flex-row'>
+        <TextField type="text" required id="outlined-basic" name="Person In Contact" placeholder="Enter the contact person name" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        <TextField type="text" required id="outlined-basic" name="Person In Contact" placeholder="Enter the contact person details" size="small" className=" appearance-none rounded w-full px-1 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        </div>
+        <div className="mb-4 col-span-2">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Company Description">
+            Company Description
+          </label>
+        <TextArea  required id="outlined-basic" name="Company Description" placeholder="Enter your Company Description" size="3" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="col-span-2 flex items-center justify-center mb-4">
+        <Button variant="soft" className='button1'>
+        Submit
+        </Button>
+        </div>
         </div>
       </form>
     </div>
