@@ -2,7 +2,33 @@ const express=require('express');
 const Investor=require('../models/investor')
 const Router=express.Router();
 const bcrypt=require('bcryptjs');
-const uid=require('uid')
+const uid=require('uid');
+const { json } = require('body-parser');
+
+Router.post('/login',async(req,res)=>{
+    const {email,password,userType}=req.body;
+    try{
+        if(userType==='Investor'){
+            const investor=await Investor.findOne({email});
+            if(investor){
+
+            }else{
+                
+            }
+        }else if(userType==='Startup'){
+
+        }else{
+            res.status(400).json({"error":"Invalid UserType"});
+        }
+    }
+    catch(e){
+        res.status(400).json({"error":e.message})
+    }
+})
+
+
+
+
 Router.post('/registerinvestor',async (req,res)=>{
     const {email,fullName,password,phoneNumber,professionalTitle,companyOrganization,location,professionalBio,linkedInProfile,accreditedInvestorStatus}=req.body;
     const userExists=await Investor.findOne({email:email,fullName:fullName,phoneNumber:phoneNumber});
