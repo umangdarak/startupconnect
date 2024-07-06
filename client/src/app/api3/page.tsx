@@ -2,10 +2,10 @@ import React from 'react';
 
 export default function Page() {
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
-      <form className="py-4 px-6" action="" method="POST">
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="name">
+    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+      <form className="py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-4" action="" method="POST">
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
             Name
           </label>
           <input
@@ -15,8 +15,8 @@ export default function Page() {
             placeholder="Enter your name"
           />
         </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="email">
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
             Email
           </label>
           <input
@@ -26,8 +26,8 @@ export default function Page() {
             placeholder="Enter your email"
           />
         </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="password">
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
             Password
           </label>
           <input
@@ -37,8 +37,8 @@ export default function Page() {
             placeholder="Enter your password"
           />
         </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="phoneNumber">
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="phoneNumber">
             Phone Number
           </label>
           <input
@@ -48,8 +48,8 @@ export default function Page() {
             placeholder="Enter your Phone Number"
           />
         </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="company">
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="company">
             Company
           </label>
           <input
@@ -59,8 +59,8 @@ export default function Page() {
             placeholder="Company Name"
           />
         </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="professionalTitle">
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="professionalTitle">
             Professional Title
           </label>
           <input
@@ -70,18 +70,8 @@ export default function Page() {
             placeholder="Professional Title"
           />
         </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="professionalBio">
-            Professional Bio
-          </label>
-          <textarea
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="professionalBio"
-            placeholder="Enter your professional bio"
-          ></textarea>
-        </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="location">
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="location">
             Location
           </label>
           <textarea
@@ -90,8 +80,8 @@ export default function Page() {
             placeholder="Enter your location"
           ></textarea>
         </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="linkedInProfile">
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="linkedInProfile">
             LinkedIn Profile
           </label>
           <textarea
@@ -100,22 +90,34 @@ export default function Page() {
             placeholder="Enter your LinkedIn Profile url"
           ></textarea>
         </div>
-        <div className="mb-4 flex items-center">
-          <label className="block text-gray-700 font-bold mb-2 mr-4 w-1/3" htmlFor="accreditedInvestorStatus">
+        <div className="mb-4 col-span-2">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="professionalBio">
+            Professional Bio
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="professionalBio"
+            type="text"
+            placeholder="Enter your professional bio"
+          />
+        </div>
+        <div className="mb-4 col-span-2">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="accreditedInvestorStatus">
             Accredited Investor Status
           </label>
-          <textarea
+          <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="accreditedInvestorStatus"
+            type="text"
             placeholder="Enter the Accredited Investor Status"
-          ></textarea>
+          />
         </div>
-        <div className="flex items-center justify-center mb-4">
+        <div className="col-span-2 flex items-center justify-center mb-4">
           <button
             className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Book Appointment
+            Submit
           </button>
         </div>
       </form>
