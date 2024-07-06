@@ -43,23 +43,29 @@ export default function Page() {
           </label>
         <TextField type="text" required id="outlined-basic" name="Comapny Name" placeholder="Enter your Company Name" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
-        {/* <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Registration Number">
-            Registration Number
-          </label>
-        <TextField type="text" required id="outlined-basic" name="Registered Number" placeholder="Enter your Registered Number" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-        </div> */}
         <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Patent Application Number">
-            Patent Application Number
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Company Size">
+            Company Size
           </label>
-        <TextField type="text" required id="outlined-basic" name="Patent Application Number" placeholder="Enter your Patent Application Number" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-        </div>
+        <TextField type="text" required id="outlined-basic" name="Company Size" placeholder="Enter your Company Size" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div> 
         <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Industry">
             Industry
           </label>
         <TextField type="text" required id="outlined-basic" name="Industry" placeholder="Enter your Industry" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Location">
+            Location
+          </label>
+        <TextField type="text" required id="outlined-basic" name="Location" placeholder="Enter your Location" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        </div>
+        <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Patent Application Number">
+            Patent Application Number
+          </label>
+        <TextField type="text" required id="outlined-basic" name="Patent Application Number" placeholder="Enter your Patent Application Number" size="small" className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         </div>
         <div className="mb-4 flex-col flex col-span-2">
         <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Person In Contact">

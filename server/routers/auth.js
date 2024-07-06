@@ -106,7 +106,46 @@ Router.post('/registerinvestor',async (req,res)=>{
         res.status(400).json({"error":"User Already Exists"});
     }
 });
-Router.post('/registerstartup',(req,res)=>{
+Router.post('/registerstartup',async (req,res)=>{
+    const {fullName,email,password,phoneNumber,companyName,patentApplicationNumber,industry,companySize,location,contactPerson,companyDescription,linkedInProfile,revenue}=req.body;
+    const userExists=await Startup.findOne({email:email,fullName:fullName,phoneNumber:phoneNumber});
+    if(!userExists){
+        try{
+        const startupId=uid.uid(16);
+        const date= Date.now();
+        bcrypt.hash(password,10).then(async(pass)=>{
+            const startup=new Startup({
+                startupId:startupId,
+                fullName:fullName,
+                email:email,
+                password:pass,
+                phoneNumber:phoneNumber,
+                companyName:companyName,
+                patentApplicationNumber:patentApplicationNumber,
+                industry:industry,
+                companySize:companySize,
+                location:location,
+                contactPerson:contactPerson,
+                companyDescription:companyDescription,
+                linkedInProfile:linkedInProfile,
+                revenue:revenue,
+                createdAt:date
+            });
+            
+            await startup.save().then(()=>{
+                res.status(200).json({"message":"User succesfully created"});
+            });
+        })
+        
+    }
+        catch(e){
+            res.status(400).json({"error":e.message});
+        }
+    }
+    else{
+        res.status(400).json({"error":"User Already Exists"});
+    }
+
     
 })
 
