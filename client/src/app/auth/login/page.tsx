@@ -1,17 +1,17 @@
 "use client";
 import {
   AlertDialog,
-  Box,
   Button,
-  Card,
   Flex,
   Text,
-  TextField,
+  
 } from "@radix-ui/themes";
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
+import TextField from '@mui/material/TextField';
+import Link from "next/link";
+
 
 export default function Login() {
   const router = useRouter();
@@ -90,52 +90,42 @@ export default function Login() {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 ,ease:"backIn"}}
-          className="flex flex-col justify-center items-center border-solid border-customBlack border rounded-md p-10"
+          className="flex flex-col justify-center items-center"
 
         >
           <Button onClick={()=>{setUserType("");setShowForm(false);}}>Back</Button>
-          <Box
-            width="600px"
-            className="border-black bg-slate-100 p-10 rounded-lg"
-            height="auto"
-          >
-            <Card size="4" variant="ghost">
-              <Box>
-                <TextField.Root
-                  type="email"
-                  placeholder="Enter your email"
-                  className="my-3"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                {error?.email && (
-                  <Text className="text-red-600">{error.email}</Text>
-                )}
-                <TextField.Root
-                  type="password"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-                {error?.password && (
-                  <Text className="text-red-600">{error.password}</Text>
-                )}
-                <div className="flex flex-row items-center w-full justify-center mt-4">
-                  <Button className="my-3" size="3" onClick={handleSubmit}>
-                    <Text>Login</Text>
-                  </Button>
+           <div
+    className="relative mx-auto w-full max-w-md  px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+    <div className="w-full">
+        <div className="text-center">
+            <h1 className="text-3xl font-semibold text-gray-900">Login</h1>
+            {/* <p className="mt-2 text-gray-500">Sign in below to access your account</p> */}
+        </div>
+        <div className="mt-5">
+            
+                <div className="relative mt-6">
+                    <TextField required id="outlined-basic" error={error?.email?true:false} name="email"  value={email} placeholder="Email Address" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" onChange={(e)=>setEmail(e.target.value)}/>
+                {error?.email&&<Text>{error.email}</Text>}
                 </div>
-              </Box>
-              <Box className="mt-4">
-                <Text>
-                  Don't have an account?{" "}
-                  <Link href="/auth/register">
-                    <Text className="text-red-600">Register</Text>
-                  </Link>
-                </Text>
-              </Box>
-            </Card>
-          </Box>
+              
+                <div className="relative mt-6">
+                    <TextField required id="outlined-basic" type="password" name="password" error={error?.password?true:false}value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" className="peer peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" />
+                    {error?.password&&<Text>{error.password}</Text>}
+
+                </div>
+                
+                <div className="my-6">
+                    <Button className="w-full rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none" onClick={handleSubmit}>Login</Button>
+                </div>
+                <p className="text-center text-sm text-gray-500">Don&#x27;t have an account yet?
+                    <Link href="/auth/register"
+                        className="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">Register
+                    </Link>.
+                </p>
+            
+        </div>
+    </div>
+</div>
         </motion.div>
       )}
       {alertVisible && (
