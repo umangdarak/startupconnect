@@ -8,17 +8,22 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        mono: ['Roboto Mono', 'monospace'],
+        'space-mono':['Space Mono','monospace']
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors:{
+        customBlue: '#050A44',
+        customBlack:'#141619',
+        
+      }
     },
-    colors:{
-      customBlue: '#050A44',
-      customBlack:'#141619',
-      
-    }
+    
   },
   plugins: [],
 };

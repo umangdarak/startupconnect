@@ -1,18 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-body{
-    background-color: #B3B4BD;
-}
-*{
-    @apply font-space-mono;
-}
 
 
 
-.button1,.button2 {
+.button1 {
     font: inherit;
     background-color: #f0f0f0;
     border: 0;
