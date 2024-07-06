@@ -109,7 +109,7 @@ export default function Login() {
         <div className="mt-5">
             
                 <div className="relative mt-6">
-                    <TextField required id="outlined-basic" error={error?.email?true:false} name="email"  value={email} placeholder="Email Address" className="peer mt-1 w-full border-b-2 border-gray-300  placeholder:text-transparent focus:border-gray-500 focus:outline-none w-full" onChange={(e)=>setEmail(e.target.value)}/>
+                    <TextField type="email" required id="outlined-basic" error={error?.email?true:false} name="email"  value={email} placeholder="Email Address" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>setEmail(e.target.value)}/>
                 {error?.email&&<Text>{error.email}</Text>}
                 </div>
               

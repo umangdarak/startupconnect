@@ -1,6 +1,7 @@
 "use client";
 import { Box,Text, TextField } from '@radix-ui/themes';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+
 
 export default function RegisterInvestor() {
     const [phoneNumber,setPhoneNumber]=useState<string>();
@@ -101,6 +102,7 @@ export default function RegisterInvestor() {
     <Box className='flex flex-col w-screen items-center'>
         <Text>Register!!</Text>
         <Box className='bg-slate-500 w-1/2'>
+           
            
             <TextField.Root
             type='email'
