@@ -1,16 +1,26 @@
 "use client";
 import { Button, Text } from "@radix-ui/themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RegisterInvestor from "./_RegisterInvestor";
 import RegisterStartup from "./_RegisterStartup";
 import { motion } from "framer-motion";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { RootState } from "@/lib/store";
+import router from "next/router";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
 
 
 export default function Register() {
   const [userType, setUserType] = useState<string>("");
+  const router=useRouter();
   const [showForm, setShowForm] = useState<boolean>(false);
-
+  const authState = useSelector((state: RootState) => state.auth);
+  useEffect(()=>{
+    if(authState.authState){
+      router.push("/");
+    }
+  })
   return (
     <div className="flex flex-row justify-center items-center h-screen">
       {" "}

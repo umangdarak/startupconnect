@@ -17,7 +17,7 @@ Router.post('/login',async(req,res)=>{
                       }
                       if(valid){
                         const token = jwt.sign({ user:investor }, process.env.privatekey,{"expiresIn":"3h"});
-                        res.status(200).json({"message":"Login Succesful",token:token,user:investor});
+                        res.status(200).json({message:"Login Succesful",token:token,user:investor});
                       }
                 }));
             }else{

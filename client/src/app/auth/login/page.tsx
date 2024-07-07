@@ -6,13 +6,16 @@ import {
   Text,
   
 } from "@radix-ui/themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import TextField from '@mui/material/TextField';
 import Link from "next/link";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import '../login/pages.css'
+import { AppDispatch, RootState } from "@/lib/store";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "@/lib/slices/authSlice";
 
 export default function Login() {
   const router = useRouter();
@@ -26,6 +29,8 @@ export default function Login() {
     fetchError?: string;
   }>();
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
+    const dispatch=useDispatch<AppDispatch>();
+
 
   const validate = () => {
     const errors: { email?: string; password?: string } = {};
@@ -49,10 +54,38 @@ export default function Login() {
     setError(err);
     if (Object.keys(err).length === 0) {
       // Handle successful validation
+      const res=await fetch(`http://localhost:8000/auth/login`,{
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          userType: userType,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setError({ fetchError: data["error"] });
+        setAlertVisible(true);
+      }else{
+        const data=await res.json();
+        dispatch(userLogin({
+          user: data.user,
+          token: data.token,
+          userType: userType
+        }));
+        router.push("/");
+      }
     } else {
       setAlertVisible(true);
     }
   };
+  const authState = useSelector((state: RootState) => state.auth);
+  useEffect(()=>{
+    if(authState.authState){
+      router.push("/");
+    }
+  })
 
   return (
     <div className="flex flex-row justify-center items-center h-screen">

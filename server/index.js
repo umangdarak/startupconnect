@@ -6,7 +6,7 @@ const app=express();
 const bodyparser=require('body-parser');
 const cors=require('cors');
 
-cors();
+app.use(cors());
 app.use(bodyparser.json());
 
 
