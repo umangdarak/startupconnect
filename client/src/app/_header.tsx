@@ -24,7 +24,7 @@ export const HeaderPage = () => {
                 dispatch(userLogout());
               }}
             >
-              <PowerSettingsNewIcon />
+              <PowerSettingsNewIcon sx={{ color: '#FFFFFF' }} />
             </Button>
           </div>
         ) : (
