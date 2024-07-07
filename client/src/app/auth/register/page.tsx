@@ -43,7 +43,7 @@ export default function Register() {
                   setShowForm(true);
                 }}
               >
-                <Text className="text-customBlack">Investor</Text>
+                <Text className="text-white text-lg font-light">Investor</Text>
               </Button>
               <Button
                 className="button1"
@@ -52,7 +52,7 @@ export default function Register() {
                   setShowForm(true);
                 }}
               >
-                <Text className="text-customBlack">Entrepreneur/Startup</Text>
+                <Text className="text-white text-lg font-light">Entrepreneur/Startup</Text>
               </Button>
             </div>
           </div>
@@ -65,7 +65,7 @@ export default function Register() {
           className="flex flex-col items-center h-screen"
         ><div className="flex flex-row items-start w-1/2 justify-self-center ">
            <Button onClick={()=>{setUserType("");setShowForm(false);}} className="bg-transparent button1">
-            <ArrowBackIosIcon fontSize="small" sx={{ color: '#141619' }}/>
+            <ArrowBackIosIcon fontSize="small" sx={{ color: '#FFFFFF' }}/>
           </Button>
           
           </div>

@@ -119,7 +119,7 @@ export default function RegisterInvestor() {
         <div className="text-center">
           <h1 className="text-3xl font-semibold text-customBlack">Register</h1>
         </div>
-        <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="max-w-xl mx-auto mt-10 bg-white shadow-2xl rounded-lg overflow-hidden">
           <div className="py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="mb-4">
               <label
@@ -341,7 +341,7 @@ export default function RegisterInvestor() {
                 className="button1"
                 onClick={handleSubmit}
               >
-                Submit
+                <Text className="text-white text-lg font-light">Submit</Text>
               </Button>
             </div>
           </div>
@@ -390,7 +390,7 @@ export default function RegisterInvestor() {
             <Flex className="flex flex-row justify-center items-center w-full">
               <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
                 <Button variant="soft" className="button1">
-                  Ok
+                  <Text className="text-white text-lg font-light">Ok</Text>
                 </Button>
               </AlertDialog.Cancel>
             </Flex>

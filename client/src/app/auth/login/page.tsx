@@ -101,13 +101,13 @@ export default function Login() {
           </Text>
           <div className="flex flex-row justify-between w-full px-6 mt-8">
             <Button
-              className="button1"
+              className="button1 text-white"
               onClick={() => {
                 setUserType("Investor");
                 setShowForm(true);
               }}
             >
-              <Text className="text-customBlack">Investor</Text>
+              <Text className="text-white text-lg font-light">Investor</Text>
             </Button>
             <Button className="button1"
               onClick={() => {
@@ -115,7 +115,7 @@ export default function Login() {
                 setShowForm(true);
               }}
             >
-              <Text className="text-customBlack">Entrepreneur/Startup</Text>
+              <Text className="text-white text-lg font-light">Entrepreneur/Startup</Text>
             </Button>
           </div> 
           </div> 
@@ -132,7 +132,7 @@ export default function Login() {
            <div
     className="relative mx-auto w-full   px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
       <Button onClick={()=>{setUserType("");setShowForm(false);}} className="bg-transparent button1">
-            <ArrowBackIosIcon fontSize="small" sx={{ color: '#141619' }}/>
+            <ArrowBackIosIcon fontSize="small" sx={{ color: '#FFFFFF' }}/>
           </Button>
     <div className="w-full">
         <div className="text-center">
@@ -153,7 +153,7 @@ export default function Login() {
                 </div>
                 
                 <div className="my-6 flex flex-row justify-center w-full">
-                    <Button className="button1 rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none" onClick={handleSubmit}>Login</Button>
+                    <Button className="button1 rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none" onClick={handleSubmit}><Text className="text-white text-lg font-light">Login</Text></Button>
                 </div>
                 <p className="text-center text-sm text-gray-500">Don&#x27;t have an account yet?
                     <Link href="/auth/register"
@@ -183,8 +183,8 @@ export default function Login() {
             </AlertDialog.Description>
             <Flex className="flex flex-row justify-center items-center w-full">
               <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
-                <Button variant="soft" color="gray">
-                  Ok
+                <Button variant="soft" className="button1">
+                 <Text className="text-white text-lg font-light"> Ok</Text>
                 </Button>
               </AlertDialog.Cancel>
             </Flex>
