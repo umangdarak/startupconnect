@@ -64,7 +64,7 @@ export default function Register() {
           transition={{ duration: 0.3, ease: "backIn" }}
           className="flex flex-col items-center h-screen"
         ><div className="flex flex-row items-start w-1/2 justify-self-center ">
-           <Button onClick={()=>{setUserType("");setShowForm(false);}} className="bg-transparent button1">
+           <Button onClick={()=>{setUserType("");setShowForm(false);}} className="button1">
             <ArrowBackIosIcon fontSize="small" sx={{ color: '#FFFFFF' }}/>
           </Button>
           
