@@ -1,138 +1,108 @@
-import React from 'react';
+import React from 'react'
 
 export default function Page() {
   return (
-    <div className="max-w-3xl mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden" style={{ width: '75%' }}>
-      <form className="py-4 px-6" action="" method="POST">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="name">
-              Name
+    <div className="max-w-md mx-auto mt-10 bg-white shadow-lg rounded-lg overflow-hidden">
+    <form className="py-4 px-6" action="" method="POST">
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="Name">
+                Name
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="text"
-              placeholder="Enter your name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-              Email
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="name" type="text" placeholder="Enter your name" />
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="Email">
+                Email
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
-              Password
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="email" type="email" placeholder="Enter your email" />
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="Password">
+                Password
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              placeholder="Enter your password"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="phoneNumber">
-              Phone Number
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="pass" type="pas" placeholder="Enter your password" />
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="Phone Number">
+                Phone Number
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="phoneNumber"
-              type="tel"
-              placeholder="Enter your phone number"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="linkedInProfile">
-              LinkedIn Profile
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="phoneno" type="tel" placeholder="Enter you Phone Number" />
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="LinkedIn Profile">
+            LinkedIn Profile
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="linkedInProfile"
-              type="text"
-              placeholder="LinkedIn Profile"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="companyName">
-              Company Name
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="linkedInprofile" type="text" placeholder="LinkedIn Profile" />
+            
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="CompanyName">
+                Company Name
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="companyName"
-              type="text"
-              placeholder="Company Name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="registrationNumber">
-              Registration Number
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="companyName" type="text" placeholder="Company Name" />
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="Registration No">
+                Regisration Number
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="registrationNumber"
-              type="text"
-              placeholder="Registration Number"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="industry">
-              Industry
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="registrationNumber" type="text" placeholder="Registration Number" />
+            
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="Industry">
+                Industry
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="industry"
-              type="text"
-              placeholder="Industry"
-            />
-          </div>
-          <div className="col-span-2 mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="companyDescription">
-              Company Description
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="industry" type="text" placeholder="Industry" />
+            
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="Company Description">
+                Company Description
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="companyDescription"
-              type="text"
-              placeholder="Company Description"
-            />
-          </div>
-          <div className="col-span-2 mb-4">
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="contactPerson">
-              Person In Contact
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="companyDescription" type="text" placeholder="Company Description" />
+            
+        </div>
+        <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2" htmlFor="Person In Contact">
+            Person In Contact
             </label>
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="contactPerson"
-              type="text"
-              placeholder="Person In Contact"
-            />
-          </div>
-          <div className="col-span-2 mb-4">
+            <input 
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="contactPerson" type="text" placeholder="Person In Contact" />
+            
+        </div>
+        <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="message">
-              Message
+                Message
             </label>
             <textarea
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="message"
-              placeholder="Enter any additional information"
-            ></textarea>
-          </div>
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="message" placeholder="Enter any additional information"></textarea>
         </div>
         <div className="flex items-center justify-center mb-4">
-          <button
-            className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Submit
-          </button>
+            <button
+                className="bg-gray-900 text-white py-2 px-4 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline"
+                type="submit">
+                Book Appointment
+            </button>
         </div>
       </form>
     </div>

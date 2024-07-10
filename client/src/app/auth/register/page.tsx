@@ -1,14 +1,26 @@
 "use client";
 import { Button, Text } from "@radix-ui/themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RegisterInvestor from "./_RegisterInvestor";
 import RegisterStartup from "./_RegisterStartup";
 import { motion } from "framer-motion";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import { RootState } from "@/lib/store";
+import router from "next/router";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+
 
 export default function Register() {
   const [userType, setUserType] = useState<string>("");
+  const router=useRouter();
   const [showForm, setShowForm] = useState<boolean>(false);
-
+  const authState = useSelector((state: RootState) => state.auth);
+  useEffect(()=>{
+    if(authState.authState){
+      router.push("/");
+    }
+  })
   return (
     <div className="flex flex-row justify-center items-center h-screen">
       {" "}
@@ -17,29 +29,32 @@ export default function Register() {
           initial={{ opacity: 1, scale: 0 }}
           animate={{ opacity: showForm ? 0 : 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "linear" }}
-          className="flex flex-col justify-center items-center border-solid border-customBlack border rounded-full p-10"
+          className="flex flex-col justify-center items-center px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 rounded-full"
         >
-          <Text className="text-customBlack font-mono">
-            Are you an Investor or an Entrepreneur/Startup Company?
-          </Text>
-          <div className="flex flex-row justify-between w-full px-6">
-            <Button
-              className="mb-5"
-              onClick={() => {
-                setUserType("Investor");
-                setShowForm(true);
-              }}
-            >
-              <Text className="text-white font-mono">Investor</Text>
-            </Button>
-            <Button
-              onClick={() => {
-                setUserType("Startup");
-                setShowForm(true);
-              }}
-            >
-              <Text className="text-white font-mono">Entrepreneur/Startup</Text>
-            </Button>
+          <div className="p-10">
+            <Text className="text-customBlack">
+              Are you an Investor or an Entrepreneur/Startup Company?
+            </Text>
+            <div className="flex flex-row justify-between w-full px-6 mt-8">
+              <Button
+                className="button1"
+                onClick={() => {
+                  setUserType("Investor");
+                  setShowForm(true);
+                }}
+              >
+                <Text className="text-white text-lg font-light">Investor</Text>
+              </Button>
+              <Button
+                className="button1"
+                onClick={() => {
+                  setUserType("Startup");
+                  setShowForm(true);
+                }}
+              >
+                <Text className="text-white text-lg font-light">Entrepreneur/Startup</Text>
+              </Button>
+            </div>
           </div>
         </motion.div>
       ) : (
@@ -47,15 +62,13 @@ export default function Register() {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3, ease: "backIn" }}
-        >
-          <Button
-            onClick={() => {
-              setUserType("");
-              setShowForm(false);
-            }}
-          >
-            Back
+          className="flex flex-col items-center h-screen"
+        ><div className="flex flex-row items-start w-1/2 justify-self-center ">
+           <Button onClick={()=>{setUserType("");setShowForm(false);}} className="button1">
+            <ArrowBackIosIcon fontSize="small" sx={{ color: '#FFFFFF' }}/>
           </Button>
+          
+          </div>
           {userType === "Investor" ? (
             <div>
               <RegisterInvestor />

@@ -6,12 +6,16 @@ import {
   Text,
   
 } from "@radix-ui/themes";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import TextField from '@mui/material/TextField';
 import Link from "next/link";
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import '../login/pages.css'
+import { AppDispatch, RootState } from "@/lib/store";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "@/lib/slices/authSlice";
 
 export default function Login() {
   const router = useRouter();
@@ -25,6 +29,8 @@ export default function Login() {
     fetchError?: string;
   }>();
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
+    const dispatch=useDispatch<AppDispatch>();
+
 
   const validate = () => {
     const errors: { email?: string; password?: string } = {};
@@ -48,10 +54,38 @@ export default function Login() {
     setError(err);
     if (Object.keys(err).length === 0) {
       // Handle successful validation
+      const res=await fetch(`http://localhost:8000/auth/login`,{
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+          userType: userType,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setError({ fetchError: data["error"] });
+        setAlertVisible(true);
+      }else{
+        const data=await res.json();
+        dispatch(userLogin({
+          user: data.user,
+          token: data.token,
+          userType: userType
+        }));
+        router.push("/");
+      }
     } else {
       setAlertVisible(true);
     }
   };
+  const authState = useSelector((state: RootState) => state.auth);
+  useEffect(()=>{
+    if(authState.authState){
+      router.push("/");
+    }
+  })
 
   return (
     <div className="flex flex-row justify-center items-center h-screen">
@@ -60,51 +94,55 @@ export default function Login() {
           initial={{ opacity: 1, scale: 0 }}
           animate={{ opacity: showForm?0:1, scale: 1 }}
           transition={{ duration: 0.5,ease:"linear" }}
-          className="flex flex-col justify-center items-center border-solid border-customBlack border rounded-full p-10"
-        >
-          <Text className="text-customBlack font-mono">
+          className="flex flex-col justify-center items-center px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 rounded-full"
+        ><div className="p-10">
+          <Text className="text-customBlack">
             Are you an Investor or an Entrepreneur/Startup Company?
           </Text>
-          <div className="flex flex-row justify-between w-full px-6">
+          <div className="flex flex-row justify-between w-full px-6 mt-8">
             <Button
-              className="mb-5"
+              className="button1 text-white"
               onClick={() => {
                 setUserType("Investor");
                 setShowForm(true);
               }}
             >
-              <Text className="text-white font-mono">Investor</Text>
+              <Text className="text-white text-lg font-light">Investor</Text>
             </Button>
-            <Button
+            <Button className="button1"
               onClick={() => {
                 setUserType("Startup");
                 setShowForm(true);
               }}
             >
-              <Text className="text-white font-mono">Entrepreneur/Startup</Text>
+              <Text className="text-white text-lg font-light">Entrepreneur/Startup</Text>
             </Button>
-          </div>
+          </div> 
+          </div> 
         </motion.div>
       ) : (
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 ,ease:"backIn"}}
-          className="flex flex-col justify-center items-center"
+          className="flex flex-col justify-center items-center w-1/2"
 
         >
-          <Button onClick={()=>{setUserType("");setShowForm(false);}}>Back</Button>
+          
            <div
-    className="relative mx-auto w-full max-w-md  px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+    className="relative mx-auto w-full   px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
+      <Button onClick={()=>{setUserType("");setShowForm(false);}} className="bg-transparent button1">
+            <ArrowBackIosIcon fontSize="small" sx={{ color: '#FFFFFF' }}/>
+          </Button>
     <div className="w-full">
         <div className="text-center">
-            <h1 className="text-3xl font-semibold text-gray-900">Login</h1>
+            <h1 className="text-3xl font-semibold text-customBlack">Login</h1>
             {/* <p className="mt-2 text-gray-500">Sign in below to access your account</p> */}
         </div>
         <div className="mt-5">
             
                 <div className="relative mt-6">
-                    <TextField required id="outlined-basic" error={error?.email?true:false} name="email"  value={email} placeholder="Email Address" className="peer mt-1 w-full border-b-2 border-gray-300 px-0 py-1 placeholder:text-transparent focus:border-gray-500 focus:outline-none" onChange={(e)=>setEmail(e.target.value)}/>
+                    <TextField type="email" required id="outlined-basic" error={error?.email?true:false} name="email"  value={email} placeholder="Email Address" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onChange={(e)=>setEmail(e.target.value)}/>
                 {error?.email&&<Text>{error.email}</Text>}
                 </div>
               
@@ -114,8 +152,8 @@ export default function Login() {
 
                 </div>
                 
-                <div className="my-6">
-                    <Button className="w-full rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none" onClick={handleSubmit}>Login</Button>
+                <div className="my-6 flex flex-row justify-center w-full">
+                    <Button className="button1 rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none" onClick={handleSubmit}><Text className="text-white text-lg font-light">Login</Text></Button>
                 </div>
                 <p className="text-center text-sm text-gray-500">Don&#x27;t have an account yet?
                     <Link href="/auth/register"
@@ -145,8 +183,8 @@ export default function Login() {
             </AlertDialog.Description>
             <Flex className="flex flex-row justify-center items-center w-full">
               <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
-                <Button variant="soft" color="gray">
-                  Ok
+                <Button variant="soft" className="button1">
+                 <Text className="text-white text-lg font-light"> Ok</Text>
                 </Button>
               </AlertDialog.Cancel>
             </Flex>
