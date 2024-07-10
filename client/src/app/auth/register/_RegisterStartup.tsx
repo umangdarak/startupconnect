@@ -1,6 +1,7 @@
 "use client";
 import { Box,Text, TextField } from '@radix-ui/themes';
 import React, { useState } from 'react'
+import '../register/pages.css';
 
 export default function RegisterStartup() {
     const [phoneNumber,setPhoneNumber]=useState<string>();

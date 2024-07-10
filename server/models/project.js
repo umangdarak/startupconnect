@@ -30,15 +30,15 @@ const Schema=mongoose.Schema({
       required:true
     },
     fundingGoals:{
-      type:Number,
-      required:true
-    },
-    useOfFunds:[{
       type:String,
       required:true
-    }],
+    },
+    useOfFunds:{
+      type:String,
+      required:true
+    },
     expectedROI:{
-      type:Number,
+      type:String,
       required:true
     },
     patentDetails:{

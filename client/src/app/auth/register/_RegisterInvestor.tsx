@@ -1,7 +1,9 @@
 "use client";
 import { TextField } from "@mui/material";
 import { AlertDialog, Box, Button, Flex, Text } from "@radix-ui/themes";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import '../register/pages.css';
 
 export default function RegisterInvestor() {
   const [phoneNumber, setPhoneNumber] = useState<string>();
@@ -32,7 +34,7 @@ export default function RegisterInvestor() {
     accreditedInvestorStatus?: string;
     fetchError?: string;
   }>();
-
+  const router=useRouter();
   const validate = () => {
     const errors: {
       email?: string;
@@ -108,6 +110,29 @@ export default function RegisterInvestor() {
     setErrors(err);
     if (Object.keys(err).length === 0) {
       // Handle successful validation
+      const res=await fetch(`http://localhost:8000/auth/registerinvestor`,{
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          fullName:fullName,
+          email: email,
+          password: password,
+          phoneNumber:phoneNumber,
+          professionalTitle:professionalTitle,
+          companyOrganization:company,
+          location:location,
+          professionalBio:professionalBio,
+          linkedInProfile:linkedInProfile,
+          accreditedInvestorStatus:accreditedInvestorStatus,
+        }),
+      });
+      if(!res.ok){
+        const data = await res.json();
+        setErrors({ fetchError: data["error"] });
+        setAlertVisible(true);
+      }else{
+        router.push("/auth/login");
+      }
     } else {
       setAlertVisible(true);
     }

@@ -12,10 +12,14 @@ function Home() {
   useEffect(() => {
     if (!authState.authState) {
       router.push("/auth/login");
+    }else if(authState.userType=='Startup'){
+      router.push("/dashboardStartup");
+    }else{
+      router.push('/dashboardInvestor');
     }
-  });
+  },[authState]);
 
-  return <div>{JSON.stringify(authState.user)}</div>;
+  return <div></div>;
 }
 
 export default Home;
