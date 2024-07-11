@@ -1,5 +1,6 @@
 require('../server/MongoDbConnection')
 const Auth=require('../server/routers/auth')
+const Project=require('../server/routers/startupproject')
 const express=require('express')
 require('dotenv').config();
 const app=express();
@@ -21,3 +22,4 @@ app.listen(8000,()=>console.log("Server running on 3560"));
 
 //app routes
 app.use('/auth',Auth);
+app.use('/post',Project);

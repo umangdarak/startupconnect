@@ -55,7 +55,7 @@ const Schema=mongoose.Schema({
     //   required:true
     // },
     accreditedInvestorStatus:{
-      type:Boolean,
+      type:String,
       required:true
     },
     //doc Of Accreditation,proof of funds
