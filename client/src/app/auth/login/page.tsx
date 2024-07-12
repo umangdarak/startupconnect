@@ -12,7 +12,7 @@ import { motion } from "framer-motion";
 import TextField from '@mui/material/TextField';
 import Link from "next/link";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import '../login/pages.css'
+import './pages.css'
 import { AppDispatch, RootState } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "@/lib/slices/authSlice";

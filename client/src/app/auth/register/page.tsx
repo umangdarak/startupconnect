@@ -9,7 +9,7 @@ import { RootState } from "@/lib/store";
 import router from "next/router";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import '../register/pages.css';
+import './pages.css';
 
 export default function Register() {
   const [userType, setUserType] = useState<string>("");

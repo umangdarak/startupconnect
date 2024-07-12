@@ -3,7 +3,7 @@ import { TextField } from "@mui/material";
 import { AlertDialog, Box, Button, Flex, Text } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import '../register/pages.css';
+import './pages.css';
 
 export default function RegisterInvestor() {
   const [phoneNumber, setPhoneNumber] = useState<string>();
