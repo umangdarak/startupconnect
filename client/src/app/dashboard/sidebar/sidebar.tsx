@@ -1,8 +1,9 @@
 'use client';
+import { useDashboardContext } from '../provider';
 import css from '../style.module.css';
-import { SidebarItems } from './SidebarItems';
-import { SidebarHeader } from './SidebarHeader';
-import { useDashboardContext } from '../Provider';
+import { SidebarHeader } from './sidebarHeader';
+import { SidebarItems } from './sidebarItems';
+
 
 interface SidebarProps {
   mobileOrientation: 'start' | 'end';

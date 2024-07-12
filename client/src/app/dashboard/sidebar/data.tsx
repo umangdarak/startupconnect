@@ -1,4 +1,3 @@
-import { DocIcon } from './icons/DocIcon';
 import { HomeIcon } from './icons/HomeIcon';
 import { StatusIcon } from './icons/StatusIcon';
 import { CreditIcon } from './icons/CreditIcon';
@@ -31,9 +30,5 @@ export const data = [
     icon: <SettingsIcon />,
     link: '/admin/settings',
   },
-  {
-    title: 'Documentation',
-    icon: <DocIcon />,
-    link: '/admin/documentation',
-  },
+ 
 ];

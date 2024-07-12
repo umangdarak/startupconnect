@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { data } from './data';
-import { useDashboardContext } from '../Provider';
+import { useDashboardContext } from '../provider';
 
 const style = {
   title: 'mx-4 text-sm whitespace-pre',
