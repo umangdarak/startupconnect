@@ -3,9 +3,10 @@ import { RootState } from "@/lib/store";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import "../dashboardInvestor/pages.css";
-import { Box, Flex, Text } from "@radix-ui/themes";
+import { Box, Button, Flex, Text } from "@radix-ui/themes";
 import Image from "next/image";
-
+import { Bounce, toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 interface Project {
   startupId: string;
   patentDetails: string;
@@ -20,6 +21,7 @@ interface Project {
     data: string;
   };
 }
+
 export default function DashBoardInvestor() {
   const authState = useSelector((state: RootState) => state.auth);
   const [data, setData] = useState<Project[]>([]);
@@ -34,10 +36,57 @@ export default function DashBoardInvestor() {
 
     if (res.ok) {
       const properties = await res.json();
-      console.log(properties);
       setData(properties);
     } else {
       console.error("Failed to fetch properties");
+    }
+  };
+  const handleFollow = async (startupId: string) => {
+    try{
+    const res = await fetch(`http://localhost:8000/follow/followreq`, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({
+        investorId: authState.user!["_id"],
+        startupId: startupId,
+      }),
+    });
+    if (res.ok) {
+      toast.success("Follow Request Sent", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    } else {
+      toast.error(await res.json(), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }}catch(e:any){
+      toast.error(e, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+        });
     }
   };
   return (
@@ -47,6 +96,26 @@ export default function DashBoardInvestor() {
           <Flex direction="column" gap="2">
             <Text className="text-lg font-bold">
               Posted By:{project.startupId}
+              <Button
+                onClick={() => {
+                  handleFollow(project.startupId);
+                }}
+              >
+                Follow
+              </Button>
+              <ToastContainer
+                position="bottom-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+                transition={Bounce}
+              />
             </Text>
             {/* <Text className="text-gray-600">Owned by: {property.owner}</Text> */}
             <Box className="w-full my-4">

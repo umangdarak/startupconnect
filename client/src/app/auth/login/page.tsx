@@ -1,18 +1,13 @@
 "use client";
-import {
-  AlertDialog,
-  Button,
-  Flex,
-  Text,
-} from "@radix-ui/themes";
+import { AlertDialog, Button, Flex, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 import Link from "next/link";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import Image from 'next/image';
-import './pages.css'
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import Image from "next/image";
+import "./pages.css";
 import { AppDispatch, RootState } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "@/lib/slices/authSlice";
@@ -31,8 +26,8 @@ export default function Login() {
   }>();
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
   const [otpEmailSent, setOtpEmailSent] = useState(false);
-  const [otpEmail, setOtpEmail] = useState('');
-  const [otpError, setOtpError] = useState('');
+  const [otpEmail, setOtpEmail] = useState("");
+  const [otpError, setOtpError] = useState("");
 
   const validate = () => {
     const errors: { email?: string; password?: string } = {};
@@ -56,18 +51,29 @@ export default function Login() {
     setError(err);
     if (Object.keys(err).length === 0) {
       try {
-        const emailRes = await fetch(`http://localhost:8000/auth/send-otp-email`, {
+        const emailRes = await fetch(`http://localhost:8000/auth/login`, {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          body: JSON.stringify({ email }),
+          body: JSON.stringify({
+            email: email,
+            password: password,
+            userType: userType,
+          }),
         });
         if (!emailRes.ok) {
-          throw new Error('Failed to send OTP to email');
+          throw new Error("Failed to send OTP to email");
         }
-        setOtpEmailSent(true);
-        setShowForm(true); // Display OTP input field
+        const data = await emailRes.json();
+        dispatch(
+          userLogin({
+            user: data.user,
+            token: data.token,
+            userType: userType,
+          })
+        );
+        router.push("/");
       } catch (error) {
-        console.error('Error sending OTP:', error);
+        console.error("Error sending OTP:", error);
         setAlertVisible(true); // Show error alert
       }
     } else {
@@ -75,28 +81,28 @@ export default function Login() {
     }
   };
 
-  const handleVerifyOTP = async () => {
-    try {
-      const res = await fetch(`http://localhost:8000/auth/verify-otp-email`, {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ otpEmail }),
-      });
-      if (!res.ok) {
-        throw new Error('OTP verification failed');
-      }
-      const data = await res.json();
-      dispatch(userLogin({
-        user: data.user,
-        token: data.token,
-        userType: userType,
-      }));
-      router.push("/");
-    } catch (error) {
-      console.error('Error verifying OTP:', error);
-      setOtpError('OTP verification failed. Please try again.');
-    }
-  };
+  // const handleVerifyOTP = async () => {
+  //   try {
+  //     const res = await fetch(`http://localhost:8000/auth/verify-otp-email`, {
+  //       method: "POST",
+  //       headers: { "Content-type": "application/json" },
+  //       body: JSON.stringify({ otpEmail }),
+  //     });
+  //     if (!res.ok) {
+  //       throw new Error('OTP verification failed');
+  //     }
+  //     const data = await res.json();
+  //     dispatch(userLogin({
+  //       user: data.user,
+  //       token: data.token,
+  //       userType: userType,
+  //     }));
+  //     router.push("/");
+  //   } catch (error) {
+  //     console.error('Error verifying OTP:', error);
+  //     setOtpError('OTP verification failed. Please try again.');
+  //   }
+  // };
 
   const authState = useSelector((state: RootState) => state.auth);
   useEffect(() => {
@@ -113,30 +119,34 @@ export default function Login() {
           animate={{ opacity: showForm ? 0 : 1, scale: 1 }}
           transition={{ duration: 0.5, ease: "linear" }}
           className="flex flex-col justify-center items-center px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 rounded-full"
-        ><div className="p-10">
-          <Text className="text-customBlack">
-            Are you an Investor or an Entrepreneur/Startup Company?
-          </Text>
-          <div className="flex flex-row justify-between w-full px-6 mt-8">
-            <Button
-              className="button1 text-white"
-              onClick={() => {
-                setUserType("Investor");
-                setShowForm(true);
-              }}
-            >
-              <Text className="text-white text-lg font-light">Investor</Text>
-            </Button>
-            <Button className="button1"
-              onClick={() => {
-                setUserType("Startup");
-                setShowForm(true);
-              }}
-            >
-              <Text className="text-white text-lg font-light">Entrepreneur/Startup</Text>
-            </Button>
+        >
+          <div className="p-10">
+            <Text className="text-customBlack">
+              Are you an Investor or an Entrepreneur/Startup Company?
+            </Text>
+            <div className="flex flex-row justify-between w-full px-6 mt-8">
+              <Button
+                className="button1 text-white"
+                onClick={() => {
+                  setUserType("Investor");
+                  setShowForm(true);
+                }}
+              >
+                <Text className="text-white text-lg font-light">Investor</Text>
+              </Button>
+              <Button
+                className="button1"
+                onClick={() => {
+                  setUserType("Startup");
+                  setShowForm(true);
+                }}
+              >
+                <Text className="text-white text-lg font-light">
+                  Entrepreneur/Startup
+                </Text>
+              </Button>
+            </div>
           </div>
-        </div>
         </motion.div>
       ) : (
         <motion.div
@@ -147,15 +157,29 @@ export default function Login() {
         >
           <div className="flex flex-row w-full">
             <div className="w-1/2">
-            <Image src="/images/login2.png" alt="Login Image" width={400} height={400} className="h-full w-full object-cover" />
+              <Image
+                src="/images/login2.png"
+                alt="Login Image"
+                width={400}
+                height={400}
+                className="h-full w-full object-cover"
+              />
             </div>
             <div className="w-1/2 px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl sm:px-10">
-              <Button onClick={() => { setUserType(""); setShowForm(false); }} className="bg-transparent button1">
-                <ArrowBackIosIcon fontSize="small" sx={{ color: '#FFFFFF' }} />
+              <Button
+                onClick={() => {
+                  setUserType("");
+                  setShowForm(false);
+                }}
+                className="bg-transparent button1"
+              >
+                <ArrowBackIosIcon fontSize="small" sx={{ color: "#FFFFFF" }} />
               </Button>
               <div className="w-full">
                 <div className="text-center">
-                  <h1 className="text-3xl font-semibold text-customBlack">Login</h1>
+                  <h1 className="text-3xl font-semibold text-customBlack">
+                    Login
+                  </h1>
                   {/* <p className="mt-2 text-gray-500">Sign in below to access your account</p> */}
                 </div>
                 <div className="mt-5">
@@ -189,14 +213,24 @@ export default function Login() {
                   </div>
 
                   <div className="my-6 flex flex-row justify-center w-full">
-                    <Button className="button1 rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none" onClick={handleSubmit}>
-                      <Text className="text-white text-lg font-light">Login</Text>
+                    <Button
+                      className="button1 rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none"
+                      onClick={handleSubmit}
+                    >
+                      <Text className="text-white text-lg font-light">
+                        Login
+                      </Text>
                     </Button>
                   </div>
-                  <p className="text-center text-sm text-gray-500">Don&#x27;t have an account yet?
-                    <Link href="/auth/register"
-                      className="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none">Register
-                    </Link>.
+                  <p className="text-center text-sm text-gray-500">
+                    Don&#x27;t have an account yet?
+                    <Link
+                      href="/auth/register"
+                      className="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none"
+                    >
+                      Register
+                    </Link>
+                    .
                   </p>
                 </div>
               </div>
@@ -204,7 +238,7 @@ export default function Login() {
           </div>
         </motion.div>
       )}
-      {otpEmailSent && (
+      {/* {otpEmailSent && (
         <div className="flex flex-col items-center justify-center mt-8">
           <TextField
             id="otpEmail"
@@ -217,7 +251,7 @@ export default function Login() {
           <Button onClick={handleVerifyOTP}>Verify OTP</Button>
           {otpError && <Text className="mt-2 text-red-500">{otpError}</Text>}
         </div>
-      )}
+      )} */}
       {alertVisible && (
         <AlertDialog.Root open={alertVisible}>
           <AlertDialog.Content maxWidth="450px">

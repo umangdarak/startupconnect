@@ -6,7 +6,8 @@ import imageCompression from "browser-image-compression";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
-import '../dashboardStartup/pages.css';
+import "../dashboardStartup/pages.css";
+import { toast, Bounce, ToastContainer } from "react-toastify";
 export default function DashBoardStartup() {
   const authState = useSelector((state: RootState) => state.auth);
 
@@ -122,7 +123,7 @@ export default function DashBoardStartup() {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({
-          startupId: authState.user!["startupId"],
+          startupId: authState.user!["_id"],
           projectTitle: projectTitle,
           projectDescription: projectDescription,
           targetMarket: targetMarket,
@@ -145,12 +146,137 @@ export default function DashBoardStartup() {
       setAlertVisible(true);
     }
   };
+  interface Follow {
+    startupId: string;
+    investorId: string;
+    createdAt: Date;
+  }
+  const [followRequests, setFollowRequests] = useState<Follow[]>([]);
 
+  const getRequests = async () => {
+    try {
+      const res = await fetch(`http://localhost:8000/follow/getfollowrequest`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          startupId: authState.user!["_id"],
+        }),
+      });
+      if (res.ok) {
+        const data1 = await res.json();
+        setFollowRequests(data1);
+      } else {
+        toast.error(await res.json(), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      }
+    } catch (e: any) {
+      toast.error(e, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  };
+  const acceptFollow = async (startupId: string, investorId: string) => {
+    try {
+      const res = await fetch(`http://localhost:8000/follow/acceptRequest`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          startupId: startupId,
+          investorId: investorId,
+        }),
+      });
+      if (res.ok) {
+        toast.success("Follow Request Accepted", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      } else {
+        toast.error(await res.json(), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      }
+    } catch (e: any) {
+      toast.error(e, {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  };
   return (
     <div className="flex  flex-col w-full items-center h-screen justify-center">
       <Box className="flex flex-col w-screen items-center">
         <div className="text-center">
-          <h1 className="text-3xl font-semibold text-customBlack">Project Ideas</h1>
+          <h1 className="text-3xl font-semibold text-customBlack">
+            Project Ideas
+          </h1>
+        </div>
+        <div>
+          <Button onClick={getRequests}>Get Follow req</Button>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition={Bounce}
+          />
+          {followRequests &&
+            followRequests.map((req) => (
+              <>
+                <Text>{req.investorId}</Text>sent a follow Request
+                <Button
+                  onClick={() => {
+                    acceptFollow(req.startupId, req.investorId);
+                  }}
+                >
+                  Accept?
+                </Button>
+              </>
+            ))}
         </div>
         <div className="max-w-xl mx-auto mt-10 bg-white shadow-2xl rounded-lg overflow-hidden">
           <div className="py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-4">

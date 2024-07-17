@@ -1,7 +1,7 @@
 const express = require("express");
-const uid = require("uid");
 const Router = express.Router();
 const Project = require("../models/project");
+const mongoose = require("mongoose");
 
 Router.post("/project", async (req, res) => {
   const {
@@ -18,11 +18,9 @@ Router.post("/project", async (req, res) => {
   } = req.body;
   try {
     const bufferData = Buffer.from(legalDocuments, "base64");
-    const projectId = uid.uid(16);
     const date = Date.now();
     const project = await Project({
-      projectId: projectId,
-      startupId: startupId,
+      startupId: new mongoose.Types.ObjectId(startupId),
       projectTitle: projectTitle,
       projectDescription: projectDescription,
       targetMarket: targetMarket,
@@ -32,7 +30,7 @@ Router.post("/project", async (req, res) => {
       expectedROI: expectedROI,
       patentDetails: patentDetails,
       legalDocuments: bufferData,
-      createdAt:date
+      createdAt: date,
     });
     const result = await project.save();
     res.status(200).send("project uploaded successfully");
@@ -43,14 +41,13 @@ Router.post("/project", async (req, res) => {
   }
 });
 
-Router.get('/allprojects',async(req,res)=>{
-    try{
-        const projects=await Project.find({});
-        res.json(projects);
-    }
-    catch(e){
-        res.json(JSON.stringify(e));
-    }
-})
+Router.get("/allprojects", async (req, res) => {
+  try {
+    const projects = await Project.find({});
+    res.json(projects);
+  } catch (e) {
+    res.json(JSON.stringify(e));
+  }
+});
 
-module.exports=Router;
+module.exports = Router;
