@@ -15,8 +15,6 @@ import { Responsive } from "@radix-ui/themes/props";
 export default function RegisterStartup() {
   const [fullName, setFullName] = useState<string>();
   const [phoneNumber, setPhoneNumber] = useState<string>();
-  const [companySize, setCompanySize] = useState<string>();
-  const [contactPerson, setContactPerson] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [companyName, setCompanyName] = useState<string>();
@@ -25,8 +23,6 @@ export default function RegisterStartup() {
   const [location, setLocation] = useState<string>();
   const [ideaDescription, setIdeaDescription] = useState<string>();
   const [linkedInProfile, setLinkedInProfile] = useState<string>();
-  const [missionStatement, setMissionStatement] = useState<string>();
-  const [revenue, setRevenue] = useState<string>();
   const [patentApplicationNumbers, setPatentApplicationNumbers] = useState<
     string[]
   >([]);
@@ -34,23 +30,17 @@ export default function RegisterStartup() {
   const [otpSent, setOtpSent] = useState<boolean>(false);
   const [emailOtp, setEmailOtp] = useState<string>();
   const [phoneOtp, setPhoneOtp] = useState<string>();
-  const [documents, setDocuments] = useState<Buffer>();
   const [errors, setErrors] = useState<{
     companyName?: string;
     fullName?: string;
     email?: string;
     password?: string;
     phoneNumber?: string;
-    companySize?: string;
     industry?: string;
     location?: string;
-    contactPerson?: string;
     companyDescription?: string;
     linkedInProfile?: string;
-    missionStatement?: string;
-    revenue?: string;
     patentApplicationNumber?: string;
-    documents?: string;
     fetchError?: string;
     ideaDescription?: string;
     patentApplicationNumbers?: string;
@@ -64,12 +54,8 @@ export default function RegisterStartup() {
       email?: string;
       password?: string;
       phoneNumber?: string;
-      companySize?: string;
       companyName?: string;
-      contactPerson?: string;
       companyDescription?: string;
-      missionStatement?: string;
-      revenue?: string;
       patentApplicationNumber?: string;
       documents?: string;
       fetchError?: string;
@@ -93,7 +79,6 @@ export default function RegisterStartup() {
       errors.phoneNumber = "Phone Number must be 10 characters";
     if (!industry) errors.industry = "Industry is required";
     if (!location) errors.location = "Location is required";
-    if (!companySize) errors.companySize = "companySize is required";
     if (!companyName) errors.companyName = "companyName is required";
 
     if (!ideaDescription)
@@ -310,13 +295,13 @@ export default function RegisterStartup() {
                 id="outlined-basic"
                 name="Company Size"
                 placeholder="Enter your company size"
-                error={errors?.companySize ? true : false}
-                value={companySize}
-                onChange={(e) => setCompanySize(e.target.value)}
+                error={errors?.ideaDescription ? true : false}
+                value={ideaDescription}
+                onChange={(e) => setIdeaDescription(e.target.value)}
                 size="small"
                 className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
-              {errors?.companySize && <Text>{errors.companySize}</Text>}
+              {errors?.ideaDescription && <Text>{errors.ideaDescription}</Text>}
             </div>
             <div className="mb-4">
               <label
@@ -360,27 +345,7 @@ export default function RegisterStartup() {
               />
               {errors?.location && <Text>{errors.location}</Text>}
             </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 font-bold mb-1 px-1"
-                htmlFor="Contact Person"
-              >
-                Contact Person
-              </label>
-              <TextField
-                type="text"
-                required
-                id="outlined-basic"
-                name="Contact Person"
-                placeholder="Enter your contact person"
-                error={errors?.contactPerson ? true : false}
-                value={contactPerson}
-                onChange={(e) => setContactPerson(e.target.value)}
-                size="small"
-                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-              {errors?.contactPerson && <Text>{errors.contactPerson}</Text>}
-            </div>
+
             <div className="mb-4 col-span-2">
               <label
                 className="block text-gray-700 font-bold mb-1 px-1"
@@ -423,48 +388,7 @@ export default function RegisterStartup() {
               />
               {errors?.linkedInProfile && <Text>{errors.linkedInProfile}</Text>}
             </div>
-            <div className="mb-4 col-span-2">
-              <label
-                className="block text-gray-700 font-bold mb-1 px-1"
-                htmlFor="Mission Statement"
-              >
-                Mission Statement
-              </label>
-              <TextArea
-                id="outlined-basic"
-                name="Mission Statement"
-                placeholder="Enter your mission statement"
-                //error={errors?.missionStatement ? true : false}
-                value={missionStatement}
-                onChange={(e) => setMissionStatement(e.target.value)}
-                size={"medium" as Responsive<"1" | "2" | "3">}
-                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-              {errors?.missionStatement && (
-                <Text>{errors.missionStatement}</Text>
-              )}
-            </div>
-            <div className="mb-4 col-span-2">
-              <label
-                className="block text-gray-700 font-bold mb-1 px-1"
-                htmlFor="Revenue"
-              >
-                Revenue
-              </label>
-              <TextField
-                type="number"
-                required
-                id="outlined-basic"
-                name="Revenue"
-                placeholder="Enter your revenue"
-                error={errors?.revenue ? true : false}
-                value={revenue}
-                onChange={(e) => setRevenue(e.target.value)}
-                size="small"
-                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-              {errors?.revenue && <Text>{errors.revenue}</Text>}
-            </div>
+
             <div className="mb-4 col-span-2">
               <label
                 className="block text-gray-700 font-bold mb-1 px-1"
@@ -493,27 +417,7 @@ export default function RegisterStartup() {
                 <Text>{errors.patentApplicationNumber}</Text>
               )}
             </div>
-            <div className="mb-4 col-span-2">
-              <label
-                className="block text-gray-700 font-bold mb-1 px-1"
-                htmlFor="Documents"
-              >
-                Documents
-              </label>
-              <TextField
-                type="file"
-                required
-                id="outlined-basic"
-                name="Documents"
-                placeholder="Enter your documents"
-                error={errors?.documents ? true : false}
-                value={documents}
-                onChange={(e) => {}}
-                size="small"
-                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              />
-              {errors?.documents && <Text>{errors.documents}</Text>}
-            </div>
+
             <Button
               type="submit"
               className="col-span-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
