@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import {
@@ -27,11 +28,6 @@ export default function RegisterStartup() {
   const [emailOtp, setEmailOtp] = useState<string>("");
   const [phoneOtp, setPhoneOtp] = useState<string>("");
   const [errors, setErrors] = useState<{
-    fullName?: string;
-    email?: string;
-    password?: string;
-    phoneNumber?: string;
-    companyName?: string;
     industry?: string;
     location?: string;
     ideaDescription?: string;
@@ -43,11 +39,8 @@ export default function RegisterStartup() {
 
   const validate = () => {
     const errors: {
-      fullName?: string;
-      email?: string;
-      password?: string;
-      phoneNumber?: string;
-      companyName?: string;
+
+
       industry?: string;
       location?: string;
       ideaDescription?: string;
@@ -59,10 +52,28 @@ export default function RegisterStartup() {
 
     if (!fullName) errors.fullName = "Full Name is required";
     if (!email) errors.email = "Email is required";
+
+      companySize?: string;
+      industry?: string;
+      location?: string;
+      contactPerson?: string;
+      companyDescription?: string;
+      linkedInProfile?: string;
+      missionStatement?: string;
+      revenue?: string;
+      patentApplicationNumber?: string;
+      documents?: string;
+      fetchError?: string;
+    } = {};
+
+    if (!fullName) errors.fullName = "Full Name is required";
+    if (!email) errors.email = "Email does not exist";
+
     else if (!/\S+@\S+\.\S+/.test(email)) errors.email = "Email is invalid";
     if (!password) errors.password = "Password is required";
     else if (password.length < 6) errors.password = "Password must be at least 6 characters";
     if (!phoneNumber) errors.phoneNumber = "Phone Number is required";
+
     else if (phoneNumber.length !== 10) errors.phoneNumber = "Phone Number must be 10 characters";
     if (!industry) errors.industry = "Industry is required";
     if (!location) errors.location = "Location is required";
@@ -73,6 +84,7 @@ export default function RegisterStartup() {
         errors.patentApplicationNumbers = `Patent ID ${index + 1} is required`;
       }
     });
+
 
     return errors;
   };
@@ -88,304 +100,342 @@ export default function RegisterStartup() {
       setAlertVisible(true);
     }
   };
-
-  const handleOtpSubmit = () => {
-    const otpErrors: {
-      emailOtp?: string;
-      phoneOtp?: string;
-    } = {};
-
-    if (!emailOtp) otpErrors.emailOtp = "Email OTP is required";
-    if (!phoneOtp) otpErrors.phoneOtp = "Phone OTP is required";
-
-    if (Object.keys(otpErrors).length === 0) {
-      // Handle successful OTP verification
-      console.log("OTP verified successfully!");
-    } else {
-      setErrors(otpErrors);
+  const handleOtpRequest = async (type: 'phone' | 'email') => {
+    try {
+      const response = await axios.post('/api/request-otp', { type, phoneNumber, email });
+      if (response.data.success) {
+        console.log(`${type === 'phone' ? 'Phone' : 'Email'} OTP requested successfully.`);
+      } else {
+        console.error(`Failed to request ${type === 'phone' ? 'phone' : 'email'} OTP.`);
+      }
+    } catch (error) {
+      console.error(`Error requesting ${type === 'phone' ? 'phone' : 'email'} OTP:`, error);
     }
   };
-
-  const handlePatentIdChange = (
-    index: number,
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const newPatentApplicationNumbers = [...patentApplicationNumbers];
-    newPatentApplicationNumbers[index] = event.target.value;
-    setPatentApplicationNumbers(newPatentApplicationNumbers);
+  
+  const handleOtpVerification = async (type: 'phone' | 'email') => {
+    try {
+      const otp = type === 'phone' ? phoneOtp : emailOtp;
+      const response = await axios.post('/api/verify-otp', { type, otp });
+      if (response.data.success) {
+        console.log(`${type === 'phone' ? 'Phone' : 'Email'} OTP verified successfully.`);
+      } else {
+        console.error(`Failed to verify ${type === 'phone' ? 'phone' : 'email'} OTP.`);
+      }
+    } catch (error) {
+      console.error(`Error verifying ${type === 'phone' ? 'phone' : 'email'} OTP:`, error);
+    }
   };
+  
 
   return (
-    <div className="flex flex-col w-screen items-center h-screen justify-center">
-      <Box className="flex flex-col w-screen items-center" style={{ width: "150%" }}>
+    <div className="flex flex-col w-screen items-center justify-center p-4 md:p-0">
+      <Box className="flex flex-col items-center w-full max-w-3xl">
         <div className="text-center">
           <h1 className="text-3xl font-semibold text-customBlack">Register</h1>
         </div>
-        <div className="max-w-xl mx-auto mt-10 bg-white shadow-2xl rounded-lg overflow-hidden">
-          <form onSubmit={handleSubmit}>
-            {!otpSent ? (
-              <div className="py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Name">
-                    Name
-                  </label>
-                  <TextField
-                    type="text"
-                    required
-                    id="name"
-                    name="Name"
-                    error={!!errors.fullName}
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    placeholder="Enter your Name"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.fullName && <Text>{errors.fullName}</Text>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Email">
-                    Email
-                  </label>
-                  <TextField
-                    type="email"
-                    required
-                    id="email"
-                    name="Email"
-                    error={!!errors.email}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your Email"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.email && <Text>{errors.email}</Text>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Password">
-                    Password
-                  </label>
-                  <TextField
-                    type="password"
-                    required
-                    id="password"
-                    name="Password"
-                    error={!!errors.password}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your Password"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.password && <Text>{errors.password}</Text>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Phone">
-                    Phone Number
-                  </label>
-                  <TextField
-                    type="tel"
-                    required
-                    id="phoneNumber"
-                    name="Phone"
-                    error={!!errors.phoneNumber}
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    placeholder="Enter your Phone Number"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.phoneNumber && <Text>{errors.phoneNumber}</Text>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="LinkedIn">
-                    LinkedIn Profile
-                  </label>
-                  <TextField
-                    type="text"
-                    required
-                    id="linkedIn"
-                    name="LinkedIn"
-                    error={!!errors.linkedInProfile}
-                    value={linkedInProfile}
-                    onChange={(e) => setLinkedInProfile(e.target.value)}
-                    placeholder="Enter your LinkedIn Profile"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.linkedInProfile && <Text>{errors.linkedInProfile}</Text>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Company">
-                    Company Name
-                  </label>
-                  <TextField
-                    type="text"
-                    id="companyName"
-                    name="Company"
-                    error={!!errors.companyName}
-                    value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
-                    placeholder="Enter your Company Name"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.companyName && <Text>{errors.companyName}</Text>}
-                </div>
-                {companyName && (
-                  <div className="mb-4 col-span-2">
-                    <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="CompanyDesc">
-                      Company Description
-                    </label>
-                    <TextArea
-                      id="companyDescription"
-                      name="CompanyDesc"
-                      value={companyDescription}
-                      onChange={(e) => setCompanyDescription(e.target.value)}
-                      placeholder="Enter your Company Description"
-                      size="3"
-                      className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    />
-                  </div>
-                )}
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Industry">
-                    Industry
-                  </label>
-                  <TextField
-                    type="text"
-                    id="industry"
-                    name="Industry"
-                    required
-                    error={!!errors.industry}
-                    value={industry}
-                    onChange={(e) => setIndustry(e.target.value)}
-                    placeholder="Enter your Industry"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.industry && <Text>{errors.industry}</Text>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Location">
-                    Location
-                  </label>
-                  <TextField
-                    type="text"
-                    id="location"
-                    name="Location"
-                    required
-                    error={!!errors.location}
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    placeholder="Enter your Location"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.location && <Text>{errors.location}</Text>}
-                </div>
-                <div className="mb-4 col-span-2">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="IdeaDesc">
-                    Idea Description
-                  </label>
-                  <TextArea
-                    id="ideaDescription"
-                    name="IdeaDesc"
-                    required
-                    value={ideaDescription}
-                    onChange={(e) => setIdeaDescription(e.target.value)}
-                    placeholder="Enter your Idea Description"
-                    size="3"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.ideaDescription && <Text>{errors.ideaDescription}</Text>}
-                </div>
-                <div className="mb-4 col-span-2">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="PatentIds">
-                    Patent Application Numbers
-                  </label>
-                  {patentApplicationNumbers.map((patent, index) => (
-                    <div key={index} className="flex mb-2">
-                      <TextField
-                        type="text"
-                        id={`patent${index}`}
-                        name={`Patent${index}`}
-                        value={patent}
-                        onChange={(e) => handlePatentIdChange(index, e)}
-                        placeholder={`Enter Patent ID ${index + 1}`}
-                        size="small"
-                        className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      />
-                      {errors.patentApplicationNumbers &&
-                        errors.patentApplicationNumbers.includes(`Patent ID ${index + 1}`) && (
-                          <Text>{`Patent ID ${index + 1} is required`}</Text>
-                        )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <div className="py-4 px-6">
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="emailOtp">
-                    Email OTP
-                  </label>
-                  <TextField
-                    type="text"
-                    id="emailOtp"
-                    name="emailOtp"
-                    error={!!errors.emailOtp}
-                    value={emailOtp}
-                    onChange={(e) => setEmailOtp(e.target.value)}
-                    placeholder="Enter OTP sent to your Email"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.emailOtp && <Text>{errors.emailOtp}</Text>}
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="phoneOtp">
-                    Phone OTP
-                  </label>
-                  <TextField
-                    type="text"
-                    id="phoneOtp"
-                    name="phoneOtp"
-                    error={!!errors.phoneOtp}
-                    value={phoneOtp}
-                    onChange={(e) => setPhoneOtp(e.target.value)}
-                    placeholder="Enter OTP sent to your Phone"
-                    size="small"
-                    className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  />
-                  {errors.phoneOtp && <Text>{errors.phoneOtp}</Text>}
-                </div>
-                <Flex justify="center" mt="5">
-                  <Button onClick={handleOtpSubmit}>Submit OTP</Button>
-                </Flex>
-              </div>
-            )}
-            {!otpSent && (
-              <Flex justify="center" mt="5">
-                <Button type="submit">Submit</Button>
-              </Flex>
-            )}
+        <div className="mt-10 w-full bg-white shadow-2xl rounded-lg overflow-hidden">
+          <form className="py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-4" onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Name">
+                Name
+              </label>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="Name"
+                error={errors?.fullName ? true : false}
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Enter your Name"
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.fullName && <Text>{errors.fullName}</Text>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Email">
+                Email
+              </label>
+              <TextField
+                type="email"
+                required
+                id="outlined-basic"
+                name="Email"
+                error={errors?.email ? true : false}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your Mail"
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.email && <Text>{errors.email}</Text>}
+              <Button variant="soft" onClick={() => handleOtpRequest('email')}>Request OTP</Button>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="EmailOtp"
+                value={emailOtp}
+                onChange={(e) => setEmailOtp(e.target.value)}
+                placeholder="Enter your OTP"
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              <Button variant="soft" onClick={() => handleOtpVerification('email')}>Verify OTP</Button>
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Password">
+                Password
+              </label>
+              <TextField
+                type="password"
+                required
+                id="outlined-basic"
+                name="Password"
+                error={errors?.password ? true : false}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your Password"
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.password && <Text>{errors.password}</Text>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Phone Number">
+                Phone Number
+              </label>
+              <TextField
+                type="number"
+                required
+                id="outlined-basic"
+                name="Phone Number"
+                placeholder="Enter your phone number"
+                error={errors?.phoneNumber ? true : false}
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.phoneNumber && <Text>{errors.phoneNumber}</Text>}
+              <Button variant="soft" onClick={() => handleOtpRequest('phone')}>Request OTP</Button>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="PhoneOtp"
+                value={phoneOtp}
+                onChange={(e) => setPhoneOtp(e.target.value)}
+                placeholder="Enter your OTP"
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              <Button variant="soft" onClick={() => handleOtpVerification('phone')}>Verify OTP</Button>
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Company Name">
+                Company Name
+              </label>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="Company Name"
+                placeholder="Enter your company name"
+                error={errors?.companyName ? true : false}
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.companyName && <Text>{errors.companyName}</Text>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Company Size">
+                Company Size
+              </label>
+              <TextField
+                type="number"
+                required
+                id="outlined-basic"
+                name="Company Size"
+                placeholder="Enter your company size"
+                error={errors?.companySize ? true : false}
+                value={companySize}
+                onChange={(e) => setCompanySize(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.companySize && <Text>{errors.companySize}</Text>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Industry">
+                Industry
+              </label>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="Industry"
+                placeholder="Enter your industry"
+                error={errors?.industry ? true : false}
+                value={industry}
+                onChange={(e) => setIndustry(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.industry && <Text>{errors.industry}</Text>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Location">
+                Location
+              </label>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="Location"
+                placeholder="Enter your location"
+                error={errors?.location ? true : false}
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.location && <Text>{errors.location}</Text>}
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Contact Person">
+                Contact Person
+              </label>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="Contact Person"
+                placeholder="Enter your contact person"
+                error={errors?.contactPerson ? true : false}
+                value={contactPerson}
+                onChange={(e) => setContactPerson(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.contactPerson && <Text>{errors.contactPerson}</Text>}
+            </div>
+            <div className="mb-4 col-span-2">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Company Description">
+                Company Description
+              </label>
+              <TextArea
+                id="outlined-basic"
+                name="Company Description"
+                placeholder="Enter your company description"
+                //error={errors?.companyDescription ? true : false}
+                value={companyDescription}
+                onChange={(e) => setCompanyDescription(e.target.value)}
+                size={"medium" as Responsive<"1" | "2" | "3">}
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.companyDescription && <Text>{errors.companyDescription}</Text>}
+            </div>
+            <div className="mb-4 col-span-2">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="LinkedIn Profile">
+                LinkedIn Profile
+              </label>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="LinkedIn Profile"
+                placeholder="Enter your LinkedIn profile"
+                error={errors?.linkedInProfile ? true : false}
+                value={linkedInProfile}
+                onChange={(e) => setLinkedInProfile(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.linkedInProfile && <Text>{errors.linkedInProfile}</Text>}
+            </div>
+            <div className="mb-4 col-span-2">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Mission Statement">
+                Mission Statement
+              </label>
+              <TextArea
+                id="outlined-basic"
+                name="Mission Statement"
+                placeholder="Enter your mission statement"
+                //error={errors?.missionStatement ? true : false}
+                value={missionStatement}
+                onChange={(e) => setMissionStatement(e.target.value)}
+                size={"medium" as Responsive<"1" | "2" | "3">}
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.missionStatement && <Text>{errors.missionStatement}</Text>}
+            </div>
+            <div className="mb-4 col-span-2">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Revenue">
+                Revenue
+              </label>
+              <TextField
+                type="number"
+                required
+                id="outlined-basic"
+                name="Revenue"
+                placeholder="Enter your revenue"
+                error={errors?.revenue ? true : false}
+                value={revenue}
+                onChange={(e) => setRevenue(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.revenue && <Text>{errors.revenue}</Text>}
+            </div>
+            <div className="mb-4 col-span-2">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Patent Application Number">
+                Patent Application Number
+              </label>
+              <TextField
+                type="text"
+                required
+                id="outlined-basic"
+                name="Patent Application Number"
+                placeholder="Enter your patent application number"
+                error={errors?.patentApplicationNumber ? true : false}
+                value={patentApplicationNumber}
+                onChange={(e) => setPatentApplicationNumber(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.patentApplicationNumber && <Text>{errors.patentApplicationNumber}</Text>}
+            </div>
+            <div className="mb-4 col-span-2">
+              <label className="block text-gray-700 font-bold mb-1 px-1" htmlFor="Documents">
+                Documents
+              </label>
+              <TextField
+                type="file"
+                required
+                id="outlined-basic"
+                name="Documents"
+                placeholder="Enter your documents"
+                error={errors?.documents ? true : false}
+                value={documents}
+                onChange={(e) => setDocuments(e.target.value)}
+                size="small"
+                className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              />
+              {errors?.documents && <Text>{errors.documents}</Text>}
+            </div>
+            <Button
+              type="submit"
+              className="col-span-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Submit
+            </Button>
           </form>
         </div>
-        <AlertDialog open={alertVisible} onOpenChange={setAlertVisible}>
-          <AlertDialogTrigger asChild>
-            <Button>Open Alert</Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogTitle>Error</AlertDialogTitle>
-            <AlertDialogDescription>
-              Please correct the errors in the form before submitting.
-            </AlertDialogDescription>
-            <AlertDialogAction asChild>
-              <Button onClick={() => setAlertVisible(false)}>Close</Button>
-            </AlertDialogAction>
-          </AlertDialogContent>
-        </AlertDialog>
       </Box>
     </div>
   );

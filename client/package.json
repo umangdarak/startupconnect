@@ -16,6 +16,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@radix-ui/themes": "^3.1.1",
     "@reduxjs/toolkit": "^2.2.6",
+    "axios": "^1.7.2",
     "browser-image-compression": "^2.0.2",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.2.13",

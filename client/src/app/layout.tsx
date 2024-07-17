@@ -22,7 +22,9 @@ export default function RootLayout({
       <body  >
         <ReduxProvider>
           <Theme>
+
            <HeaderPage />
+
             {children}
           </Theme>
         </ReduxProvider>
