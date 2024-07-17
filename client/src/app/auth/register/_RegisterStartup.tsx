@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import {
   AlertDialog,
@@ -8,57 +9,50 @@ import {
   AlertDialogDescription,
   AlertDialogAction,
 } from "@radix-ui/react-alert-dialog";
-import { Box, Button, Flex, Text, TextArea } from "@radix-ui/themes";
-import React, { useState } from "react";
-import axios from "axios";
-import { Responsive } from "@radix-ui/themes/dist/esm/props/prop-def.js";
+import { TextArea, Box, Button, Flex, Text } from "@radix-ui/themes";
 
 export default function RegisterStartup() {
-  const [fullName, setFullName] = useState<string>();
-  const [phoneNumber, setPhoneNumber] = useState<string>();
-  const [phoneOtp, setPhoneOtp] = useState<string>();
-  const [email, setEmail] = useState<string>();
-  const [emailOtp, setEmailOtp] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  const [companyName, setCompanyName] = useState<string>();
-  const [companySize, setCompanySize] = useState<string>();
-  const [industry, setIndustry] = useState<string>();
-  const [location, setLocation] = useState<string>();
-  const [contactPerson, setContactPerson] = useState<string>();
-  const [companyDescription, setCompanyDescription] = useState<string>();
-  const [linkedInProfile, setLinkedInProfile] = useState<string>();
-  const [missionStatement, setMissionStatement] = useState<string>();
-  const [revenue, setRevenue] = useState<string>();
-  const [patentApplicationNumber, setPatentApplicationNumber] = useState<string>();
-  const [documents, setDocuments] = useState<string>();
-  const [createdAt, setCreatedAt] = useState<string>();
+  const [fullName, setFullName] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [companyName, setCompanyName] = useState<string>("");
+  const [companyDescription, setCompanyDescription] = useState<string>("");
+  const [industry, setIndustry] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [ideaDescription, setIdeaDescription] = useState<string>("");
+  const [linkedInProfile, setLinkedInProfile] = useState<string>("");
+  const [patentApplicationNumbers, setPatentApplicationNumbers] = useState<string[]>([""]);
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
-  const [errors, setErrors] = useState<{    
-    fullName?: string;
-    email?: string;
-    password?: string;
-    phoneNumber?: string;
-    companyName?: string;
-    companySize?: string;
+  const [otpSent, setOtpSent] = useState<boolean>(false);
+  const [emailOtp, setEmailOtp] = useState<string>("");
+  const [phoneOtp, setPhoneOtp] = useState<string>("");
+  const [errors, setErrors] = useState<{
     industry?: string;
     location?: string;
-    contactPerson?: string;
-    companyDescription?: string;
+    ideaDescription?: string;
     linkedInProfile?: string;
-    missionStatement?: string;
-    revenue?: string;
-    patentApplicationNumber?: string;
-    documents?: string;
-    fetchError?: string;
-  }>();
+    patentApplicationNumbers?: string;
+    emailOtp?: string;
+    phoneOtp?: string;
+  }>({});
 
   const validate = () => {
-    const errors: {    
-      fullName?: string;
-      email?: string;
-      password?: string;
-      phoneNumber?: string;
-      companyName?: string;
+    const errors: {
+
+
+      industry?: string;
+      location?: string;
+      ideaDescription?: string;
+      linkedInProfile?: string;
+      patentApplicationNumbers?: string;
+      emailOtp?: string;
+      phoneOtp?: string;
+    } = {};
+
+    if (!fullName) errors.fullName = "Full Name is required";
+    if (!email) errors.email = "Email is required";
+
       companySize?: string;
       industry?: string;
       location?: string;
@@ -74,19 +68,23 @@ export default function RegisterStartup() {
 
     if (!fullName) errors.fullName = "Full Name is required";
     if (!email) errors.email = "Email does not exist";
+
     else if (!/\S+@\S+\.\S+/.test(email)) errors.email = "Email is invalid";
     if (!password) errors.password = "Password is required";
     else if (password.length < 6) errors.password = "Password must be at least 6 characters";
     if (!phoneNumber) errors.phoneNumber = "Phone Number is required";
-    else if (phoneNumber.length !== 10) errors.phoneNumber = "PhoneNumber must be of 10 characters";
-    if (!companyName) errors.companyName = "Company Name is required";
-    if (!companySize) errors.companySize = "Company size is required";
+
+    else if (phoneNumber.length !== 10) errors.phoneNumber = "Phone Number must be 10 characters";
     if (!industry) errors.industry = "Industry is required";
     if (!location) errors.location = "Location is required";
-    if (!contactPerson) errors.contactPerson = "Contact Person is required";
+    if (!ideaDescription) errors.ideaDescription = "Idea Description is required";
     if (!linkedInProfile) errors.linkedInProfile = "LinkedIn Profile is required";
-    if (!patentApplicationNumber) errors.patentApplicationNumber = "Patent Application Number is required";
-    if (!documents) errors.documents = "Document is required";
+    patentApplicationNumbers.forEach((patent, index) => {
+      if (!patent) {
+        errors.patentApplicationNumbers = `Patent ID ${index + 1} is required`;
+      }
+    });
+
 
     return errors;
   };
@@ -96,12 +94,12 @@ export default function RegisterStartup() {
     const err = validate();
     setErrors(err);
     if (Object.keys(err).length === 0) {
-      // Handle successful validation
+      // Simulate sending OTP
+      setOtpSent(true);
     } else {
       setAlertVisible(true);
     }
   };
-
   const handleOtpRequest = async (type: 'phone' | 'email') => {
     try {
       const response = await axios.post('/api/request-otp', { type, phoneNumber, email });
@@ -442,3 +440,4 @@ export default function RegisterStartup() {
     </div>
   );
 }
+
