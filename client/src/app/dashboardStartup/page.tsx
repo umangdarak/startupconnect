@@ -251,7 +251,7 @@ export default function DashBoardStartup() {
         </div>
         <div>
           <Button onClick={getRequests}>Get Follow req</Button>
-          <ToastContainer
+          {/* <ToastContainer
             position="bottom-right"
             autoClose={5000}
             hideProgressBar={false}
@@ -263,7 +263,7 @@ export default function DashBoardStartup() {
             pauseOnHover
             theme="dark"
             transition={Bounce}
-          />
+          /> */}
           {followRequests &&
             followRequests.map((req) => (
               <>

@@ -33,12 +33,12 @@ export const HeaderPage = () => {
           </div>
         ) : (
           <div className="flex flex-row gap-3 ">
-            <Link href="/auth/login">
+            <Link href="/login">
               <Button className="button1">
                 <Text className="text-white text-lg font-light">Login</Text>
               </Button>
             </Link>
-            <Link href="/auth/register">
+            <Link href="/register">
               <Button className="button1">
                 <Text className="text-white text-lg font-light">Register</Text>
               </Button>

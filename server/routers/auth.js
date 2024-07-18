@@ -19,13 +19,11 @@ Router.post("/login", async (req, res) => {
             const token = jwt.sign({ user: investor }, process.env.privatekey, {
               expiresIn: "3h",
             });
-            res
-              .status(200)
-              .json({
-                message: "Login Succesful",
-                token: token,
-                user: investor,
-              });
+            res.status(200).json({
+              message: "Login Succesful",
+              token: token,
+              user: investor,
+            });
           }
         });
       } else {
@@ -42,13 +40,11 @@ Router.post("/login", async (req, res) => {
             const token = jwt.sign({ user: startup }, process.env.privatekey, {
               expiresIn: "3h",
             });
-            res
-              .status(200)
-              .json({
-                message: "Login Succesful",
-                token: token,
-                user: startup,
-              });
+            res.status(200).json({
+              message: "Login Succesful",
+              token: token,
+              user: startup,
+            });
           }
         });
       } else {

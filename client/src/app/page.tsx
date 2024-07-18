@@ -11,7 +11,7 @@ function Home() {
 
   useEffect(() => {
     if (!authState.authState) {
-      router.push("/auth/login");
+      router.push("/login");
     }else if(authState.userType=='Startup'){
       router.push("/dashboardStartup");
     }else{

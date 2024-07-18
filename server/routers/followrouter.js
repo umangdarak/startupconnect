@@ -3,7 +3,7 @@ const Router = express.Router();
 const FollowRequest = require("../models/follow");
 const Investor = require("../models/investor");
 const Startup = require("../models/startup");
-const mongoose=require("mongoose");
+const mongoose = require("mongoose");
 Router.post("/followreq", async (req, res) => {
   const { investorId, startupId } = req.body;
   try {
@@ -11,10 +11,17 @@ Router.post("/followreq", async (req, res) => {
       investorId: investorId,
       startupId: startupId,
     });
+    const startup=await Startup.find({
+      followers:investorId
+    })
+    console.log(startup);
     console.log(user);
-    if (user.length>0) {
+     if(startup.length>0){
       res.status(301).json("Already Follows");
-    } else {
+
+    }else if (user.length > 0) {
+      res.status(301).json("Already sent request");
+    }else {
       const follow = new FollowRequest({
         investorId: new mongoose.Types.ObjectId(investorId),
         startupId: new mongoose.Types.ObjectId(startupId),
@@ -46,11 +53,16 @@ Router.post("/acceptRequest", async (req, res) => {
       return res.status(404).json({ message: "Investor or Startup not found" });
     }
     investor.following.push(new mongoose.Types.ObjectId(startupId));
+  
     startup.followers.push(new mongoose.Types.ObjectId(investorId));
+    
+    
+    await investor.save();
+    await startup.save();
     res.status(200).json("Followed Succesfully");
   } catch (e) {
     res.status(404).json("Error Following");
     console.log(e);
   }
 });
-module.exports=Router;
+module.exports = Router;

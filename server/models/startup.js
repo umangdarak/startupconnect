@@ -5,10 +5,6 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
   },
-  startupId: {
-    type: String,
-    required: true,
-  },
   phoneNumber: {
     type: String,
     required: true,
@@ -25,10 +21,7 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
   },
-  patentApplicationNumber: {
-    type: String,
-    required: true,
-  },
+
   industry: {
     type: String,
     required: true,
