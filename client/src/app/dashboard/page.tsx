@@ -1,521 +1,290 @@
+// import React from "react";
+// import Image from "next/image";
+
+// export default function Home() {
+//   return (
+//     <div className="flex flex-wrap">
+//       <div className="w-full lg:w-8/12 rounded-3xl bg-gray-800 p-6 mb-8">
+//         <div className="flex items-center justify-between text-white mb-8">
+//           <p className="text-2xl font-bold">Home</p>
+//         </div>
+//         <div className="overflow-y-auto max-h-screen">
+//           {/* First Section */}
+//           <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8">
+//             <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+//               <Image
+//                 src="/images/logo.png"
+//                 alt="Revolutionizing Our Production Process"
+//                 layout="fill"
+//                 objectFit="cover"
+//               />
+//             </div>
+//             <div className="p-8 sm:pr-12 sm:pl-8">
+//               <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Technology</p>
+//               <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Revolutionizing Our Production Process</a>
+//               <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Learn how our recent investment in new technology has revolutionized our production process, leading to improved efficiency and product quality.</p>
+//               <div className="flex items-center gap-4">
+//                 <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="John Doe" />
+//                 <div>
+//                   <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">John Doe</p>
+//                   <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-08-15</p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Second Section */}
+//           <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8">
+//             <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+//               <Image
+//                 src="/images/logo.png"
+//                 alt="Expanding Our Service Network"
+//                 layout="fill"
+//                 objectFit="cover"
+//               />
+//             </div>
+//             <div className="p-8 sm:pr-12 sm:pl-8">
+//               <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Expansion</p>
+//               <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Expanding Our Service Network</a>
+//               <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Discover how our expansion investment has allowed us to enhance our service network, providing better support and customer experience.</p>
+//               <div className="flex items-center gap-4">
+//                 <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="Jane Smith" />
+//                 <div>
+//                   <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">Jane Smith</p>
+//                   <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-09-02</p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Third Section */}
+//           <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8">
+//             <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+//               <Image
+//                 src="/images/logo.png"
+//                 alt="Sustainable Practices for a Greener Future"
+//                 layout="fill"
+//                 objectFit="cover"
+//               />
+//             </div>
+//             <div className="p-8 sm:pr-12 sm:pl-8">
+//               <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Sustainability</p>
+//               <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Sustainable Practices for a Greener Future</a>
+//               <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Find out how our investment in sustainable practices is driving us towards a greener future, showcasing our commitment to environmental responsibility.</p>
+//               <div className="flex items-center gap-4">
+//                 <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="Alex Johnson" />
+//                 <div>
+//                   <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">Alex Johnson</p>
+//                   <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-09-20</p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Sidebar */}
+//       <div className="mt-8 w-full lg:mt-0 lg:w-4/12 lg:pl-4">
+//         <div className="rounded-3xl bg-gray-800 px-6 pt-6">
+//           <div className="flex pb-6 text-2xl font-bold text-white">
+//             <p>Client Messages</p>
+//           </div>
+//           {/* Client Messages content */}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
+//------------------
+// import React from "react";
+// import Image from "next/image";
+
+// export default function Home() {
+//   return (
+//     <div className="flex flex-wrap">
+//       <div className="w-full lg:w-8/12 rounded-3xl bg-gray-800 p-6 mb-8">
+//         <div className="flex items-center justify-between text-white mb-8">
+//           <p className="text-2xl font-bold">Home</p>
+//         </div>
+//         <div className="overflow-y-auto max-h-screen">
+//           {/* First Section */}
+//           <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8 border border-gray-300">
+//             <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+//               <Image
+//                 src="/images/logo.png"
+//                 alt="Revolutionizing Our Production Process"
+//                 layout="fill"
+//                 objectFit="cover"
+//               />
+//             </div>
+//             <div className="p-8 sm:pr-12 sm:pl-8">
+//               <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Technology</p>
+//               <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Revolutionizing Our Production Process</a>
+//               <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Learn how our recent investment in new technology has revolutionized our production process, leading to improved efficiency and product quality.</p>
+//               <div className="flex items-center gap-4">
+//                 <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="John Doe" />
+//                 <div>
+//                   <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">John Doe</p>
+//                   <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-08-15</p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Second Section */}
+//           <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8 border border-gray-300">
+//             <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+//               <Image
+//                 src="/images/logo.png"
+//                 alt="Expanding Our Service Network"
+//                 layout="fill"
+//                 objectFit="cover"
+//               />
+//             </div>
+//             <div className="p-8 sm:pr-12 sm:pl-8">
+//               <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Expansion</p>
+//               <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Expanding Our Service Network</a>
+//               <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Discover how our expansion investment has allowed us to enhance our service network, providing better support and customer experience.</p>
+//               <div className="flex items-center gap-4">
+//                 <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="Jane Smith" />
+//                 <div>
+//                   <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">Jane Smith</p>
+//                   <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-09-02</p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+
+//           {/* Third Section */}
+//           <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8 border border-gray-300">
+//             <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+//               <Image
+//                 src="/images/logo.png"
+//                 alt="Sustainable Practices for a Greener Future"
+//                 layout="fill"
+//                 objectFit="cover"
+//               />
+//             </div>
+//             <div className="p-8 sm:pr-12 sm:pl-8">
+//               <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Sustainability</p>
+//               <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Sustainable Practices for a Greener Future</a>
+//               <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Find out how our investment in sustainable practices is driving us towards a greener future, showcasing our commitment to environmental responsibility.</p>
+//               <div className="flex items-center gap-4">
+//                 <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="Alex Johnson" />
+//                 <div>
+//                   <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">Alex Johnson</p>
+//                   <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-09-20</p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+
+//       {/* Sidebar */}
+//       <div className="mt-8 w-full lg:mt-0 lg:w-4/12 lg:pl-4">
+//         <div className="rounded-3xl bg-gray-800 px-6 pt-6">
+//           <div className="flex pb-6 text-2xl font-bold text-white">
+//             <p>Client Messages</p>
+//           </div>
+//           {/* Client Messages content */}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 import React from "react";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <div className="flex flex-wrap">
-      <div className="w-full rounded-3xl bg-gray-800 p-6 lg:w-8/12">
-        <div className="mb-8 flex items-center justify-between text-white">
+      <div className="w-full lg:w-8/12 rounded-3xl bg-gray-800 p-6 mb-8">
+        <div className="flex items-center justify-between text-white mb-8">
           <p className="text-2xl font-bold">Home</p>
-          <p className="">December, 12</p>
         </div>
-        <div className="flex flex-wrap items-center justify-between pb-8">
-          <div className="flex flex-wrap text-white">
-            <div className="pr-10">
-              <div className="text-2xl font-bold">45</div>
-              <div className="">In Progress</div>
+        <div className="overflow-y-auto max-h-screen">
+          {/* First Section */}
+          <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8 border border-gray-300 transition-transform transform hover:scale-105">
+            <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+              <Image
+                src="/images/logo.png"
+                alt="Revolutionizing Our Production Process"
+                layout="fill"
+                objectFit="cover"
+              />
             </div>
-            <div className="pr-10">
-              <div className="text-2xl font-bold">24</div>
-              <div className="">Upcoming</div>
-            </div>
-            <div>
-              <div className="text-2xl font-bold">62</div>
-              <div className="">Total Projects</div>
-            </div>
-          </div>
-          <div className="mt-4 flex items-center md:mt-0">
-            <button className="bg-transparent text-white" title="List View">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="8" y1="6" x2="21" y2="6" />
-                <line x1="8" y1="12" x2="21" y2="12" />
-                <line x1="8" y1="18" x2="21" y2="18" />
-                <line x1="3" y1="6" x2="3.01" y2="6" />
-                <line x1="3" y1="12" x2="3.01" y2="12" />
-                <line x1="3" y1="18" x2="3.01" y2="18" />
-              </svg>
-            </button>
-            <button className="ml-2 bg-gray-700 p-2 text-white" title="Grid View">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-              </svg>
-            </button>
-          </div>
-        </div>
-        <div className="flex flex-wrap">
-          <div className="w-full md:w-4/12">
-            <div className="p-2">
-              <div className="rounded-3xl p-4" style={{ backgroundColor: 'fee4cb#' }}>
-                <div className="flex items-center">
-                  <span className="text-sm">December 10, 2020</span>
-                </div>
-                <div className="mb-4 mt-5 text-center">
-                  <p className="text-base font-bold opacity-70">Web Designing</p>
-                  <p className="mt-2 text-sm opacity-70">Prototyping</p>
-                </div>
-                <div>
-                  <p className="m-0 text-sm font-bold">Progress</p>
-                  <div className="mx-0 my-2 h-1 w-full overflow-hidden rounded-md bg-white">
-                    <span className="block h-1 w-6/12 rounded-md bg-yellow-700" />
-                  </div>
-                  <p className="m-0 text-right text-sm font-bold">60%</p>
-                </div>
-                <div className="relative flex justify-between pt-4">
-                  <div className="flex items-center">
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                      alt="participant1"
-                    />
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                      alt="participant2"
-                    />
-                    <button className="ml-3 flex h-5 w-5 items-center justify-center rounded-full border-none bg-white p-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 5v14M5 12h14" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="flex shrink-0 rounded-lg px-4 py-2 text-sm font-bold text-yellow-600">
-                    2 Days Left
-                  </div>
-                </div>
+            <div className="p-8 sm:pr-12 sm:pl-8">
+              <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Technology</p>
+              <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Revolutionizing Our Production Process</a>
+              <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Learn how our recent investment in new technology has revolutionized our production process, leading to improved efficiency and product quality.</p>
+              <div className="flex items-center gap-4">
+                {/* <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="John Doe" /> */}
+                {/* <div>
+                  <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">John Doe</p>
+                  <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-08-15</p>
+                </div> */}
               </div>
             </div>
           </div>
-          <div className="w-full md:w-4/12">
-            <div className="p-2">
-              <div className="rounded-3xl bg-gray-300 p-4">
-                <div className="flex items-center">
-                  <span className="text-sm">December 10, 2020</span>
-                </div>
-                <div className="mb-4 mt-5 text-center">
-                  <p className="text-base font-bold opacity-70">Web Designing</p>
-                  <p className="mt-2 text-sm opacity-70">Prototyping</p>
-                </div>
+
+          {/* Second Section */}
+          <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8 border border-gray-300 transition-transform transform hover:scale-105">
+            <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+              <Image
+                src="/images/logo.png"
+                alt="Sustainable Practices for a Greener Future"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+            <div className="p-8 sm:pr-12 sm:pl-8">
+              <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Sustainability</p>
+              <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Sustainable Practices for a Greener Future</a>
+              <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Find out how our investment in sustainable practices is driving us towards a greener future, showcasing our commitment to environmental responsibility.</p>
+              <div className="flex items-center gap-4">
+                {/* <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="Alex Johnson" />
                 <div>
-                  <p className="m-0 text-sm font-bold">Progress</p>
-                  <div className="mx-0 my-2 h-1 w-full overflow-hidden rounded-md bg-white">
-                    <span className="block h-1 w-5/12 rounded-md bg-indigo-700" />
-                  </div>
-                  <p className="m-0 text-right text-sm font-bold">50%</p>
-                </div>
-                <div className="relative flex justify-between pt-4">
-                  <div className="flex items-center">
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                      alt="participant3"
-                    />
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                      alt="participant4"
-                    />
-                    <button className="ml-3 flex h-5 w-5 items-center justify-center rounded-full border-none bg-white p-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 5v14M5 12h14" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="flex shrink-0 rounded-lg px-4 py-2 text-sm font-bold text-indigo-700">
-                    2 Days Left
-                  </div>
-                </div>
+                  <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">Alex Johnson</p>
+                  <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-09-20</p>
+                </div> */}
               </div>
             </div>
           </div>
-          <div className="w-full md:w-4/12">
-            <div className="p-2">
-              <div className="rounded-3xl bg-green-200 p-4">
-                <div className="flex items-center">
-                  <span className="text-sm">December 10, 2020</span>
-                </div>
-                <div className="mb-4 mt-5 text-center">
-                  <p className="text-base font-bold opacity-70">Web Designing</p>
-                  <p className="mt-2 text-sm opacity-70">Prototyping</p>
-                </div>
-                <div>
-                  <p className="m-0 text-sm font-bold">Progress</p>
-                  <div className="mx-0 my-2 h-1 w-full overflow-hidden rounded-md bg-white">
-                    <span className="block h-1 w-7/12 rounded-md bg-green-700" />
-                  </div>
-                  <p className="m-0 text-right text-sm font-bold">70%</p>
-                </div>
-                <div className="relative flex justify-between pt-4">
-                  <div className="flex items-center">
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                      alt="participant5"
-                    />
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                      alt="participant6"
-                    />
-                    <button className="ml-3 flex h-5 w-5 items-center justify-center rounded-full border-none bg-white p-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 5v14M5 12h14" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="flex shrink-0 rounded-lg px-4 py-2 text-sm font-bold text-green-700">
-                    2 Days Left
-                  </div>
-                </div>
-              </div>
+
+          {/* Third Section */}
+          <div className="relative flex-col bg-clip-border rounded-xl bg-transparent text-gray-700 shadow-none grid gap-4 sm:grid-cols-2 mb-8 border border-gray-300 transition-transform transform hover:scale-105">
+            <div className="relative bg-clip-border rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg m-0" style={{ height: '400px' }}>
+              <Image
+                src="/images/logo.png"
+                alt="Sustainable Practices for a Greener Future"
+                layout="fill"
+                objectFit="cover"
+              />
             </div>
-          </div>
-          <div className="w-full md:w-4/12">
-            <div className="p-2">
-              <div className="rounded-3xl bg-blue-200 p-4">
-                <div className="flex items-center">
-                  <span className="text-sm">December 10, 2020</span>
-                </div>
-                <div className="mb-4 mt-5 text-center">
-                  <p className="text-base font-bold opacity-70">Web Designing</p>
-                  <p className="mt-2 text-sm opacity-70">Prototyping</p>
-                </div>
+            <div className="p-8 sm:pr-12 sm:pl-8">
+              <p className="block antialiased font-sans text-sm font-light leading-normal text-inherit mb-4">Sustainability</p>
+              <a href="#" className="block antialiased tracking-normal font-sans text-xl font-semibold leading-snug text-blue-gray-900 mb-2 normal-case transition-colors hover:text-gray-700">Sustainable Practices for a Greener Future</a>
+              <p className="block antialiased font-sans text-base leading-relaxed text-inherit mb-8 font-normal !text-gray-500">Find out how our investment in sustainable practices is driving us towards a greener future, showcasing our commitment to environmental responsibility.</p>
+              <div className="flex items-center gap-4">
+                {/* <img src="/images/logo.png" className="inline-block relative object-cover object-center !rounded-full w-16 h-16" alt="Alex Johnson" />
                 <div>
-                  <p className="m-0 text-sm font-bold">Progress</p>
-                  <div className="mx-0 my-2 h-1 w-full overflow-hidden rounded-md bg-white">
-                    <span className="block h-1 w-7/12 rounded-md bg-blue-700" />
-                  </div>
-                  <p className="m-0 text-right text-sm font-bold">70%</p>
-                </div>
-                <div className="relative flex justify-between pt-4">
-                  <div className="flex items-center">
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                      alt="participant7"
-                    />
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                      alt="participant8"
-                    />
-                    <button className="ml-3 flex h-5 w-5 items-center justify-center rounded-full border-none bg-white p-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 5v14M5 12h14" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="flex shrink-0 rounded-lg px-4 py-2 text-sm font-bold text-blue-700">
-                    2 Days Left
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-4/12">
-            <div className="p-2">
-              <div className="rounded-3xl bg-red-200 p-4">
-                <div className="flex items-center">
-                  <span className="text-sm">December 10, 2020</span>
-                </div>
-                <div className="mb-4 mt-5 text-center">
-                  <p className="text-base font-bold opacity-70">Web Designing</p>
-                  <p className="mt-2 text-sm opacity-70">Prototyping</p>
-                </div>
-                <div>
-                  <p className="m-0 text-sm font-bold">Progress</p>
-                  <div className="mx-0 my-2 h-1 w-full overflow-hidden rounded-md bg-white">
-                    <span className="block h-1 w-7/12 rounded-md bg-red-700" />
-                  </div>
-                  <p className="m-0 text-right text-sm font-bold">70%</p>
-                </div>
-                <div className="relative flex justify-between pt-4">
-                  <div className="flex items-center">
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                      alt="participant9"
-                    />
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                      alt="participant10"
-                    />
-                    <button className="ml-3 flex h-5 w-5 items-center justify-center rounded-full border-none bg-white p-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 5v14M5 12h14" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="flex shrink-0 rounded-lg px-4 py-2 text-sm font-bold text-red-700">
-                    2 Days Left
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-full md:w-4/12">
-            <div className="p-2">
-              <div className="rounded-3xl bg-purple-200 p-4">
-                <div className="flex items-center">
-                  <span className="text-sm">December 10, 2020</span>
-                </div>
-                <div className="mb-4 mt-5 text-center">
-                  <p className="text-base font-bold opacity-70">Web Designing</p>
-                  <p className="mt-2 text-sm opacity-70">Prototyping</p>
-                </div>
-                <div>
-                  <p className="m-0 text-sm font-bold">Progress</p>
-                  <div className="mx-0 my-2 h-1 w-full overflow-hidden rounded-md bg-white">
-                    <span className="block h-1 w-7/12 rounded-md bg-purple-700" />
-                  </div>
-                  <p className="m-0 text-right text-sm font-bold">70%</p>
-                </div>
-                <div className="relative flex justify-between pt-4">
-                  <div className="flex items-center">
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                      alt="participant11"
-                    />
-                    <img
-                      className="h-5 w-5 overflow-hidden rounded-full object-cover"
-                      src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTB8fG1hbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                      alt="participant12"
-                    />
-                    <button className="ml-3 flex h-5 w-5 items-center justify-center rounded-full border-none bg-white p-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="12"
-                        height="12"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 5v14M5 12h14" />
-                      </svg>
-                    </button>
-                  </div>
-                  <div className="flex shrink-0 rounded-lg px-4 py-2 text-sm font-bold text-purple-700">
-                    2 Days Left
-                  </div>
-                </div>
+                  <p className="block antialiased font-sans text-base font-light leading-relaxed text-blue-gray-900 mb-0.5">Alex Johnson</p>
+                  <p className="block antialiased font-sans text-sm leading-normal text-gray-700 font-normal">2022-09-20</p>
+                </div> */}
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Sidebar */}
       <div className="mt-8 w-full lg:mt-0 lg:w-4/12 lg:pl-4">
         <div className="rounded-3xl bg-gray-800 px-6 pt-6">
           <div className="flex pb-6 text-2xl font-bold text-white">
             <p>Client Messages</p>
           </div>
-          <div>
-            <div className="flex w-full border-t border-gray-700 p-4 hover:bg-gray-700 2xl:items-start">
-              <img
-                src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                alt="profile image"
-                className="h-10 w-10 rounded-full object-cover"
-              />
-              <div className="w-full pl-4">
-                <div className="flex w-full items-center justify-between">
-                  <div className="font-medium text-white">Stephanie</div>
-                  <div className="flex h-7 w-7 cursor-pointer items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-white"
-                    >
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="my-2 text-sm text-gray-400">
-                  I got your first assignment. It was quite good. 🥳 We can continue with the next
-                  assignment.
-                </p>
-                <p className="text-right text-sm text-gray-400">Dec, 12</p>
-              </div>
-            </div>
-            <div className="flex w-full border-t border-gray-700 p-4 hover:bg-gray-700 2xl:items-start">
-              <img
-                src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80"
-                alt="profile image2"
-                className="h-10 w-10 rounded-full object-cover"
-              />
-              <div className="w-full pl-4">
-                <div className="flex w-full items-center justify-between">
-                  <div className="font-medium text-white">Mark</div>
-                  <div className="flex h-7 w-7 cursor-pointer items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-white"
-                    >
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="my-2 text-sm text-gray-400">
-                  Hey, can tell me about progress of project? I'm waiting for your response.
-                </p>
-                <p className="text-right text-sm text-gray-400">Dec, 12</p>
-              </div>
-            </div>
-            <div className="flex w-full border-t border-gray-700 p-4 hover:bg-gray-700 2xl:items-start">
-              <img
-                src="https://images.unsplash.com/photo-1543965170-4c01a586684e?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NDZ8fG1hbnxlbnwwfDB8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                alt="profile image"
-                className="h-10 w-10 rounded-full object-cover"
-              />
-              <div className="w-full pl-4">
-                <div className="flex w-full items-center justify-between">
-                  <div className="font-medium text-white">David</div>
-                  <div className="flex h-7 w-7 cursor-pointer items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-white"
-                    >
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="my-2 text-sm text-gray-400">
-                  Hey, can tell me about progress of project? I'm waiting for your response.
-                </p>
-                <p className="text-right text-sm text-gray-400">Dec, 12</p>
-              </div>
-            </div>
-            <div className="flex w-full border-t border-gray-700 p-4 hover:bg-gray-700 2xl:items-start">
-              <img
-                src="https://images.unsplash.com/photo-1533993192821-2cce3a8267d1?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MTl8fHdvbWFuJTIwbW9kZXJufGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-                alt="profile image3"
-                className="h-10 w-10 rounded-full object-cover"
-              />
-              <div className="w-full pl-4">
-                <div className="flex w-full items-center justify-between">
-                  <div className="font-medium text-white">Mark</div>
-                  <div className="flex h-7 w-7 cursor-pointer items-center justify-center">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="text-white"
-                    >
-                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                    </svg>
-                  </div>
-                </div>
-                <p className="my-2 text-sm text-gray-400">
-                  I am really impressed! Can't wait to see the final result.
-                </p>
-                <p className="text-right text-sm text-gray-400">Dec, 12</p>
-              </div>
-            </div>
-          </div>
+          {/* Client Messages content */}
         </div>
       </div>
     </div>
