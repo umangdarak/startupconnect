@@ -22,7 +22,7 @@ export default function Register() {
     }
   })
   return (
-    <div className="flex flex-row justify-center items-center h-screen">
+    <div className="flex flex-row justify-center items-center" style={{ height: 'calc(100vh - 64px)' }}>
       {" "}
       {!showForm ? (
         <motion.div
