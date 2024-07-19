@@ -677,7 +677,7 @@ export default function Login() {
 
   return (
     <div className="overflow-hidden">
-    <div className="flex flex-row justify-center items-center h-screen">
+    <div className="flex flex-row justify-center items-center" style={{ height: 'calc(100vh - 64px)' }}>
       {!showForm ? (
         <motion.div
           initial={{ opacity: 1, scale: 0 }}
