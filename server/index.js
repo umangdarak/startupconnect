@@ -7,7 +7,6 @@ require('dotenv').config();
 const app=express();
 const bodyparser=require('body-parser');
 const cors=require('cors');
-const io=require('socket.io');
 const {createServer}=require('http')
 
 
@@ -17,7 +16,6 @@ app.use(bodyparser.json());
 
 const server=createServer(app);
 
-const socket=io(server);
 
 
 

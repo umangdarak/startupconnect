@@ -1,10 +1,8 @@
 "use client";
-import { Button, Text } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/lib/store";
-import { userLogin, userLogout } from "@/lib/slices/authSlice";
+import {  useSelector } from "react-redux";
+import {  RootState } from "@/lib/store";
 function Home() {
   const router = useRouter();
   const authState = useSelector((state: RootState) => state.auth);
@@ -19,7 +17,7 @@ function Home() {
     }
   },[authState]);
 
-  return <div>thisthis</div>;
+  return null;
 }
 
 export default Home;

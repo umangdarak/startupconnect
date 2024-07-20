@@ -11,17 +11,14 @@ Router.post("/followreq", async (req, res) => {
       investorId: investorId,
       startupId: startupId,
     });
-    const startup=await Startup.find({
-      followers:investorId
-    })
-    console.log(startup);
-    console.log(user);
-     if(startup.length>0){
+    const startup = await Startup.find({
+      followers: investorId,
+    });
+    if (startup.length > 0) {
       res.status(301).json("Already Follows");
-
-    }else if (user.length > 0) {
+    } else if (user.length > 0) {
       res.status(301).json("Already sent request");
-    }else {
+    } else {
       const follow = new FollowRequest({
         investorId: new mongoose.Types.ObjectId(investorId),
         startupId: new mongoose.Types.ObjectId(startupId),
@@ -53,12 +50,15 @@ Router.post("/acceptRequest", async (req, res) => {
       return res.status(404).json({ message: "Investor or Startup not found" });
     }
     investor.following.push(new mongoose.Types.ObjectId(startupId));
-  
+
     startup.followers.push(new mongoose.Types.ObjectId(investorId));
-    
-    
+
     await investor.save();
     await startup.save();
+    const result = await FollowRequest.deleteMany({
+      investorId: investorId,
+      startupId: startupId,
+    });
     res.status(200).json("Followed Succesfully");
   } catch (e) {
     res.status(404).json("Error Following");

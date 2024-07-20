@@ -214,6 +214,7 @@ export default function DashBoardStartup() {
           theme: "dark",
           transition: Bounce,
         });
+        setFollowRequests([]);
       } else {
         toast.error(await res.json(), {
           position: "bottom-right",

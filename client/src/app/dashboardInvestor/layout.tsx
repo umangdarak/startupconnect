@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { DashboardLayout } from "./DashBoardLayout";
+import { DashboardLayout } from "../dashboard/DashBoardLayout";
+import { HeaderPage } from "../_header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-       <DashboardLayout>{children}</DashboardLayout>
-      </body> 
+        <HeaderPage />
+        <DashboardLayout>{children}</DashboardLayout>
+      </body>
     </html>
   );
 }

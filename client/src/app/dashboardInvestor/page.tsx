@@ -42,40 +42,41 @@ export default function DashBoardInvestor() {
     }
   };
   const handleFollow = async (startupId: string) => {
-    try{
-    const res = await fetch(`http://localhost:8000/follow/followreq`, {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify({
-        investorId: authState.user!["_id"],
-        startupId: startupId,
-      }),
-    });
-    if (res.ok) {
-      toast.success("Follow Request Sent", {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
+    try {
+      const res = await fetch(`http://localhost:8000/follow/followreq`, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({
+          investorId: authState.user!["_id"],
+          startupId: startupId,
+        }),
       });
-    } else {
-      toast.error(await res.json(), {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-        transition: Bounce,
-      });
-    }}catch(e:any){
+      if (res.ok) {
+        toast.success("Follow Request Sent", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      } else {
+        toast.error(await res.json(), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      }
+    } catch (e: any) {
       toast.error(e, {
         position: "bottom-right",
         autoClose: 5000,
@@ -86,7 +87,7 @@ export default function DashBoardInvestor() {
         progress: undefined,
         theme: "dark",
         transition: Bounce,
-        });
+      });
     }
   };
   return (
@@ -100,6 +101,10 @@ export default function DashBoardInvestor() {
                 onClick={() => {
                   handleFollow(project.startupId);
                 }}
+                className="button1"
+                disabled={authState.user?.following?.includes(
+                  project.startupId
+                )}
               >
                 Follow
               </Button>
