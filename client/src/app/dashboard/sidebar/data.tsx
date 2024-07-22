@@ -3,7 +3,7 @@ import { StatusIcon } from './icons/StatusIcon';
 import { CreditIcon } from './icons/CreditIcon';
 import { ArchiveIcon } from './icons/ArchiveIcon';
 import { SettingsIcon } from './icons/SettingsIcon';
-
+import MessageIcon from '@mui/icons-material/Message';
 export const data = [
   {
     title: 'Home',
@@ -17,14 +17,10 @@ export const data = [
   },
   {
     title: 'Archives',
-    icon: <ArchiveIcon />,
-    link: '/admin/archives',
+    icon: <MessageIcon />,
+    link: '/chat',
   },
-  {
-    title: 'Credits',
-    icon: <CreditIcon />,
-    link: '/admin/credits',
-  },
+
   {
     title: 'Settings',
     icon: <SettingsIcon />,

@@ -1,8 +1,17 @@
-'use client';
-import { useDashboardContext } from './provider';
+"use client";
+import { userLogout } from "@/lib/slices/authSlice";
+import { Button } from "@radix-ui/themes";
+import { useDashboardContext } from "./provider";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/lib/store";
+import { useRouter } from "next/navigation";
 
 export function TopBar() {
   const { openSidebar } = useDashboardContext();
+  const dispatch = useDispatch<AppDispatch>();
+  const router=useRouter();
+
   return (
     <header className="relative z-10 h-20 items-center">
       <div className="relative z-10 mx-auto flex h-full flex-col justify-center px-3 text-white">
@@ -96,13 +105,15 @@ export function TopBar() {
                 />
               </svg>
             </a>
-            <a href="#" className="relative block">
-              <img
-                alt="Maurice Lokumba"
-                src="/images/1.jpg"
-                className="mx-auto h-10 w-10 rounded-full object-cover"
-              />
-            </a>
+            <Button
+              className="button1"
+              onClick={() => {
+                dispatch(userLogout());
+                router.push("/");
+              }}
+            >
+              <PowerSettingsNewIcon sx={{ color: "#FFFFFF" }} />
+            </Button>
           </div>
         </div>
       </div>
