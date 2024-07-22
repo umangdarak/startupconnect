@@ -3,7 +3,7 @@ import { StatusIcon } from './icons/StatusIcon';
 import { ShareIcon } from './icons/ShareIcon';
 import { ChatIcon } from './icons/ChatIcon';
 import { SettingsIcon } from './icons/SettingsIcon';
-
+import MessageIcon from '@mui/icons-material/Message';
 export const data = [
   {
     title: 'Home',
@@ -16,9 +16,10 @@ export const data = [
     link: '/admin/status',
   },
   {
+
     title: 'Chat',
     icon: <ChatIcon />,
-    link: '/admin/archives',
+    link: '/chat',
   },
   {
     title: 'Share',

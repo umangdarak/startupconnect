@@ -4,6 +4,25 @@ const FollowRequest = require("../models/follow");
 const Investor = require("../models/investor");
 const Startup = require("../models/startup");
 const mongoose = require("mongoose");
+
+Router.post("/getFollowers", async (req, res) => {
+  const { id, userType } = req.body;
+  try {
+    if (userType == "Startup") {
+      const startup = await Startup({ _id: id });
+      res.status(200).json(startup["followers"]);
+    } else if (userType == "Investor") {
+      const investor = await Investor({ _id: id });
+      console.log(investor.following);
+      res.status(200).json(investor.following);
+    } else {
+      res.status(404).json("error");
+    }
+  } catch (e) {
+    res.status(404).json(e);
+  }
+});
+
 Router.post("/followreq", async (req, res) => {
   const { investorId, startupId } = req.body;
   try {
