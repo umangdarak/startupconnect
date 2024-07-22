@@ -1,7 +1,7 @@
 import { HomeIcon } from './icons/HomeIcon';
 import { StatusIcon } from './icons/StatusIcon';
-import { CreditIcon } from './icons/CreditIcon';
-import { ArchiveIcon } from './icons/ArchiveIcon';
+import { ShareIcon } from './icons/ShareIcon';
+import { ChatIcon } from './icons/ChatIcon';
 import { SettingsIcon } from './icons/SettingsIcon';
 import MessageIcon from '@mui/icons-material/Message';
 export const data = [
@@ -16,11 +16,16 @@ export const data = [
     link: '/admin/status',
   },
   {
-    title: 'Archives',
-    icon: <MessageIcon />,
+
+    title: 'Chat',
+    icon: <ChatIcon />,
     link: '/chat',
   },
-
+  {
+    title: 'Share',
+    icon: <ShareIcon />,
+    link: '/admin/credits',
+  },
   {
     title: 'Settings',
     icon: <SettingsIcon />,

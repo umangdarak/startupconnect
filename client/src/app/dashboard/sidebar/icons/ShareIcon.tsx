@@ -1,5 +1,4 @@
-
-export function CreditIcon() {
+export function ShareIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,8 +11,8 @@ export function CreditIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+        d="M12 2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM5.5 9a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM18.5 9a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM7.72 10.81L14.5 7.5M14.5 16.5L7.72 13.19"
       />
-    </svg>
-  );
+    </svg>
+  );
 }
