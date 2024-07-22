@@ -1,7 +1,7 @@
 import { HomeIcon } from './icons/HomeIcon';
 import { StatusIcon } from './icons/StatusIcon';
-import { CreditIcon } from './icons/CreditIcon';
-import { ArchiveIcon } from './icons/ArchiveIcon';
+import { ShareIcon } from './icons/ShareIcon';
+import { ChatIcon } from './icons/ChatIcon';
 import { SettingsIcon } from './icons/SettingsIcon';
 
 export const data = [
@@ -16,13 +16,13 @@ export const data = [
     link: '/admin/status',
   },
   {
-    title: 'Archives',
-    icon: <ArchiveIcon />,
+    title: 'Chat',
+    icon: <ChatIcon />,
     link: '/admin/archives',
   },
   {
-    title: 'Credits',
-    icon: <CreditIcon />,
+    title: 'Share',
+    icon: <ShareIcon />,
     link: '/admin/credits',
   },
   {

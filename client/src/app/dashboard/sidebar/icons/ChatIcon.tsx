@@ -1,4 +1,4 @@
-export function ArchiveIcon() {
+export function ChatIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,8 +11,8 @@ export function ArchiveIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"
+        d="M8 10h8M8 14h4M21 12c0 4.418-4.03 8-9 8-1.538 0-2.977-.355-4.243-.983L3 21l1.085-4.371C3.263 15.032 3 13.548 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
       />
-    </svg>
-  );
+    </svg>
+  );
 }
