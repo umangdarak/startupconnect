@@ -23,7 +23,7 @@ export default function RootLayout({
         <ReduxProvider>
           <Theme>
 
-           <HeaderPage />
+           {/* <HeaderPage /> */}
 
             {children}
           </Theme>

@@ -9,11 +9,11 @@ Router.post("/getFollowers", async (req, res) => {
   const { id, userType } = req.body;
   try {
     if (userType == "Startup") {
-      const startup = await Startup({ _id: id });
+      const startup = await Startup.findById( id);
       res.status(200).json(startup["followers"]);
     } else if (userType == "Investor") {
-      const investor = await Investor({ _id: id });
-      console.log(investor.following);
+      const investor = await Investor.findById( id);
+      console.log(investor);
       res.status(200).json(investor.following);
     } else {
       res.status(404).json("error");
