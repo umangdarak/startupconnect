@@ -1,4 +1,4 @@
-export function ShareIcon() {
+export function ProfileIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,8 +11,8 @@ export function ShareIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        d="M12 2.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM5.5 9a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM18.5 9a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM7.72 10.81L14.5 7.5M14.5 16.5L7.72 13.19"
+        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"
       />
-    </svg>
-  );
+    </svg>
+  );
 }

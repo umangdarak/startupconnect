@@ -2,6 +2,7 @@
 import { userLogout } from "@/lib/slices/authSlice";
 import { Button } from "@radix-ui/themes";
 import { useDashboardContext } from "./provider";
+import LogoutIcon from '@mui/icons-material/Logout';
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/lib/store";
@@ -56,55 +57,34 @@ export function TopBar() {
               />
             </div>
           </div>
-          <div className="relative ml-5 flex w-full items-center justify-end p-1 sm:right-auto sm:mr-0">
-            <a href="#" className="block pr-5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-                />
-              </svg>
-            </a>
-            <a href="#" className="block pr-5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </a>
-            <a href="#" className="relative block pr-5">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-            </a>
+          <div className="relative ml-5 flex w-full items-center justify-end p-1 sm:right-auto ">
+          <a href="#" className="block pr-5">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-7 w-7"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+              d="M19 11H13V5h-2v6H5v2h6v6h2v-6h6v-2z"
+            />
+            <rect
+              x="2"
+              y="2"
+              width="20"
+              height="20"
+              rx="5"
+              ry="5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </a>
             <Button
               className="button1"
               onClick={() => {
@@ -112,7 +92,7 @@ export function TopBar() {
                 router.push("/");
               }}
             >
-              <PowerSettingsNewIcon sx={{ color: "#FFFFFF" }} />
+              <LogoutIcon sx={{ color: "#FFFFFF" }} />
             </Button>
           </div>
         </div>
@@ -120,3 +100,4 @@ export function TopBar() {
     </header>
   );
 }
+

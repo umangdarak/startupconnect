@@ -152,7 +152,7 @@ export default function Login() {
           </motion.div>
         </div>
       ) : (
-        <div className="flex flex-row justify-end items-center" style={{ height: 'calc(100vh - 64px)' }}>
+        <div className="flex flex-row justify-center items-center" style={{ height: 'calc(100vh - 64px)' }}>
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
