@@ -1,7 +1,9 @@
+"use client";
 import React, { useState } from "react";
 import { TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
 import { Box, Button } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 export default function RegisterInvestor() {
   const [investorName, setInvestorName] = useState<string>("");
@@ -76,13 +78,20 @@ export default function RegisterInvestor() {
         const data = await res.json();
         setErrors({ fetchError: data["error"] });
       } else {
-        router.push("/auth/login");
+        router.push("/login");
       }
     }
   };
 
   return (
-    <div className="flex flex-col w-full items-center h-screen justify-center">
+    <div className="flex flex-col w-full items-center h-screen justify-center relative">
+      {/* Back Button */}
+      <div className="absolute top-6 left-4">
+        <Button onClick={() => router.back()} className="button1">
+          <ArrowBackIosIcon fontSize="small" sx={{ color: '#FFFFFF' }} />
+        </Button>
+      </div>
+
       <Box className="flex flex-col w-screen items-center">
         <div className="text-center">
           <h1 className="text-3xl font-semibold text-customBlack">Register Investor</h1>
@@ -107,7 +116,6 @@ export default function RegisterInvestor() {
                 error={!!errors.email}
                 helperText={errors.email}
               />
-
               <TextField
                 label="Password"
                 type="password"
@@ -117,7 +125,6 @@ export default function RegisterInvestor() {
                 error={!!errors.password}
                 helperText={errors.password}
               />
-
               <TextField
                 label="Phone Number"
                 type="tel"
@@ -193,18 +200,45 @@ export default function RegisterInvestor() {
                   <MenuItem value="0-100K">$0-100K</MenuItem>
                   <MenuItem value="100K-500K">$100K-500K</MenuItem>
                   <MenuItem value="500K-1M">$500K-1M</MenuItem>
-                  <MenuItem value="Rather Not Say">Rather Not Say</MenuItem>
                 </Select>
               </FormControl>
-
+              {/* Other Inputs */}
               <TextField
                 label="Equity Stake"
-                required
                 value={equityStake}
                 onChange={(e) => setEquityStake(e.target.value)}
                 error={!!errors.equityStake}
                 helperText={errors.equityStake}
               />
+              <TextField
+                label="Investment Horizon"
+                value={investmentHorizon}
+                onChange={(e) => setInvestmentHorizon(e.target.value)}
+                error={!!errors.investmentHorizon}
+                helperText={errors.investmentHorizon}
+              />
+              <TextField
+                label="Track Record"
+                value={trackRecord}
+                onChange={(e) => setTrackRecord(e.target.value)}
+                error={!!errors.trackRecord}
+                helperText={errors.trackRecord}
+              />
+              <TextField
+                label="Sector Expertise"
+                value={sectorExpertise}
+                onChange={(e) => setSectorExpertise(e.target.value)}
+                error={!!errors.sectorExpertise}
+                helperText={errors.sectorExpertise}
+              />
+              <TextField
+                label="Limited Partners"
+                value={limitedPartners}
+                onChange={(e) => setLimitedPartners(e.target.value)}
+                error={!!errors.limitedPartners}
+                helperText={errors.limitedPartners}
+              />
+              {/* Geographic Preferences */}
               <FormControl fullWidth error={!!errors.geoPreferences}>
                 <InputLabel>Geographic Preferences</InputLabel>
                 <Select
@@ -213,56 +247,23 @@ export default function RegisterInvestor() {
                   onChange={(e) => setGeoPreferences(e.target.value as string[])}
                   renderValue={(selected) => selected.join(", ")}
                 >
-                  <MenuItem value="Regional">Regional</MenuItem>
-                  <MenuItem value="National">National</MenuItem>
+                  <MenuItem value="Domestic">Domestic</MenuItem>
                   <MenuItem value="International">International</MenuItem>
                 </Select>
               </FormControl>
-
-              <TextField
-                label="Investment Horizon"
-                required
-                value={investmentHorizon}
-                onChange={(e) => setInvestmentHorizon(e.target.value)}
-                error={!!errors.investmentHorizon}
-                helperText={errors.investmentHorizon}
-              />
-              <TextField
-                label="Track Record"
-                required
-                value={trackRecord}
-                onChange={(e) => setTrackRecord(e.target.value)}
-                error={!!errors.trackRecord}
-                helperText={errors.trackRecord}
-              />
-              <TextField
-                label="Sector Expertise"
-                required
-                value={sectorExpertise}
-                onChange={(e) => setSectorExpertise(e.target.value)}
-                error={!!errors.sectorExpertise}
-                helperText={errors.sectorExpertise}
-              />
-              <TextField
-                label="Limited Partners"
-                required
-                value={limitedPartners}
-                onChange={(e) => setLimitedPartners(e.target.value)}
-                error={!!errors.limitedPartners}
-                helperText={errors.limitedPartners}
-              />
+              {/* Availability Input */}
               <TextField
                 label="Availability"
-                required
                 value={availability}
                 onChange={(e) => setAvailability(e.target.value)}
                 error={!!errors.availability}
                 helperText={errors.availability}
               />
             </div>
-            <div className="flex items-center justify-center">
-              <Button type="submit" className="text-white font-bold py-2 px-4 rounded">
-                Submit
+            {/* Submit Button */}
+            <div className="flex justify-center mt-6 mb-4">
+              <Button type="submit" className="w-40 h-12 bg-indigo-600 text-white rounded-lg">
+                Register
               </Button>
             </div>
           </form>
