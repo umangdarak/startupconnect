@@ -1,95 +1,49 @@
 import React, { useState } from "react";
-import { TextField } from "@mui/material";
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogAction,
-} from "@radix-ui/react-alert-dialog";
-import { TextArea, Box, Button, Flex, Text } from "@radix-ui/themes";
+import { TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
+import { Box, Button } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
+
 export default function RegisterInvestor() {
+  const [investorName, setInvestorName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [fullName, setFullName] = useState<string>("");
-  const [professionalTitle, setProfessionalTitle] = useState<string>("");
-  const [company, setCompany] = useState<string>("");
+  const [typeOfInvestor, setTypeOfInvestor] = useState<string[]>([]);
   const [location, setLocation] = useState<string>("");
-  const [professionalBio, setProfessionalBio] = useState<string>("");
-  const [linkedInProfile, setLinkedInProfile] = useState<string>("");
-  const [alertVisible, setAlertVisible] = useState<boolean>(false);
-  const [errors, setErrors] = useState<{
-    email?: string;
-    password?: string;
-    phoneNumber?: string;
-    fullName?: string;
-    professionalTitle?: string;
-    company?: string;
-    location?: string;
-    professionalBio?: string;
-    linkedInProfile?: string;
-    fetchError?: string;
-  }>({});
+  const [sectorsOfInterest, setSectorsOfInterest] = useState<string>("");
+  const [stageFocus, setStageFocus] = useState<string>("");
+  const [preferredBusinessModels, setPreferredBusinessModels] = useState<string[]>([]);
+  const [ticketSize, setTicketSize] = useState<string>("");
+  const [equityStake, setEquityStake] = useState<string>("");
+  const [investmentHorizon, setInvestmentHorizon] = useState<string>("");
+  const [trackRecord, setTrackRecord] = useState<string>("");
+  const [sectorExpertise, setSectorExpertise] = useState<string>("");
+  const [limitedPartners, setLimitedPartners] = useState<string>("");
+  const [geoPreferences, setGeoPreferences] = useState<string[]>([]);
+  const [availability, setAvailability] = useState<string>("");
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const router = useRouter();
 
   const validate = () => {
-    const errors: {
-      email?: string;
-      password?: string;
-      phoneNumber?: string;
-      fullName?: string;
-      professionalTitle?: string;
-      company?: string;
-      location?: string;
-      professionalBio?: string;
-      linkedInProfile?: string;
-      fetchError?: string;
-    } = {};
-    if (!email) {
-      errors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      errors.email = "Email is invalid";
-    }
-
-    if (!password) {
-      errors.password = "Password is required";
-    } else if (password.length < 6) {
-      errors.password = "Password must be at least 6 characters";
-    }
-
-    if (!phoneNumber) {
-      errors.phoneNumber = "Phone Number is required";
-    } else if (phoneNumber.length !== 10) {
-      errors.phoneNumber = "Phone Number must be 10 characters";
-    }
-
-    if (!fullName) {
-      errors.fullName = "Full Name is required";
-    }
-
-    if (!professionalTitle) {
-      errors.professionalTitle = "Professional Title is required";
-    }
-
-    if (!company) {
-      errors.company = "Company Name is required";
-    }
-
-    if (!location) {
-      errors.location = "Location is required";
-    }
-
-    if (!professionalBio) {
-      errors.professionalBio = "Professional Bio is required";
-    }
-
-    if (!linkedInProfile) {
-      errors.linkedInProfile = "LinkedIn Profile is required";
-    }
-
+    const errors: { [key: string]: string } = {};
+    if (!email || !/\S+@\S+\.\S+/.test(email)) errors.email = "Valid Email is required";
+    if (!password || password.length < 6) errors.password = "Password must be at least 6 characters";
+    if (!phoneNumber || phoneNumber.length !== 10) errors.phoneNumber = "Phone Number must be 10 digits";
+    if (!investorName) errors.investorName = "Investor name is required.";
+    if (!typeOfInvestor.length) errors.typeOfInvestor = "Type of investor is required.";
+    if (!location) errors.location = "Location is required.";
+    if (!sectorsOfInterest) errors.sectorsOfInterest = "Sectors of interest are required.";
+    if (!stageFocus) errors.stageFocus = "Stage focus is required.";
+    if (!preferredBusinessModels.length) errors.preferredBusinessModels = "Preferred business models are required.";
+    if (!ticketSize) errors.ticketSize = "Ticket size is required.";
+    if (!equityStake) errors.equityStake = "Equity stake is required.";
+    if (!investmentHorizon) errors.investmentHorizon = "Investment horizon is required.";
+    if (!trackRecord) errors.trackRecord = "Track record is required.";
+    if (!sectorExpertise) errors.sectorExpertise = "Sector expertise is required.";
+    if (!limitedPartners) errors.limitedPartners = "Limited partners are required.";
+    if (!geoPreferences.length) errors.geoPreferences = "Geographic preferences are required.";
+    if (!availability) errors.availability = "Availability is required.";
     return errors;
   };
 
@@ -102,26 +56,28 @@ export default function RegisterInvestor() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName,
-          email,
-          password,
-          phoneNumber,
-          professionalTitle,
-          companyOrganization: company,
+          investorName,
+          typeOfInvestor,
           location,
-          professionalBio,
-          linkedInProfile,
+          sectorsOfInterest,
+          stageFocus,
+          preferredBusinessModels,
+          ticketSize,
+          equityStake,
+          investmentHorizon,
+          trackRecord,
+          sectorExpertise,
+          limitedPartners,
+          geoPreferences,
+          availability,
         }),
       });
       if (!res.ok) {
         const data = await res.json();
         setErrors({ fetchError: data["error"] });
-        setAlertVisible(true);
       } else {
         router.push("/auth/login");
       }
-    } else {
-      setAlertVisible(true);
     }
   };
 
@@ -129,236 +85,189 @@ export default function RegisterInvestor() {
     <div className="flex flex-col w-full items-center h-screen justify-center">
       <Box className="flex flex-col w-screen items-center">
         <div className="text-center">
-          <h1 className="text-3xl font-semibold text-customBlack">Register</h1>
+          <h1 className="text-3xl font-semibold text-customBlack">Register Investor</h1>
         </div>
         <div className="max-w-xl mx-auto mt-10 bg-white shadow-2xl rounded-lg overflow-hidden">
           <form onSubmit={handleSubmit}>
             <div className="py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="Name"
+              <TextField
+                label="Investor Name"
+                required
+                value={investorName}
+                onChange={(e) => setInvestorName(e.target.value)}
+                error={!!errors.investorName}
+                helperText={errors.investorName}
+              />
+              <TextField
+                label="Email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                error={!!errors.email}
+                helperText={errors.email}
+              />
+
+              <TextField
+                label="Password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                error={!!errors.password}
+                helperText={errors.password}
+              />
+
+              <TextField
+                label="Phone Number"
+                type="tel"
+                required
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                error={!!errors.phoneNumber}
+                helperText={errors.phoneNumber}
+              />
+
+              {/* Dropdown for Type of Investor */}
+              <FormControl fullWidth error={!!errors.typeOfInvestor}>
+                <InputLabel>Type of Investor</InputLabel>
+                <Select
+                  multiple
+                  value={typeOfInvestor}
+                  onChange={(e) => setTypeOfInvestor(e.target.value as string[])}
+                  renderValue={(selected) => selected.join(", ")}
                 >
-                  Name
-                </label>
-                <TextField
-                  type="text"
-                  required
-                  id="outlined-basic"
-                  name="Name"
-                  error={!!errors.fullName}
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  placeholder="Enter your Name"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.fullName && <Text>{errors.fullName}</Text>}
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="Email"
+                  <MenuItem value="Angel">Angel</MenuItem>
+                  <MenuItem value="Venture Capitalist">Venture Capitalist</MenuItem>
+                  <MenuItem value="Corporate Investor">Corporate Investor</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                label="Location"
+                required
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                error={!!errors.location}
+                helperText={errors.location}
+              />
+              <TextField
+                label="Sectors of Interest"
+                required
+                value={sectorsOfInterest}
+                onChange={(e) => setSectorsOfInterest(e.target.value)}
+                error={!!errors.sectorsOfInterest}
+                helperText={errors.sectorsOfInterest}
+              />
+              <TextField
+                label="Stage Focus"
+                required
+                value={stageFocus}
+                onChange={(e) => setStageFocus(e.target.value)}
+                error={!!errors.stageFocus}
+                helperText={errors.stageFocus}
+              />
+
+              {/* Dropdown for Preferred Business Models */}
+              <FormControl fullWidth error={!!errors.preferredBusinessModels}>
+                <InputLabel>Preferred Business Models</InputLabel>
+                <Select
+                  multiple
+                  value={preferredBusinessModels}
+                  onChange={(e) => setPreferredBusinessModels(e.target.value as string[])}
+                  renderValue={(selected) => selected.join(", ")}
                 >
-                  Email
-                </label>
-                <TextField
-                  type="email"
-                  required
-                  id="outlined-basic"
-                  name="Email"
-                  error={!!errors.email}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your Email"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.email && <Text>{errors.email}</Text>}
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="Password"
+                  <MenuItem value="B2B">B2B</MenuItem>
+                  <MenuItem value="B2C">B2C</MenuItem>
+                  <MenuItem value="C2C">C2C</MenuItem>
+                </Select>
+              </FormControl>
+
+              {/* Dropdown for Ticket Size */}
+              <FormControl fullWidth error={!!errors.ticketSize}>
+                <InputLabel>Ticket Size</InputLabel>
+                <Select
+                  value={ticketSize}
+                  onChange={(e) => setTicketSize(e.target.value as string)}
                 >
-                  Password
-                </label>
-                <TextField
-                  type="password"
-                  required
-                  id="outlined-basic"
-                  name="Password"
-                  error={!!errors.password}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your Password"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.password && <Text>{errors.password}</Text>}
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="Phone Number"
+                  <MenuItem value="0-100K">$0-100K</MenuItem>
+                  <MenuItem value="100K-500K">$100K-500K</MenuItem>
+                  <MenuItem value="500K-1M">$500K-1M</MenuItem>
+                  <MenuItem value="Rather Not Say">Rather Not Say</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                label="Equity Stake"
+                required
+                value={equityStake}
+                onChange={(e) => setEquityStake(e.target.value)}
+                error={!!errors.equityStake}
+                helperText={errors.equityStake}
+              />
+              <FormControl fullWidth error={!!errors.geoPreferences}>
+                <InputLabel>Geographic Preferences</InputLabel>
+                <Select
+                  multiple
+                  value={geoPreferences}
+                  onChange={(e) => setGeoPreferences(e.target.value as string[])}
+                  renderValue={(selected) => selected.join(", ")}
                 >
-                  Phone Number
-                </label>
-                <TextField
-                  type="text"
-                  required
-                  id="outlined-basic"
-                  name="Phone Number"
-                  placeholder="Enter your Phone Number"
-                  error={!!errors.phoneNumber}
-                  value={phoneNumber}
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.phoneNumber && <Text>{errors.phoneNumber}</Text>}
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="Company"
-                >
-                  Company
-                </label>
-                <TextField
-                  type="text"
-                  required
-                  id="outlined-basic"
-                  name="Company"
-                  error={!!errors.company}
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                  placeholder="Enter your Company Name"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.company && <Text>{errors.company}</Text>}
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="Professional Title"
-                >
-                  Professional Title
-                </label>
-                <TextField
-                  type="text"
-                  required
-                  id="outlined-basic"
-                  name="Professional Title"
-                  error={!!errors.professionalTitle}
-                  value={professionalTitle}
-                  onChange={(e) => setProfessionalTitle(e.target.value)}
-                  placeholder="Enter your Professional Title"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.professionalTitle && (
-                  <Text>{errors.professionalTitle}</Text>
-                )}
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="Location"
-                >
-                  Location
-                </label>
-                <TextField
-                  type="text"
-                  required
-                  id="outlined-basic"
-                  name="Location"
-                  error={!!errors.location}
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Enter your Location"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.location && <Text>{errors.location}</Text>}
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="Professional Bio"
-                >
-                  Professional Bio
-                </label>
-                <TextField
-                  type="text"
-                  required
-                  id="outlined-basic"
-                  name="Professional Bio"
-                  error={!!errors.professionalBio}
-                  value={professionalBio}
-                  onChange={(e) => setProfessionalBio(e.target.value)}
-                  placeholder="Enter your Professional Bio"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.professionalBio && (
-                  <Text>{errors.professionalBio}</Text>
-                )}
-              </div>
-              <div className="mb-4">
-                <label
-                  className="block text-gray-700 font-bold mb-1 px-1"
-                  htmlFor="LinkedIn Profile"
-                >
-                  LinkedIn Profile
-                </label>
-                <TextField
-                  type="text"
-                  required
-                  id="outlined-basic"
-                  name="LinkedIn Profile"
-                  error={!!errors.linkedInProfile}
-                  value={linkedInProfile}
-                  onChange={(e) => setLinkedInProfile(e.target.value)}
-                  placeholder="Enter your LinkedIn Profile"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                {errors.linkedInProfile && (
-                  <Text>{errors.linkedInProfile}</Text>
-                )}
-              </div>
+                  <MenuItem value="Regional">Regional</MenuItem>
+                  <MenuItem value="National">National</MenuItem>
+                  <MenuItem value="International">International</MenuItem>
+                </Select>
+              </FormControl>
+
+              <TextField
+                label="Investment Horizon"
+                required
+                value={investmentHorizon}
+                onChange={(e) => setInvestmentHorizon(e.target.value)}
+                error={!!errors.investmentHorizon}
+                helperText={errors.investmentHorizon}
+              />
+              <TextField
+                label="Track Record"
+                required
+                value={trackRecord}
+                onChange={(e) => setTrackRecord(e.target.value)}
+                error={!!errors.trackRecord}
+                helperText={errors.trackRecord}
+              />
+              <TextField
+                label="Sector Expertise"
+                required
+                value={sectorExpertise}
+                onChange={(e) => setSectorExpertise(e.target.value)}
+                error={!!errors.sectorExpertise}
+                helperText={errors.sectorExpertise}
+              />
+              <TextField
+                label="Limited Partners"
+                required
+                value={limitedPartners}
+                onChange={(e) => setLimitedPartners(e.target.value)}
+                error={!!errors.limitedPartners}
+                helperText={errors.limitedPartners}
+              />
+              <TextField
+                label="Availability"
+                required
+                value={availability}
+                onChange={(e) => setAvailability(e.target.value)}
+                error={!!errors.availability}
+                helperText={errors.availability}
+              />
             </div>
             <div className="flex items-center justify-center">
-              <Button
-                className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                color="blue"
-                variant="solid"
-                type="submit"
-              >
+              <Button type="submit" className="text-white font-bold py-2 px-4 rounded">
                 Submit
               </Button>
             </div>
           </form>
-          {alertVisible && (
-            <AlertDialog open={alertVisible} onOpenChange={setAlertVisible}>
-              <AlertDialog.Content>
-                <AlertDialog.Title>Error</AlertDialog.Title>
-                <AlertDialog.Description>
-                  <ul>
-                    {Object.keys(errors).map((key) => (
-                      <li key={key}>{errors[key as keyof typeof errors]}</li>
-                    ))}
-                  </ul>
-                </AlertDialog.Description>
-                <AlertDialog.Action>OK</AlertDialog.Action>
-              </AlertDialog.Content>
-            </AlertDialog>
-          )}
         </div>
       </Box>
     </div>
   );
 }
-
