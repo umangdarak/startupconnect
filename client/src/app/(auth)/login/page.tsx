@@ -124,7 +124,7 @@ export default function Login() {
           >
             <div className="p-10">
               <Text className="text-customBlack">
-                Are you an Investor or an Entrepreneur/Startup Company? yes
+                Are you an Investor or an Entrepreneur/Startup Company?
               </Text>
               <div className="flex flex-row justify-between w-full px-6 mt-8">
                 <Button
