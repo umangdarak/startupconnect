@@ -58,7 +58,7 @@ export function TopBar() {
             </div>
           </div>
           <div className="relative ml-5 flex w-full items-center justify-end p-1 sm:right-auto ">
-          <a href="#" className="block pr-5">
+          {/* <a href="#" className="block pr-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-7 w-7"
@@ -84,7 +84,7 @@ export function TopBar() {
               strokeWidth="2"
             />
           </svg>
-        </a>
+        </a> */}
             <Button
               className="button1"
               onClick={() => {
