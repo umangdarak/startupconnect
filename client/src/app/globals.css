@@ -6,7 +6,7 @@
 body{
 }
 *{
-    @apply font-space-mono;
+    /* @apply font-space-mono; */
     
 }
 .button1 {
