@@ -11,6 +11,8 @@ import "./pages.css";
 import { AppDispatch, RootState } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "@/lib/slices/authSlice";
+import styled from "styled-components";
+
 
 export default function Login() {
   const router = useRouter();
@@ -127,26 +129,24 @@ export default function Login() {
                 Are you an Investor or an Entrepreneur/Startup Company?
               </Text>
               <div className="flex flex-row justify-between w-full px-6 mt-8">
-                <Button
-                  className="button1 text-white"
+                <button
+                  className="button4 border-yellow-200 mx-6"
                   onClick={() => {
                     setUserType("Investor");
                     setShowForm(true);
                   }}
                 >
-                  <Text className="text-white text-lg font-light">Investor</Text>
-                </Button>
-                <Button
-                  className="button1"
+                Investor
+                </button>
+                <button
+                  className="button4"
                   onClick={() => {
                     setUserType("Startup");
                     setShowForm(true);
                   }}
                 >
-                  <Text className="text-white text-lg font-light">
                     Entrepreneur/Startup
-                  </Text>
-                </Button>
+                </button>
               </div>
             </div>
           </motion.div>
@@ -187,7 +187,7 @@ export default function Login() {
                   </div>
                   <div className="mt-5">
                     <div className="relative mt-6">
-                      <TextField
+                      {/* <TextField
                         type="email"
                         required
                         id="outlined-basic"
@@ -197,11 +197,49 @@ export default function Login() {
                         placeholder="Email Address"
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         onChange={(e) => setEmail(e.target.value)}
-                      />
-                      {error?.email && <Text>{error.email}</Text>}
+                      /> */}
+                      <StyledWrapper>
+                      <div className="group">
+          
+          <svg
+            fill="none"
+            viewBox="0 0 24 24"
+            height="24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon"
+          >
+            <path
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              strokeWidth={1.5}
+              stroke="#141B34"
+              d="M7 8.5L9.94202 10.2394C11.6572 11.2535 12.3428 11.2535 14.058 10.2394L17 8.5"
+            />
+            <path
+              strokeLinejoin="round"
+              strokeWidth={1.5}
+              stroke="#141B34"
+              d="M2.01577 13.4756C2.08114 16.5412 2.11383 18.0739 3.24496 19.2094C4.37608 20.3448 5.95033 20.3843 9.09883 20.4634C11.0393 20.5122 12.9607 20.5122 14.9012 20.4634C18.0497 20.3843 19.6239 20.3448 20.7551 19.2094C21.8862 18.0739 21.9189 16.5412 21.9842 13.4756C22.0053 12.4899 22.0053 11.5101 21.9842 10.5244C21.9189 7.45886 21.8862 5.92609 20.7551 4.79066C19.6239 3.65523 18.0497 3.61568 14.9012 3.53657C12.9607 3.48781 11.0393 3.48781 9.09882 3.53656C5.95033 3.61566 4.37608 3.65521 3.24495 4.79065C2.11382 5.92608 2.08114 7.45885 2.01576 10.5244C1.99474 11.5101 1.99475 12.4899 2.01577 13.4756Z"
+            />
+          </svg>
+          <input
+            title="Inpit title"
+            className="input"
+            type="email"
+            id="email_field"
+                        required
+                        name="email"
+                        value={email}
+                        placeholder="Email Address"
+                        onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        </StyledWrapper>
+                      {error?.email && <Text className="text-red-600">{error.email}</Text>}
                     </div>
                     <div className="relative mt-6">
-                      <TextField
+                      {/* <TextField
                         type="password"
                         required
                         id="outlined-basic"
@@ -211,29 +249,52 @@ export default function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      />
-                      {error?.password && <Text>{error.password}</Text>}
+                      /> */}
+                      <StyledWrapper>
+      <div className="group">
+        <svg
+          stroke="currentColor"
+          strokeWidth={1.5}
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+          className="icon"
+        >
+          <path
+            d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+          />
+        </svg>
+        <input className="input" type="password" 
+         required
+         name="password"
+         value={password}
+         onChange={(e) => setPassword(e.target.value)}
+         placeholder="Password"
+    />
+      </div>
+    </StyledWrapper>
+                      {error?.password && <Text className="text-red-600">{error.password}</Text>}
                     </div>
 
                     <div className="my-6 flex flex-row justify-center w-full">
-                      <Button
-                        className="button1 rounded-md bg-black px-3 py-4 text-white focus:bg-gray-600 focus:outline-none"
+                      <button
+                        className="button4"
                         onClick={handleSubmit}
                       >
-                        <Text className="text-white text-lg font-light">
-                          Login
-                        </Text>
-                      </Button>
+                      Login
+                      </button>
                     </div>
                     <p className="text-center text-sm text-gray-500">
                       Don&#x27;t have an account yet?
                       <Link
                         href="/register"
-                        className="font-semibold text-gray-600 hover:underline focus:text-gray-800 focus:outline-none"
+                        className="font-semibold text-gray-600 hover:text-customPurple hover:tracking-wider focus:text-gray-800 focus:outline-none"
+                      
                       >
                         Register
                       </Link>
-                      .
+
                     </p>
                   </div>
                 </div>
@@ -273,7 +334,7 @@ export default function Login() {
             </AlertDialog.Description>
             <Flex className="flex flex-row justify-center items-center w-full">
               <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
-                <Button variant="soft" className="button1">
+                <Button variant="soft" className="button4">
                   <Text className="text-white text-lg font-light"> Ok</Text>
                 </Button>
               </AlertDialog.Cancel>
@@ -285,3 +346,75 @@ export default function Login() {
   );
 }
 
+const StyledWrapper = styled.div`
+  .group {
+  display: flex;
+  line-height: 30px;
+  align-items: center;
+  position: relative;
+  
+}
+
+.input_container {
+  width: 100%;
+  height: fit-content;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+
+.input_field {
+  width: auto;
+  height: 40px;
+  padding: 0 0 0 40px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  filter: drop-shadow(0px 1px 0px #efefef)
+    drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
+  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.input_field:focus {
+  border: 1px solid transparent;
+  box-shadow: 0px 0px 0px 2px #242424;
+  background-color: transparent;
+}
+
+
+
+.input {
+  width: 100%;
+  height: 45px;
+  line-height: 30px;
+  padding: 0 5rem;
+  padding-left: 3rem;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  background-color: #f8fafc;
+  color: #0d0c22;
+  transition: .5s ease;
+}
+
+.input::placeholder {
+  color: #94a3b8;
+}
+
+.input:focus, input:hover {
+  outline: none;
+  border-color: rgba(129, 140, 248);
+  background-color: #fff;
+  box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
+}
+
+.icon {
+  position: absolute;
+  left: 1rem;
+  fill: none;
+  width: 1rem;
+  height: 1rem;
+}
+`;

@@ -20,6 +20,8 @@ const config: Config = {
       colors:{
         customBlue: '#050A44',
         customBlack:'#141619',
+        customPurple: 'hsl(261deg 80% 48%)',
+
         
       }
     },
