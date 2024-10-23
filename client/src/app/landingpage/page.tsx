@@ -412,7 +412,7 @@ const World = dynamic(() => import("../../components/ui/globe").then((m) => m.Wo
 export default function LandingPage() {
     return (<div >
 
-        <GlobeDemo />
+        {/* <GlobeDemo /> */}
 
         <br className=" mt-64"/>
         <meta charSet="UTF-8" />

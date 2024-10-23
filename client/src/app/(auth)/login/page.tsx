@@ -113,19 +113,74 @@ export default function Login() {
     }
   });
 
+const StyledWrapper = styled.div`
+  .card {
+  width: 190px;
+  height: 254px;
+  background: #07182E;
+  position: relative;
+  display: flex;
+  place-content: center;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.card h2 {
+  z-index: 1;
+  color: white;
+  font-size: 2em;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  width: 100px;
+  background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+  height: 130%;
+  animation: rotBGimg 3s linear infinite;
+  transition: all 0.2s linear;
+}
+
+@keyframes rotBGimg {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  background: #07182E;
+  ;
+  inset: 5px;
+  border-radius: 15px;
+}  
+ .card:hover:before {
+  background-image: linear-gradient(180deg, rgb(81, 255, 0), purple);
+  animation: rotBGimg 3.5s linear infinite;
+} 
+`;
   return (
     <div className="overflow-hidden">
       {!showForm ? (
         <div className="flex flex-row justify-center items-center" style={{ height: 'calc(100vh - 64px)' }}>
 
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 1, scale: 0 }}
             animate={{ opacity: showForm ? 0 : 1, scale: 1 }}
             transition={{ duration: 0.5, ease: "linear" }}
             className="flex flex-col justify-center items-center px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 rounded-full"
-          >
-            <div className="p-10">
-              <Text className="text-customBlack">
+          > */}
+          <div className="card">
+          <div className="bg"></div>
+  <div className="blob"></div>
+            <div className="p-10 styled">
+              <Text className="text-white">
                 Are you an Investor or an Entrepreneur/Startup Company?
               </Text>
               <div className="flex flex-row justify-between w-full px-6 mt-8">
@@ -149,7 +204,8 @@ export default function Login() {
                 </button>
               </div>
             </div>
-          </motion.div>
+            </div>
+          {/* </motion.div> */}
         </div>
       ) : (
         <div className="flex flex-row justify-center items-center" style={{ height: 'calc(100vh - 64px)' }}>

@@ -4,8 +4,8 @@ const nextConfig = {
     return [
       {
         source: '/',
-        destination: '/landingpage',
-        permanent: false, 
+        destination: '/globe',
+        permanent: true, 
       },
     ];
   },
