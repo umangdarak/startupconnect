@@ -107,11 +107,17 @@ export default function Login() {
   // };
 
   const authState = useSelector((state: RootState) => state.auth);
+  
   useEffect(() => {
-    if (authState.authState) {
-      router.push("/");
+    if (!authState.authState) {
+      router.push("/login");
+    }else if(authState.userType=='Startup'){
+      router.push("/dashboardStartup");
+    }else{
+      router.push('/dashboardInvestor');
     }
-  });
+  },[authState]);
+
 
   return (
     <div className="overflow-hidden">
@@ -168,24 +174,24 @@ export default function Login() {
           >
             <div className="flex justify-center items-cneter object-cover w-full h-full bg-white shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl mt-1">
               <div className="w-1/2 h-full flex justify-center">
-                <Image
-                  src="/images/login2.png"
-                  alt="Login Image"
-                  width={600}
-                  height={600}
-                  className="h-full w-full object-cover sm:rounded-xl shadow-xl"
-                />
+                {/* <Image
+                //   src="/images/login2.png"
+                //   alt="Login Image"
+                //   width={600}
+                //   height={600}
+                //   className="h-full w-full object-cover sm:rounded-xl shadow-xl"
+                // /> */}
               </div>
               <div className="w-1/2 px-6 pt-10 pb-8">
-                <Button
+                <button
                   onClick={() => {
                     setUserType("");
                     setShowForm(false);
                   }}
-                  className="bg-transparent button1"
+                  className=" button4"
                 >
-                  <ArrowBackIosIcon fontSize="small" sx={{ color: "#FFFFFF" }} />
-                </Button>
+                  <ArrowBackIosIcon fontSize="small"  />
+                </button>
                 <div className="w-full items-center justify-center">
                   <div className="text-center">
                     <h1 className="text-3xl font-semibold text-customBlack">

@@ -7,6 +7,7 @@ import { Box, Button, Flex, Text } from "@radix-ui/themes";
 import Image from "next/image";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 interface Project {
   startupId: string;
   patentDetails: string;
@@ -29,6 +30,7 @@ export default function DashBoardInvestor() {
   useEffect(() => {
     getProjects();
   }, []);
+
   const getProjects = async () => {
     const res = await fetch(`http://localhost:8000/post/allprojects`, {
       method: "GET",
@@ -41,6 +43,7 @@ export default function DashBoardInvestor() {
       console.error("Failed to fetch properties");
     }
   };
+
   const handleFollow = async (startupId: string) => {
     try {
       const res = await fetch(`http://localhost:8000/follow/followreq`, {
@@ -90,80 +93,56 @@ export default function DashBoardInvestor() {
       });
     }
   };
+
   return (
     <div className="flex flex-col w-3/4 h-screen">
       {data.map((project) => (
-        <Box className="border rounded-lg p-4 mb-4 bg-white">
-          <Flex direction="column" gap="2">
-            <Text className="text-lg font-bold">
-              Posted By:{project.startupId}
-              <Button
-                onClick={() => {
-                  handleFollow(project.startupId);
-                }}
-                className="button1"
-                disabled={authState.user?.following?.includes(
-                  project.startupId
-                )}
-              >
-                Follow
-              </Button>
-              <ToastContainer
-                position="bottom-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="dark"
-                transition={Bounce}
-              />
-            </Text>
-            {/* <Text className="text-gray-600">Owned by: {property.owner}</Text> */}
-            <Box className="w-full my-4">
+        <div className="card mb-16" key={project.startupId}>
+          <div className="project-header">
+            {/* Flexbox to align image and project name */}
+            <div className="image-container">
               <Image
-                src={`data:image/jpeg;base64,${Buffer.from(
-                  project.legalDocuments.data
-                ).toString("base64")}`}
+                src={`data:image/jpeg;base64,${Buffer.from(project.legalDocuments.data).toString("base64")}`}
                 alt={project.startupId}
-                width={100}
-                height={100}
-                className="w-full h-auto object-cover rounded-lg"
+                width={150}
+                height={150}
+                className="object-cover"
               />
-            </Box>
-            <Text>
-              <strong>patentDetails:</strong> {project.patentDetails}
-            </Text>
-            <Text>
-              <strong>projectTitle:</strong> {project.projectTitle}
-            </Text>
-            <Text>
-              <strong>projectDescription:</strong> {project.projectDescription}
-            </Text>
-            <Text>
-              <strong>targetMarket:</strong> ${project.targetMarket}
-            </Text>
-            <Flex gap="4">
-              <Text>
-                <strong>businessModel:</strong> {project.businessModel}
-              </Text>
-              <Text>
-                <strong>fundingGoals:</strong> {project.fundingGoals}
-              </Text>
-            </Flex>
-            <Flex gap="4">
-              <Text>
-                <strong>useOfFunds:</strong> {project.useOfFunds}
-              </Text>
-              <Text>
-                <strong>expectedROI:</strong> {project.expectedROI}
-              </Text>
-            </Flex>
-          </Flex>
-        </Box>
+            </div>
+            <div className="project-info">
+              <h2 className="project-title">{project.projectTitle}</h2>
+            </div>
+          </div>
+
+          <div className="card__content">
+            <p className="card__description">{project.projectDescription}</p>
+            <p><strong>Patent Details:</strong> {project.patentDetails}</p>
+            <p><strong>Target Market:</strong> ${project.targetMarket}</p>
+            <p><strong>Business Model:</strong> {project.businessModel}</p>
+            <p><strong>Funding Goals:</strong> {project.fundingGoals}</p>
+            <p><strong>Use of Funds:</strong> {project.useOfFunds}</p>
+            <p><strong>Expected ROI:</strong> {project.expectedROI}</p>
+            <Button
+              onClick={() => handleFollow(project.startupId)}
+              disabled={authState.user?.following?.includes(project.startupId)}
+            >
+              Follow
+            </Button>
+            <ToastContainer
+              position="bottom-right"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+              transition={Bounce}
+            />
+          </div>
+        </div>
       ))}
     </div>
   );

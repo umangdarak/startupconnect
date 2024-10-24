@@ -21,6 +21,16 @@ export default function Register() {
   //     router.push("/");
   //   }
   // }, [authState.authState, router]);
+  useEffect(() => {
+    if (!authState.authState) {
+      router.push("/login");
+    }else if(authState.userType=='Startup'){
+      router.push("/dashboardStartup");
+    }else{
+      router.push('/dashboardInvestor');
+    }
+  },[authState]);
+
 
   return (
     <div className="flex flex-col justify-center items-center" style={{ height: 'calc(100vh - 64px)' }}>

@@ -101,10 +101,11 @@ export default function ChatComponent(props: EachChatProps) {
 
   return (
     <div className="p-6 bg-darkblue h-full flex flex-col">
+      <h1 className="text-white mb-4">Chat</h1>
 
       {/* Messages container */}
       <div
-        className="overflow-y-scroll flex-grow mb-4 card"
+        className="overflow-y-scroll flex-grow mb-4"
         style={{ maxHeight: "70vh" }}
       >
         {messages.map((msg, index) => (

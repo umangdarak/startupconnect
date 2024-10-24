@@ -396,9 +396,9 @@ export default function GlobeDemo() {
   ];
   const router=useRouter();
   useEffect(()=>{
-    // setInterval(()=>{
-    //   router.push("/landingpage");
-    // },7000);
+    setInterval(()=>{
+      router.push("/landingpage");
+    },7000);
   },[])
   return (
     <div className="flex flex-row items-center justify-center py-20 h-screen md:h-auto dark:bg-black bg-white relative w-full">
