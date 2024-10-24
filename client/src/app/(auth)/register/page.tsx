@@ -31,31 +31,33 @@ export default function Register() {
           transition={{ duration: 0.5, ease: "linear" }}
           className="flex flex-col justify-center items-center px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 rounded-full"
         >
-          <div className="p-10">
-            <Text className="text-customBlack">
-              Are you an Investor or an Entrepreneur/Startup Company?
-            </Text>
-            <div className="flex flex-row justify-between w-full px-6 mt-8">
-              <Button
-                className="button1"
-                onClick={() => {
-                  setUserType("Investor");
-                  setShowForm(true);
-                }}
-              >
-                <Text className="text-white text-lg font-light">Investor</Text>
-              </Button>
-              <Button
-                className="button1"
-                onClick={() => {
-                  setUserType("Startup");
-                  setShowForm(true);
-                }}
-              >
-                <Text className="text-white text-lg font-light">Entrepreneur/Startup</Text>
-              </Button>
-            </div>
-          </div>
+         <div className="p-10 styled">
+              <div className=" flex flex-row justify-center items-center">
+              <Text className="text-black font">
+                Are you an Investor or an Entrepreneur/Startup Company?
+              </Text>
+              </div>
+              <div className="flex flex-row justify-between w-full px-6 mt-8">
+                <button
+                  className="button4 border-yellow-200 mx-6"
+                  onClick={() => {
+                    setUserType("Investor");
+                    setShowForm(true);
+                  }}
+                >
+                Investor
+                </button>
+                <button
+                  className="button4"
+                  onClick={() => {
+                    setUserType("Startup");
+                    setShowForm(true);
+                  }}
+                >
+                    Entrepreneur/Startup
+                </button>
+              </div>
+              </div>
         </motion.div>
       ) : (
         <motion.div
