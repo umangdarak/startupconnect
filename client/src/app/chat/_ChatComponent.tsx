@@ -1,7 +1,8 @@
 import { RootState } from "@/lib/store";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import io from "socket.io-client";
+import './pages.css';
 
 interface EachChatProps {
   chatID: string;
@@ -24,9 +25,9 @@ const socket = io("http://localhost:8000");
 
 export default function ChatComponent(props: EachChatProps) {
   const authState = useSelector((state: RootState) => state.auth);
-
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
+  const messagesEndRef = useRef<HTMLDivElement | null>(null); // Reference for scrolling
 
   useEffect(() => {
     fetchChat();
@@ -40,6 +41,10 @@ export default function ChatComponent(props: EachChatProps) {
       socket.off("receiveMessage");
     };
   }, [props.chatID]);
+
+  useEffect(() => {
+    scrollToBottom(); // Scroll to bottom when messages change
+  }, [messages]);
 
   const fetchChat = async () => {
     if (props.chatID) {
@@ -67,63 +72,79 @@ export default function ChatComponent(props: EachChatProps) {
   };
 
   const sendMessage = () => {
-    const newMessage = {
-      chatID: props.chatID,
-      senderId: props.senderId,
-      senderModel: props.senderModel,
-      receiverId: props.receiverId,
-      receiverModel: props.receiverModel,
-      content: message,
-    };
+    if (message.trim()) { // Prevent sending empty messages
+      const newMessage = {
+        chatID: props.chatID,
+        senderId: props.senderId,
+        senderModel: props.senderModel,
+        receiverId: props.receiverId,
+        receiverModel: props.receiverModel,
+        content: message,
+      };
 
-    socket.emit("sendMessage", newMessage);
-    setMessage("");
+      socket.emit("sendMessage", newMessage);
+      setMessage(""); // Clear the input field
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <div>
-      <h1>Chat</h1>
+    <div className="p-6 bg-darkblue h-full flex flex-col">
+
+      {/* Messages container */}
       <div
-        style={{
-          maxHeight: "500px",
-          overflowY: "scroll",
-          border: "1px solid black",
-        }}
+        className="overflow-y-scroll flex-grow mb-4 card"
+        style={{ maxHeight: "70vh" }}
       >
         {messages.map((msg, index) => (
           <div
             key={index}
-            style={{
-              display: "flex",
-              justifyContent:
-                msg.senderId === props.senderId ? "flex-end" : "flex-start",
-              margin: "10px 0",
-            }}
+            className={`flex ${
+              msg.senderId === props.senderId ? "justify-end" : "justify-start"
+            } mb-2`}
           >
             <div
-              style={{
-                backgroundColor:
-                  msg.senderId === props.senderId ? "#D1E8FF" : "#F1F0F0",
-                padding: "10px",
-                borderRadius: "10px",
-                maxWidth: "60%",
-              }}
+              className={`px-4 py-2 rounded-md ${
+                msg.senderId === props.senderId ? "bg-blue-500" : "bg-gray-500"
+              } text-white max-w-xs`}
             >
               {msg.content}
             </div>
           </div>
         ))}
+        {/* Dummy div to enable scrolling to the bottom */}
+        <div ref={messagesEndRef} />
       </div>
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Type a message"
-        style={{ width: "80%", padding: "10px", margin: "10px 0" }}
-      />
-      <button onClick={sendMessage} style={{ padding: "10px 20px" }}>
-        Send
-      </button>
+
+      {/* Input and Send button fixed at the bottom */}
+      <div className="flex flex-row items-center sticky bottom-0 bg-darkblue p-4">
+        <input
+          type="text"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={handleKeyDown} // Handle Enter key
+          placeholder="Type a message"
+          className="flex-grow p-2 rounded-md"
+          style={{ backgroundColor: "#ffffff", color: "#000" }}
+        />
+        <button
+          onClick={sendMessage}
+          className="ml-2 p-2 bg-blue-500 text-white rounded-md"
+        >
+          Send
+        </button>
+      </div>
     </div>
   );
 }
