@@ -2,6 +2,8 @@ import { HomeIcon } from './icons/HomeIcon';
 import { ProfileIcon } from './icons/ProfileIcon';
 import { ChatIcon } from './icons/ChatIcon';
 import { SettingsIcon } from './icons/SettingsIcon';
+
+
 export const data = [
   {
     title: 'Home',
@@ -18,10 +20,10 @@ export const data = [
     icon: <ProfileIcon />,
     link: '/profile',
   },
-  {
-    title: 'Settings',
+ {
+    title: 'Follow Requests',
     icon: <SettingsIcon />,
-    link: '/admin/settings',
+    link: '/followrequests',
   },
  
 ];

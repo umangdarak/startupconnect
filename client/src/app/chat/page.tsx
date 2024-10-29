@@ -51,6 +51,7 @@ export default function Page() {
 
               if (res.ok) {
                 const data1 = await res.json();
+               
                 return { id: data1._id, name: data1.fullName };
               } else {
                 console.error(`Failed to fetch details for id: ${element}`);

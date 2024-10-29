@@ -2,7 +2,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { data } from './data';
 import { useDashboardContext } from '../provider';
-
+import { useSelector } from 'react-redux';
+import { RootState } from '@/lib/store';
 const style = {
   title: 'mx-4 text-sm whitespace-pre',
   active: 'bg-gray-700 rounded-full',
@@ -14,11 +15,12 @@ const style = {
 export function SidebarItems() {
   const pathname = usePathname();
   const { isOpen } = useDashboardContext();
+  const authState = useSelector((state: RootState) => state.auth);
 
   return (
     <ul className="md:pl-3">
       {data.map((item) => (
-        <li key={item.title}>
+      authState.userType==='Investor'&&item.title==='Follow Requests'?<></>:<li key={item.title}>
           <Link href={item.link}>
             <span className={style.link}>
               <div className={`p-2 ${item.link === pathname ? style.active : ''}`}>

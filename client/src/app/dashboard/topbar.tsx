@@ -2,7 +2,7 @@
 import { userLogout } from "@/lib/slices/authSlice";
 import { Button } from "@radix-ui/themes";
 import { useDashboardContext } from "./provider";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/lib/store";
@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 export function TopBar() {
   const { openSidebar } = useDashboardContext();
   const dispatch = useDispatch<AppDispatch>();
-  const router=useRouter();
+  const router = useRouter();
   const authState = useSelector((state: RootState) => state.auth);
   return (
     <header className="relative z-10 h-20 items-center">
@@ -58,7 +58,7 @@ export function TopBar() {
             </div>
           </div>
           <div className="relative ml-5 flex w-full items-center justify-end p-1 sm:right-auto ">
-          {/* <a href="#" className="block pr-5">
+            {/* <a href="#" className="block pr-5">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-7 w-7"
@@ -85,22 +85,20 @@ export function TopBar() {
             />
           </svg>
         </a> */}
-        {authState.userType==="Startup"&&<Button>
-          notifs
-        </Button>}
-            <Button
-              className="button1"
+
+            <button
+              type="button"
+              className="text-4xl text-white focus:outline-none"
               onClick={() => {
                 dispatch(userLogout());
                 router.push("/");
               }}
             >
               <LogoutIcon sx={{ color: "#FFFFFF" }} />
-            </Button>
+            </button>
           </div>
         </div>
       </div>
     </header>
   );
 }
-

@@ -149,13 +149,13 @@ export default function Login() {
           >
             <div className="flex justify-center items-cneter object-cover w-full h-full bg-white shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl mt-1">
               <div className="w-1/2 h-full flex justify-center">
-                {/* <Image
-                //   src="/images/login2.png"
-                //   alt="Login Image"
-                //   width={600}
-                //   height={600}
-                //   className="h-full w-full object-cover sm:rounded-xl shadow-xl"
-                // /> */}
+                <Image
+                  src="/images/login2.png"
+                  alt="Login Image"
+                  width={600}
+                  height={600}
+                  className="h-full w-full object-cover sm:rounded-xl shadow-xl"
+                />
               </div>
               <div className="w-1/2 px-6 pt-10 pb-8">
                 <button

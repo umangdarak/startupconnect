@@ -6,7 +6,7 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
   },
-  investorName: {
+  fullName: {
     type: String,
     required: true,
   },

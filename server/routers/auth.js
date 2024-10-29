@@ -78,7 +78,7 @@ Router.get("/api/protected", authenticateToken, (req, res) => {
 
 Router.post("/registerinvestor", async (req, res) => {
   const {
-    investorName,
+    fullName,
           email,
           password,
           phoneNumber,
@@ -98,7 +98,7 @@ Router.post("/registerinvestor", async (req, res) => {
   } = req.body;
   const userExists = await Investor.findOne({
     email: email,
-    fullName: fullName,
+    fullName:fullName,
     phoneNumber: phoneNumber,
   });
   if (!userExists) {
@@ -106,7 +106,7 @@ Router.post("/registerinvestor", async (req, res) => {
       const date = Date.now();
       bcrypt.hash(password, 10).then(async (pass) => {
         const investor = new Investor({
-          investorName:investorName,
+          fullName:fullName,
           email: email,
           password: pass,
           phoneNumber: phoneNumber,
