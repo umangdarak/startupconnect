@@ -17,7 +17,6 @@ Router.post("/project", async (req, res) => {
     legalDocuments,
   } = req.body;
   try {
-    const bufferData = Buffer.from(legalDocuments, "base64");
     const date = Date.now();
     const project = await Project({
       startupId: new mongoose.Types.ObjectId(startupId),
@@ -29,7 +28,7 @@ Router.post("/project", async (req, res) => {
       useOfFunds: useOfFunds,
       expectedROI: expectedROI,
       patentDetails: patentDetails,
-      legalDocuments: bufferData,
+      legalDocuments: legalDocuments,
       createdAt: date,
     });
     const result = await project.save();

@@ -83,29 +83,6 @@ export default function Login() {
     }
   };
 
-  // const handleVerifyOTP = async () => {
-  //   try {
-  //     const res = await fetch(`http://localhost:8000/auth/verify-otp-email`, {
-  //       method: "POST",
-  //       headers: { "Content-type": "application/json" },
-  //       body: JSON.stringify({ otpEmail }),
-  //     });
-  //     if (!res.ok) {
-  //       throw new Error('OTP verification failed');
-  //     }
-  //     const data = await res.json();
-  //     dispatch(userLogin({
-  //       user: data.user,
-  //       token: data.token,
-  //       userType: userType,
-  //     }));
-  //     router.push("/");
-  //   } catch (error) {
-  //     console.error('Error verifying OTP:', error);
-  //     setOtpError('OTP verification failed. Please try again.');
-  //   }
-  // };
-
   const authState = useSelector((state: RootState) => state.auth);
   
   useEffect(() => {
@@ -116,7 +93,7 @@ export default function Login() {
     }else{
       router.push('/dashboardInvestor');
     }
-  },[authState]);
+  },[]);
 
 
   return (
@@ -130,9 +107,7 @@ export default function Login() {
             transition={{ duration: 0.5, ease: "linear" }}
             className="flex flex-col justify-center items-center px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 rounded-full"
           >
-          {/* <div className="card">
-          <div className="bg"></div>
-  <div className="blob"></div> */}
+      
             <div className="p-10 styled">
               <div className=" flex flex-row justify-center items-center">
               <Text className="text-black font">
@@ -141,7 +116,7 @@ export default function Login() {
               </div>
               <div className="flex flex-row justify-between w-full px-6 mt-8">
                 <button
-                  className="button4 border-yellow-200 mx-6"
+                  className="button4 mr-5"
                   onClick={() => {
                     setUserType("Investor");
                     setShowForm(true);
@@ -197,20 +172,10 @@ export default function Login() {
                     <h1 className="text-3xl font-semibold text-customBlack">
                       Login
                     </h1>
-                  </div>``
+                  </div>
                   <div className="mt-5">
                     <div className="relative mt-6">
-                      {/* <TextField
-                        type="email"
-                        required
-                        id="outlined-basic"
-                        error={error?.email ? true : false}
-                        name="email"
-                        value={email}
-                        placeholder="Email Address"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        onChange={(e) => setEmail(e.target.value)}
-                      /> */}
+                      
                       <StyledWrapper>
                       <div className="group">
           
@@ -316,20 +281,7 @@ export default function Login() {
           </motion.div>
         </div>
       )}
-      {/* {otpEmailSent && (
-        <div className="flex flex-col items-center justify-center mt-8">
-          <TextField
-            id="otpEmail"
-            label="Enter OTP sent to your Email"
-            variant="outlined"
-            value={otpEmail}
-            onChange={(e) => setOtpEmail(e.target.value)}
-            className="mb-4"
-          />
-          <Button onClick={handleVerifyOTP}>Verify OTP</Button>
-          {otpError && <Text className="mt-2 text-red-500">{otpError}</Text>}
-        </div>
-      )} */}
+ 
       {alertVisible && (
         <AlertDialog.Root open={alertVisible}>
           <AlertDialog.Content maxWidth="450px">
@@ -347,9 +299,9 @@ export default function Login() {
             </AlertDialog.Description>
             <Flex className="flex flex-row justify-center items-center w-full">
               <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
-                <Button variant="soft" className="button4">
-                  <Text className="text-white text-lg font-light"> Ok</Text>
-                </Button>
+                <button  className="button4">
+                  <Text > Ok</Text>
+                </button>
               </AlertDialog.Cancel>
             </Flex>
           </AlertDialog.Content>

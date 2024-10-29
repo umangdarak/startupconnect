@@ -61,6 +61,9 @@ export default function RegisterInvestor() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           investorName,
+          email,
+          password,
+          phoneNumber,
           typeOfInvestor,
           location,
           sectorsOfInterest,
@@ -96,7 +99,7 @@ export default function RegisterInvestor() {
         <div className="text-center">
           <h1 className="text-3xl font-semibold text-customBlack">Register Investor</h1>
         </div>
-        <div className="max-w-xl mx-auto mt-10 bg-white shadow-2xl rounded-lg overflow-hidden">
+        <div className=" mt-10 w-3/6 bg-white shadow-2xl rounded-lg overflow-hidden">
           <form onSubmit={handleSubmit}>
             <div className="py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-4">
               <TextField
@@ -262,9 +265,9 @@ export default function RegisterInvestor() {
             </div>
             {/* Submit Button */}
             <div className="flex justify-center mt-6 mb-4">
-              <Button type="submit" className="w-40 h-12 bg-indigo-600 text-white rounded-lg">
+              <button type="submit" className="button4">
                 Register
-              </Button>
+              </button>
             </div>
           </form>
         </div>

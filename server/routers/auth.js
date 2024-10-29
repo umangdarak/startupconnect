@@ -78,16 +78,23 @@ Router.get("/api/protected", authenticateToken, (req, res) => {
 
 Router.post("/registerinvestor", async (req, res) => {
   const {
-    email,
-    fullName,
-    password,
-    phoneNumber,
-    professionalTitle,
-    companyOrganization,
-    location,
-    professionalBio,
-    linkedInProfile,
-    accreditedInvestorStatus,
+    investorName,
+          email,
+          password,
+          phoneNumber,
+          typeOfInvestor,
+          location,
+          sectorsOfInterest,
+          stageFocus,
+          preferredBusinessModels,
+          ticketSize,
+          equityStake,
+          investmentHorizon,
+          trackRecord,
+          sectorExpertise,
+          limitedPartners,
+          geoPreferences,
+          availability,
   } = req.body;
   const userExists = await Investor.findOne({
     email: email,
@@ -99,16 +106,23 @@ Router.post("/registerinvestor", async (req, res) => {
       const date = Date.now();
       bcrypt.hash(password, 10).then(async (pass) => {
         const investor = new Investor({
-          fullName: fullName,
+          investorName:investorName,
           email: email,
           password: pass,
           phoneNumber: phoneNumber,
-          professionalTitle: professionalTitle,
-          companyOrganization: companyOrganization,
+          typeOfInvestor:typeOfInvestor,
           location: location,
-          professionalBio: professionalBio,
-          linkedInProfile: linkedInProfile,
-          accreditedInvestorStatus: accreditedInvestorStatus,
+          sectorsOfInterest:sectorsOfInterest,
+          stageFocus:stageFocus,
+          preferredBusinessModels:preferredBusinessModels,
+          ticketSize:ticketSize,
+          equityStake:equityStake,
+          investmentHorizon:investmentHorizon,
+          trackRecord:trackRecord,
+          sectorExpertise:sectorExpertise,
+          limitedPartners:limitedPartners,
+          geoPreferences:geoPreferences,
+          availability:availability,
           createdAt: date,
         });
 
@@ -125,16 +139,17 @@ Router.post("/registerinvestor", async (req, res) => {
 });
 Router.post("/registerstartup", async (req, res) => {
   const {
-    fullName,
-    email,
-    password,
-    phoneNumber,
     companyName,
-    patentApplicationNumber,
-    industry,
-    location,
-    companyDescription,
-    linkedInProfile,
+          companySize,
+          fullName,
+          email,
+          password,
+          phoneNumber,
+          industry,
+          location,
+          companyDescription,
+          linkedInProfile,
+          patentApplicationNumber,
   } = req.body;
   const userExists = await Startup.findOne({
     email: email,
@@ -156,6 +171,7 @@ Router.post("/registerstartup", async (req, res) => {
           location: location,
           companyDescription: companyDescription,
           linkedInProfile: linkedInProfile,
+          companySize:companySize,
           createdAt: date,
         });
 

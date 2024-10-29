@@ -1,15 +1,12 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema({
-  phoneNumber: {
-    type: String,
-    required: true,
-  },
+
   email: {
     type: String,
     required: true,
   },
-  fullName: {
+  investorName: {
     type: String,
     required: true,
   },
@@ -21,11 +18,7 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
   },
-  professionalTitle: {
-    type: String,
-    required: true,
-  },
-  companyOrganization: {
+  typeOfInvestor: {
     type: String,
     required: true,
   },
@@ -33,12 +26,16 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
   },
-
-  professionalBio: {
+  sectorsOfInterest: {
     type: String,
     required: true,
   },
-  linkedInProfile: {
+
+  stageFocus: {
+    type: String,
+    required: true,
+  },
+  preferredBusinessModels: {
     type: String,
     required: true,
   },
@@ -48,14 +45,36 @@ const Schema = mongoose.Schema({
       ref: "Startup",
     },
   ],
-  // expectedROI:{
-  //   type:Number,
-  // },
-  // involvementLevel:{
-  //   type:String,
-  //   required:true
-  // },
-  accreditedInvestorStatus: {
+
+  ticketSize: {
+    type: String,
+    required: true,
+  },
+  equityStake: {
+    type: String,
+    required: true,
+  },
+  investmentHorizon: {
+    type: String,
+    required: true,
+  },
+  trackRecord: {
+    type: String,
+    required: true,
+  },
+  sectorExpertise: {
+    type: String,
+    required: true,
+  },
+  limitedPartners: {
+    type: String,
+    required: true,
+  },
+  geoPreferences: {
+    type: String,
+    required: true,
+  },
+  availability: {
     type: String,
     required: true,
   },

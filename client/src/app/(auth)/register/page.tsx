@@ -9,6 +9,7 @@ import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import "./pages.css";
+import Link from "next/link";
 
 export default function Register() {
   const [userType, setUserType] = useState<string>("");
@@ -64,6 +65,15 @@ export default function Register() {
                 Entrepreneur/Startup
               </button>
             </div>
+            <p className="text-center text-sm text-gray-500 mt-3">
+             Already have an account?
+              <Link
+                href="/login"
+                className="font-semibold text-gray-600 hover:text-customPurple hover:tracking-wider focus:text-gray-800 focus:outline-none"
+              >
+                Login
+              </Link>
+            </p>
           </div>
         </motion.div>
       ) : (
@@ -73,26 +83,25 @@ export default function Register() {
           transition={{ duration: 0.3, ease: "backIn" }}
           className="flex flex-col items-center w-full h-full"
         >
-          <div className="flex items-start w-full h-full justify-start pl-4 pt-6 relative">
-            <Button
+          <div className="flex items-start w-full h-full justify-start pl-4 pt-6 relative bg-transparent">
+            <button
               onClick={() => {
                 setUserType("");
                 setShowForm(false);
               }}
-              className="button1"
+              className="button4"
             >
-              <ArrowBackIosIcon fontSize="small" sx={{ color: "#FFFFFF" }} />
-              Back
-            </Button>
+              <ArrowBackIosIcon fontSize="small" />
+            </button>
           </div>
           <div className="flex flex-col items-center justify-center w-full h-full mt-4">
             {userType === "Investor" ? (
               <div className="w-full h-full flex justify-center items-center p-4">
-                <RegisterInvestor  />
+                <RegisterInvestor />
               </div>
             ) : (
               <div className="w-full h-full flex justify-center items-center p-4">
-                <RegisterStartup  />
+                <RegisterStartup />
               </div>
             )}
           </div>

@@ -18,7 +18,7 @@ function Home() {
     }
   }, [authState, router]);
 
-  if (authState.authState && !authState.userType) {
+  if (!authState.authState && !authState.userType) {
     // Show the globe if user is logged in but has no userType yet
     return <GlobeDemo />;
   }

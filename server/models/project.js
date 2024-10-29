@@ -43,11 +43,10 @@ const Schema = mongoose.Schema({
     required: true,
   },
   legalDocuments: {
-    type: mongoose.SchemaTypes.Buffer,
+    type: String,
     required: true,
   },
 
-  //pitchDeck,Businessplan,exec_summary
   createdAt: {
     type: Date,
     required: true,

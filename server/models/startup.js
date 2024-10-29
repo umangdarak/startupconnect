@@ -21,58 +21,29 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
   },
-
+  companySize: {
+    type: Number,
+    required: true,
+  },
   industry: {
     type: String,
     required: true,
   },
-  // companySize: {
-  //   type: Number,
-  //   required: true,
-  // },
+  
   location: {
     type: String,
     required: true,
   },
-  // yearFounded:{
-  //   type:Date,
-  //   required:true
-  // },
-  // contactPerson: {
-  //   type: String,
-  //   required: true,
-  // },
-  /*contactTitle:{
-      type:String,
-      required:true
-    },*/
+  
   companyDescription: {
     type: String,
     required: true,
   },
-  // missionStatement:{
-  //   type:String,
-  //   required:true
-  // },
+ 
   linkedInProfile: {
     type: String,
   },
-  /*visionStatement:{
-      type:String,
-      required:true
-    },*/
-  // revenue: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // revenueAnnual:{
-  //   type:Number,
-  //   required:true
-  // },
-  // fundingHistory:{
-  //   type:String,
-  //   required:true
-  // },
+ 
   patentApplicationNumber: {
     type: String,
   },
@@ -82,17 +53,12 @@ const Schema = mongoose.Schema({
       ref: "Investor",
     },
   ],
-  // verificationDocuments:[{
-  //   type:mongoose.SchemaTypes.Buffer,
-  // }],
+
   createdAt: {
     type: Date,
     required: true,
   },
-  /*updatedAt:{
-      type:String,
-      required:true
-    },*/
+ 
 });
 
 module.exports = mongoose.model("Startup", Schema);

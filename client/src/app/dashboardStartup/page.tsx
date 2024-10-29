@@ -8,6 +8,9 @@ import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
 import "../dashboardStartup/pages.css";
 import { toast, Bounce, ToastContainer } from "react-toastify";
+import axios from 'axios';
+
+
 export default function DashBoardStartup() {
   const authState = useSelector((state: RootState) => state.auth);
 
@@ -19,7 +22,7 @@ export default function DashBoardStartup() {
   const [useOfFunds, setUseOfFunds] = useState<string>();
   const [expectedROI, setExpectedROI] = useState<string>();
   const [patentDetails, setPatentDetails] = useState<string>();
-  const [legalDocuments, setLegalDocuments] = useState<string>();
+  const [legalDocuments, setLegalDocuments] = useState<File|null>(null);
   const [errors, setErrors] = useState<{
     projectTitle?: string;
     projectDescription?: string;
@@ -89,27 +92,34 @@ export default function DashBoardStartup() {
 
     return errors;
   };
-  const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target?.files?.[0];
-    if (file) {
-      try {
-        const options = {
-          maxSizeMB: 1,
-          maxWidthOrHeight: 800,
-          useWebWorker: true,
-        };
-        const compressedFile = await imageCompression(file, options);
-        const reader = new FileReader();
-        reader.onload = (event: ProgressEvent<FileReader>) => {
-          const base64String = event.target?.result?.toString().split(",")[1];
-          if (base64String) {
-            setLegalDocuments(base64String);
-          }
-        };
-        reader.readAsDataURL(compressedFile);
-      } catch (error) {
-        console.error("Error compressing image:", error);
-      }
+  // const handleImageChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target?.files?.[0];
+  //   if (file) {
+  //     try {
+  //       const options = {
+  //         maxSizeMB: 1,
+  //         maxWidthOrHeight: 800,
+  //         useWebWorker: true,
+  //       };
+  //       const compressedFile = await imageCompression(file, options);
+  //       const reader = new FileReader();
+  //       reader.onload = (event: ProgressEvent<FileReader>) => {
+  //         const base64String = event.target?.result?.toString().split(",")[1];
+  //         if (base64String) {
+  //           setLegalDocuments(base64String);
+  //         }
+  //       };
+  //       reader.readAsDataURL(compressedFile);
+  //     } catch (error) {
+  //       console.error("Error compressing image:", error);
+  //     }
+  //   }
+  // };
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files?.[0];
+    if (selectedFile) {
+      setLegalDocuments(selectedFile);
     }
   };
 
@@ -117,8 +127,24 @@ export default function DashBoardStartup() {
     event.preventDefault();
     const err = validate();
     setErrors(err);
-    if (Object.keys(err).length === 0) {
+    if (
+      // Object.keys(err).length === 0 && 
+    legalDocuments) {
       // Handle successful validation
+
+      const url = `https://api.cloudinary.com/v1_1/dzqij2vui/image/upload`; // Replace with your Cloudinary cloud name
+      const formData = new FormData();
+      formData.append('file', legalDocuments);
+      formData.append('upload_preset', 'ewaedee'); // Replace with your upload preset
+  
+      try {
+        const response = await axios.post(url, formData);
+        const image=response.data.secure_url; // Get the image URL
+        console.log('Image uploaded successfully:',image);
+      } catch (err) {
+        console.error(err);
+      }
+
       const res = await fetch(`http://localhost:8000/post/project`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
@@ -464,9 +490,8 @@ export default function DashBoardStartup() {
                 id="outlined-basic"
                 name="legalDocuments"
                 error={errors?.legalDocuments ? true : false}
-                onChange={handleImageChange}
+                onChange={handleFileChange}
                 placeholder="legalDocuments"
-                size="small"
                 className=" appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               {errors?.legalDocuments && <Text>{errors.legalDocuments}</Text>}

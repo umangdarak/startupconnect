@@ -13,17 +13,17 @@ export default function RegisterStartup() {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [companyName, setCompanyName] = useState<string>();
-  const [companyDescription, setCompanyDescription] = useState<string>();
+  const [companySize,setCompanySize]=useState<String>();
   const [industry, setIndustry] = useState<string>();
   const [location, setLocation] = useState<string>();
-  const [ideaDescription, setIdeaDescription] = useState<string>();
+  const [companyDescription, setCompanyDescription] = useState<string>();
   const [linkedInProfile, setLinkedInProfile] = useState<string>();
   const [patentApplicationNumber, setPatentApplicationNumber] = useState<
     string
   >();
+  
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
-  const [emailOtp, setEmailOtp] = useState<string>();
-  const [phoneOtp, setPhoneOtp] = useState<string>();
+  
   const [otp, setOtp] = useState<string>();
   const [otperror, setOtperror] = useState<string>();
   const [userotp, setUserotp] = useState<string>();
@@ -41,7 +41,7 @@ export default function RegisterStartup() {
     linkedInProfile?: string;
     patentApplicationNumber?: string;
     fetchError?: string;
-    ideaDescription?: string;
+    companySize?: string;
   }>();
 
   const validate = () => {
@@ -57,7 +57,7 @@ export default function RegisterStartup() {
       fetchError?: string;
       industry?: string;
       location?: string;
-      ideaDescription?: string;
+      companySize?: string;
       linkedInProfile?: string;
     } = {};
 
@@ -74,8 +74,8 @@ export default function RegisterStartup() {
     if (!location) errors.location = "Location is required";
     if (!companyName) errors.companyName = "companyName is required";
 
-    if (!ideaDescription)
-      errors.ideaDescription = "Idea Description is required";
+    if (!companySize)
+      errors.companySize = "Company Size is required";
     if (!linkedInProfile)
       errors.linkedInProfile = "LinkedIn Profile is required";
     
@@ -97,6 +97,7 @@ export default function RegisterStartup() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           companyName,
+          companySize,
           fullName,
           email,
           password,
@@ -223,14 +224,14 @@ export default function RegisterStartup() {
                   className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 {errors?.email && <Text>{errors.email}</Text>}
-                <Button
-                  variant="soft"
+                <button
+                className="button2 my-3"
                   onClick={() => {
                     requestotp();
                   }}
                 >
                   Request OTP
-                </Button>
+                </button>
                 {otperror && <Text>{otperror}</Text>}
                 <TextField
                   type="text"
@@ -243,15 +244,16 @@ export default function RegisterStartup() {
                   size="small"
                   className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
-                <Button
-                  variant="soft"
+                <button
+                                className="button2 mt-3"
+
                   onClick={() => {
                     verifyotp();
                   }}
                 >
                   Verify OTP
-                </Button>
-                {!otpverified && <Text>Otp Not Verified</Text>}
+                </button>
+                {!otpverified? <Text>Otp Not Verified</Text>:<Text>Otp Verified!!</Text>}
               </div>
               <div className="mb-4">
                 <label
@@ -330,14 +332,14 @@ export default function RegisterStartup() {
                   id="outlined-basic"
                   name="Company Size"
                   placeholder="Enter your company size"
-                  error={errors?.ideaDescription ? true : false}
-                  value={ideaDescription}
-                  onChange={(e) => setIdeaDescription(e.target.value)}
+                  error={errors?.companySize ? true : false}
+                  value={companySize}
+                  onChange={(e) => setCompanySize(e.target.value)}
                   size="small"
                   className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
-                {errors?.ideaDescription && (
-                  <Text>{errors.ideaDescription}</Text>
+                {errors?.companySize && (
+                  <Text>{errors.companySize}</Text>
                 )}
               </div>
               <div className="mb-4">
@@ -455,13 +457,15 @@ export default function RegisterStartup() {
                   <Text>{errors.patentApplicationNumber}</Text>
                 )}
               </div>
-
-              <Button
+                <div className="flex flex-row w-full justify-center items-center col-span-2
+                ">
+              <button
                 type="submit"
-                className="col-span-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="button4"
               >
                 Submit
-              </Button>
+              </button>
+              </div>
             </form>
           </div>
         </Box>
@@ -503,8 +507,8 @@ export default function RegisterStartup() {
                 {errors?.fetchError && (
                   <Text className="m-2">{errors.fetchError}</Text>
                 )}
-                {errors?.ideaDescription && (
-                  <Text className="m-2">{errors.ideaDescription}</Text>
+                {errors?.companySize && (
+                  <Text className="m-2">{errors.companySize}</Text>
                 )}
                 {errors?.patentApplicationNumber && (
                   <Text className="m-2">{errors.patentApplicationNumber}</Text>
@@ -514,9 +518,9 @@ export default function RegisterStartup() {
             </AlertDialog.Description>
             <Flex className="flex flex-row justify-center items-center w-full">
               <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
-                <Button variant="soft" className="button4">
+                <button className="button4">
                   <Text className="text-white text-lg font-light"> Ok</Text>
-                </Button>
+                </button>
               </AlertDialog.Cancel>
             </Flex>
           </AlertDialog.Content>
