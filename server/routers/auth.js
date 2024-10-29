@@ -132,12 +132,9 @@ Router.post("/registerstartup", async (req, res) => {
     companyName,
     patentApplicationNumber,
     industry,
-    companySize,
     location,
-    contactPerson,
     companyDescription,
     linkedInProfile,
-    revenue,
   } = req.body;
   const userExists = await Startup.findOne({
     email: email,
@@ -156,12 +153,9 @@ Router.post("/registerstartup", async (req, res) => {
           companyName: companyName,
           patentApplicationNumber: patentApplicationNumber,
           industry: industry,
-          companySize: companySize,
           location: location,
-          contactPerson: contactPerson,
           companyDescription: companyDescription,
           linkedInProfile: linkedInProfile,
-          revenue: revenue,
           createdAt: date,
         });
 

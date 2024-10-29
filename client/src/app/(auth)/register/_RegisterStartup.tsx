@@ -5,6 +5,7 @@ import { TextField } from "@mui/material";
 import { TextArea, Box, Button, Flex, Text, AlertDialog } from "@radix-ui/themes";
 import { Responsive } from "@radix-ui/themes/props";
 import emailjs from "@emailjs/browser";
+import { useRouter } from "next/navigation";
 
 export default function RegisterStartup() {
   const [fullName, setFullName] = useState<string>();
@@ -17,9 +18,9 @@ export default function RegisterStartup() {
   const [location, setLocation] = useState<string>();
   const [ideaDescription, setIdeaDescription] = useState<string>();
   const [linkedInProfile, setLinkedInProfile] = useState<string>();
-  const [patentApplicationNumbers, setPatentApplicationNumbers] = useState<
-    string[]
-  >([]);
+  const [patentApplicationNumber, setPatentApplicationNumber] = useState<
+    string
+  >();
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
   const [emailOtp, setEmailOtp] = useState<string>();
   const [phoneOtp, setPhoneOtp] = useState<string>();
@@ -27,6 +28,7 @@ export default function RegisterStartup() {
   const [otperror, setOtperror] = useState<string>();
   const [userotp, setUserotp] = useState<string>();
   const [otpverified, setOtpVerified] = useState<boolean>(false);
+  const router=useRouter();
   const [errors, setErrors] = useState<{
     companyName?: string;
     fullName?: string;
@@ -40,7 +42,6 @@ export default function RegisterStartup() {
     patentApplicationNumber?: string;
     fetchError?: string;
     ideaDescription?: string;
-    patentApplicationNumbers?: string;
   }>();
 
   const validate = () => {
@@ -58,7 +59,6 @@ export default function RegisterStartup() {
       location?: string;
       ideaDescription?: string;
       linkedInProfile?: string;
-      patentApplicationNumbers?: string;
     } = {};
 
     if (!fullName) errors.fullName = "Full Name is required";
@@ -78,11 +78,11 @@ export default function RegisterStartup() {
       errors.ideaDescription = "Idea Description is required";
     if (!linkedInProfile)
       errors.linkedInProfile = "LinkedIn Profile is required";
-    patentApplicationNumbers.forEach((patent, index) => {
-      if (!patent) {
-        errors.patentApplicationNumbers = `Patent ID ${index + 1} is required`;
-      }
-    });
+    
+    if (!patentApplicationNumber){
+      errors.patentApplicationNumber = "LinkedIn Profile is required";
+    }
+    
 
     return errors;
   };
@@ -92,6 +92,28 @@ export default function RegisterStartup() {
     const err = validate();
     setErrors(err);
     if (Object.keys(err).length === 0 && otpverified) {
+      const res = await fetch(`http://localhost:8000/auth/registerstartup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          companyName,
+          fullName,
+          email,
+          password,
+          phoneNumber,
+          industry,
+          location,
+          companyDescription,
+          linkedInProfile,
+          patentApplicationNumber,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setErrors({ fetchError: data["error"] });
+      } else {
+        router.push("/login");
+      }
     } else {
       setAlertVisible(true);
     }
@@ -124,9 +146,14 @@ export default function RegisterStartup() {
     }
   };
   const verifyotp = () => {
-    if (otp == userotp) {
+    if (otp === userotp) {
+      console.log("Idar aaya")
       setOtpVerified(true);
     }
+  else{
+    console.log("idar nahi aya");
+    
+  }
   };
   function generateAlphanumericCode(length = 6) {
     const characters =
@@ -210,8 +237,8 @@ export default function RegisterStartup() {
                   required
                   id="outlined-basic"
                   name="EmailOtp"
-                  value={emailOtp}
-                  onChange={(e) => setEmailOtp(e.target.value)}
+                  value={userotp}
+                  onChange={(e) => setUserotp(e.target.value)}
                   placeholder="Enter your OTP"
                   size="small"
                   className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -219,7 +246,7 @@ export default function RegisterStartup() {
                 <Button
                   variant="soft"
                   onClick={() => {
-                    verifyotp;
+                    verifyotp();
                   }}
                 >
                   Verify OTP
@@ -415,12 +442,11 @@ export default function RegisterStartup() {
                   name="Patent Application Number"
                   placeholder="Enter your patent application number"
                   error={errors?.patentApplicationNumber ? true : false}
-                  value={patentApplicationNumbers}
+                  value={patentApplicationNumber}
                   onChange={(e) =>
-                    setPatentApplicationNumbers([
-                      ...patentApplicationNumbers,
+                    setPatentApplicationNumber(
                       e.target.value,
-                    ])
+                    )
                   }
                   size="small"
                   className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -480,8 +506,8 @@ export default function RegisterStartup() {
                 {errors?.ideaDescription && (
                   <Text className="m-2">{errors.ideaDescription}</Text>
                 )}
-                {errors?.patentApplicationNumbers && (
-                  <Text className="m-2">{errors.patentApplicationNumbers}</Text>
+                {errors?.patentApplicationNumber && (
+                  <Text className="m-2">{errors.patentApplicationNumber}</Text>
                 )}
                 {!otpverified&&<Text className="m-2">Otp Not Verified</Text>}
               </Flex>

@@ -26,10 +26,10 @@ const Schema = mongoose.Schema({
     type: String,
     required: true,
   },
-  companySize: {
-    type: Number,
-    required: true,
-  },
+  // companySize: {
+  //   type: Number,
+  //   required: true,
+  // },
   location: {
     type: String,
     required: true,
@@ -38,10 +38,10 @@ const Schema = mongoose.Schema({
   //   type:Date,
   //   required:true
   // },
-  contactPerson: {
-    type: String,
-    required: true,
-  },
+  // contactPerson: {
+  //   type: String,
+  //   required: true,
+  // },
   /*contactTitle:{
       type:String,
       required:true
@@ -56,16 +56,15 @@ const Schema = mongoose.Schema({
   // },
   linkedInProfile: {
     type: String,
-    required: true,
   },
   /*visionStatement:{
       type:String,
       required:true
     },*/
-  revenue: {
-    type: Number,
-    required: true,
-  },
+  // revenue: {
+  //   type: Number,
+  //   required: true,
+  // },
   // revenueAnnual:{
   //   type:Number,
   //   required:true
@@ -76,7 +75,6 @@ const Schema = mongoose.Schema({
   // },
   patentApplicationNumber: {
     type: String,
-    required: true,
   },
   followers: [
     {
