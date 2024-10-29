@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField } from "@mui/material";
 
 import { TextArea, Box, Button, Flex, Text, AlertDialog } from "@radix-ui/themes";
@@ -103,24 +103,24 @@ export default function RegisterStartup() {
       const otp = generateAlphanumericCode();
       setOtp(otp);
       const template = {
-        to_name: fullName,
-        from_name: "StartupConnect",
-        message: otp,
-        email: email,
+        to_email:email,
+        to_name: fullName,            // The recipient's name
+        from_name: "StartupConnect",  // The sender's name
+        message: otp,                 // The OTP message
       };
-      emailjs
-        .send("service_dv64bx6", "template_hgz8u7l", template, {
-          publicKey: "e31rrczZo7XzulSlx",
-        })
-        .then(
-          (response) => {
-            console.log("SUCCESS!", response.status, response.text);
-          },
-          (err) => {
-            setOtperror("Error sending otp");
-            console.log("FAILED...", err);
-          }
-        );
+      
+      // Send the email using EmailJS
+      emailjs.send("service_dv64bx6", "template_hgz8u7l", template, {
+        publicKey: 'aORjRAflVVvcbkBi3',
+      })
+      .then((response) => {
+        console.log('Email sent successfully!', response.status, response.text);
+      })
+      .catch((err) => {
+        setOtperror("Error sending Otp");
+        console.error('Failed to send email. Error:', err);
+      });
+      
     }
   };
   const verifyotp = () => {
@@ -199,7 +199,7 @@ export default function RegisterStartup() {
                 <Button
                   variant="soft"
                   onClick={() => {
-                    requestotp;
+                    requestotp();
                   }}
                 >
                   Request OTP
@@ -267,23 +267,7 @@ export default function RegisterStartup() {
                   className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
                 {errors?.phoneNumber && <Text>{errors.phoneNumber}</Text>}
-                <Button variant="soft" onClick={() => {}}>
-                  Request OTP
-                </Button>
-                <TextField
-                  type="text"
-                  required
-                  id="outlined-basic"
-                  name="PhoneOtp"
-                  value={phoneOtp}
-                  onChange={(e) => setPhoneOtp(e.target.value)}
-                  placeholder="Enter your OTP"
-                  size="small"
-                  className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                />
-                <Button variant="soft" onClick={() => {}}>
-                  Verify OTP
-                </Button>
+                
               </div>
               <div className="mb-4">
                 <label
