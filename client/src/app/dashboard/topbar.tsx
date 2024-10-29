@@ -4,15 +4,15 @@ import { Button } from "@radix-ui/themes";
 import { useDashboardContext } from "./provider";
 import LogoutIcon from '@mui/icons-material/Logout';
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/lib/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/lib/store";
 import { useRouter } from "next/navigation";
 
 export function TopBar() {
   const { openSidebar } = useDashboardContext();
   const dispatch = useDispatch<AppDispatch>();
   const router=useRouter();
-
+  const authState = useSelector((state: RootState) => state.auth);
   return (
     <header className="relative z-10 h-20 items-center">
       <div className="relative z-10 mx-auto flex h-full flex-col justify-center px-3 text-white">
@@ -85,6 +85,9 @@ export function TopBar() {
             />
           </svg>
         </a> */}
+        {authState.userType==="Startup"&&<Button>
+          notifs
+        </Button>}
             <Button
               className="button1"
               onClick={() => {

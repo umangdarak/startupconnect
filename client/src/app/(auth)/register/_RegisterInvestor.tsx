@@ -4,6 +4,7 @@ import { TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/mater
 import { Box, Button } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import './pages.css';
 
 export default function RegisterInvestor() {
   const [investorName, setInvestorName] = useState<string>("");
@@ -84,13 +85,9 @@ export default function RegisterInvestor() {
   };
 
   return (
-    <div className="flex flex-col w-full items-center h-screen justify-center relative">
-      {/* Back Button */}
-      <div className="absolute top-6 left-4">
-        <Button onClick={() => router.back()} className="button1">
-          <ArrowBackIosIcon fontSize="small" sx={{ color: '#FFFFFF' }} />
-        </Button>
-      </div>
+    <div className="register-component">
+    <div className="flex flex-col  items-center  justify-center relative">
+      
 
       <Box className="flex flex-col w-screen items-center">
         <div className="text-center">
@@ -269,6 +266,7 @@ export default function RegisterInvestor() {
           </form>
         </div>
       </Box>
+    </div>
     </div>
   );
 }

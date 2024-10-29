@@ -133,6 +133,7 @@ export default function RegisterStartup() {
   // };
 
   return (
+    <div className="register-component">
     <div className="flex flex-col w-screen items-center justify-center p-4 md:p-0">
       <Box className="flex flex-col items-center w-full max-w-3xl">
         <div className="text-center">
@@ -427,6 +428,7 @@ export default function RegisterStartup() {
           </form>
         </div>
       </Box>
+    </div>
     </div>
   );
 }

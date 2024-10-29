@@ -1,23 +1,29 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
-import {  useSelector } from "react-redux";
-import {  RootState } from "@/lib/store";
+import { useSelector } from "react-redux";
+import { RootState } from "@/lib/store";
+import GlobeDemo from "./_globe/page";
+
 function Home() {
   const router = useRouter();
   const authState = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-    if (!authState.authState) {
-      router.push("/login");
-    }else if(authState.userType=='Startup'){
+   
+    if (authState.userType === 'Startup') {
       router.push("/dashboardStartup");
-    }else{
-      router.push('/dashboardInvestor');
+    } else if (authState.userType === 'Investor') {
+      router.push("/dashboardInvestor");
     }
-  },[authState]);
+  }, [authState, router]);
 
-  return null;
+  if (authState.authState && !authState.userType) {
+    // Show the globe if user is logged in but has no userType yet
+    return <GlobeDemo />;
+  }
+
+  return null; // Return null when redirecting
 }
 
 export default Home;
