@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { TextField, Select, MenuItem, InputLabel, FormControl } from "@mui/material";
-import { Box, Button } from "@radix-ui/themes";
+import { AlertDialog, Box, Button, Flex ,Text} from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import './pages.css';
@@ -25,6 +25,7 @@ export default function RegisterInvestor() {
   const [geoPreferences, setGeoPreferences] = useState<string[]>([]);
   const [availability, setAvailability] = useState<string>("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [alertVisible,setAlertVisible]=useState<boolean>(false);
 
   const router = useRouter();
 
@@ -81,6 +82,8 @@ export default function RegisterInvestor() {
       } else {
         router.push("/login");
       }
+    }else{
+      setAlertVisible(true);
     }
   };
 
@@ -267,6 +270,42 @@ export default function RegisterInvestor() {
         </div>
       </Box>
     </div>
+    {alertVisible && (
+  <AlertDialog.Root open={alertVisible}>
+    <AlertDialog.Content maxWidth="450px">
+      <AlertDialog.Title>Validation Errors</AlertDialog.Title>
+      <AlertDialog.Description className="p-4 rounded">
+        <Flex className="flex flex-col">
+          {errors?.email && <Text className="m-2">{errors.email}</Text>}
+          {errors?.password && <Text className="m-2">{errors.password}</Text>}
+          {errors?.phoneNumber && <Text className="m-2">{errors.phoneNumber}</Text>}
+          {errors?.investorName && <Text className="m-2">{errors.investorName}</Text>}
+          {errors?.typeOfInvestor && <Text className="m-2">{errors.typeOfInvestor}</Text>}
+          {errors?.location && <Text className="m-2">{errors.location}</Text>}
+          {errors?.sectorsOfInterest && <Text className="m-2">{errors.sectorsOfInterest}</Text>}
+          {errors?.stageFocus && <Text className="m-2">{errors.stageFocus}</Text>}
+          {errors?.preferredBusinessModels && <Text className="m-2">{errors.preferredBusinessModels}</Text>}
+          {errors?.ticketSize && <Text className="m-2">{errors.ticketSize}</Text>}
+          {errors?.equityStake && <Text className="m-2">{errors.equityStake}</Text>}
+          {errors?.investmentHorizon && <Text className="m-2">{errors.investmentHorizon}</Text>}
+          {errors?.trackRecord && <Text className="m-2">{errors.trackRecord}</Text>}
+          {errors?.sectorExpertise && <Text className="m-2">{errors.sectorExpertise}</Text>}
+          {errors?.limitedPartners && <Text className="m-2">{errors.limitedPartners}</Text>}
+          {errors?.geoPreferences && <Text className="m-2">{errors.geoPreferences}</Text>}
+          {errors?.availability && <Text className="m-2">{errors.availability}</Text>}
+        </Flex>
+      </AlertDialog.Description>
+      <Flex className="flex flex-row justify-center items-center w-full">
+        <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
+          <Button variant="soft" className="button4">
+            <Text className="text-white text-lg font-light"> Ok</Text>
+          </Button>
+        </AlertDialog.Cancel>
+      </Flex>
+    </AlertDialog.Content>
+  </AlertDialog.Root>
+)}
+
     </div>
   );
 }
