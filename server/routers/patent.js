@@ -4,8 +4,8 @@ const qs = require('qs');
 
 const Router=express.Router();
 
-const consumerKey = '9vm12q1D64DbfIhXN808hYSkYnVscGiiqwnrEiXUcowkQEyJ';
-const consumerSecret = 'RVvZXoPmQxnB444BOHnX7hutw67hbrnXrAAuOSLocrhIMxzG055bnGwszKRRsgIy';
+const consumerKey = 'KgewpGZ7aqPqjul55SDdNp21JE899LNPGLcyGASLRgSKat1G';
+const consumerSecret = 'cKcS1McNFMxJhDPGHQvomLIGmGOXDQTd2DGrpz9TuGGtGRJCHRwxoTmlaTXyJ9DY';
 
 let accessToken = null;
 let tokenExpirationTime = null;
@@ -29,7 +29,7 @@ async function getAccessToken() {
 
     accessToken = response.data.access_token;
     tokenExpirationTime = Date.now() + response.data.expires_in * 1000; 
-
+    console.log("accesstoken"+accessToken)
     return accessToken;
 
   } catch (error) {
@@ -52,7 +52,7 @@ Router.get('/:id', async (req, res) => {
 
   try {
     const validToken = await getValidAccessToken();
-
+    
     const headers = {
       'Accept': 'application/json',  
       'Authorization': `Bearer ${validToken}`  
@@ -60,7 +60,7 @@ Router.get('/:id', async (req, res) => {
 
     const baseURL = 'https://ops.epo.org/3.2/rest-services/published-data/publication/epodoc/';
 
-    const response = await axios.get(`${baseURL}${patentId}/biblio`, { headers });
+    const response = await axios.get(`${baseURL}/${patentId}/biblio`, { headers });
 
     res.json(response.data);
 
