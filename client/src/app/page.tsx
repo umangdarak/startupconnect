@@ -16,7 +16,7 @@ function Home() {
     } else if (authState.userType === 'Investor') {
       router.push("/dashboardInvestor");
     }
-  }, [authState, router]);
+  }, [authState]);
 
   if (!authState.authState && !authState.userType) {
     // Show the globe if user is logged in but has no userType yet

@@ -73,7 +73,9 @@ export default function Login() {
             userType: userType,
           })
         );
-        router.push("/");
+        
+          router.push("/")
+       
       } catch (error) {
         console.error("Error sending OTP:", error);
         setAlertVisible(true); // Show error alert
@@ -86,12 +88,12 @@ export default function Login() {
   const authState = useSelector((state: RootState) => state.auth);
   
   useEffect(() => {
-    if (!authState.authState) {
-      router.push("/login");
-    }else if(authState.userType=='Startup'){
+  if(authState.userType==='Startup'){
       router.push("/dashboardStartup");
-    }else{
+    }else if(authState.userType==='Investor'){
       router.push('/dashboardInvestor');
+    }else{
+
     }
   },[]);
 

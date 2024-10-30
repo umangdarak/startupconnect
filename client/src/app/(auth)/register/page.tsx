@@ -17,15 +17,16 @@ export default function Register() {
   const [showForm, setShowForm] = useState<boolean>(false);
   const authState = useSelector((state: RootState) => state.auth);
 
+
   useEffect(() => {
-    if (!authState.authState) {
-      router.push("/register");
-    } else if (authState.userType === "Startup") {
-      router.push("/dashboardStartup");
-    } else {
-      router.push("/dashboardInvestor");
-    }
-  }, [authState, router]);
+    if(authState.userType==='Startup'){
+        router.push("/dashboardStartup");
+      }else if(authState.userType==='Investor'){
+        router.push('/dashboardInvestor');
+      }else{
+  
+      }
+    },[]);
 
   return (
     <div
