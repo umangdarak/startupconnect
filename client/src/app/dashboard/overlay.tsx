@@ -11,7 +11,7 @@ export function Overlay() {
       onClick={closeSidebar}
       className={
         isOpen
-          ? 'fixed left-0 top-0 z-30 h-screen w-screen bg-black opacity-40 lg:bg-transparent'
+          ? 'fixed left-0 top-0 z-30 h-screen w-screen bg-white opacity-40 lg:bg-transparent'
           : ''
       }
     />

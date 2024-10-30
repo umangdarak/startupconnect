@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/lib/store';
 const style = {
   title: 'mx-4 text-sm whitespace-pre',
-  active: 'bg-gray-700 rounded-full',
-  link: 'flex items-center justify-start my-1 p-3 w-full hover:text-white',
+  active: 'bg-white rounded-full',
+  link: 'flex items-center justify-start my-1 p-3 w-full hover:text-black',
   close: 'lg:duration-700 lg:ease-out lg:invisible lg:opacity-0 lg:transition-all',
   open: 'lg:duration-500 lg:ease-in lg:h-auto lg:opacity-100 lg:transition-all lg:w-auto',
 };
@@ -18,7 +18,7 @@ export function SidebarItems() {
   const authState = useSelector((state: RootState) => state.auth);
 
   return (
-    <ul className="md:pl-3">
+    <ul className="md:pl-3 bg-white">
       {data.map((item) => (
       authState.userType==='Investor'&&item.title==='Follow Requests'?<></>:<li key={item.title}>
           <Link href={item.link}>

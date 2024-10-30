@@ -14,8 +14,8 @@ export function TopBar() {
   const router = useRouter();
   const authState = useSelector((state: RootState) => state.auth);
   return (
-    <header className="relative z-10 h-20 items-center">
-      <div className="relative z-10 mx-auto flex h-full flex-col justify-center px-3 text-white">
+    <header className="relative z-10 h-20 items-center bg-white">
+      <div className="relative z-10 mx-auto flex h-full flex-col justify-center px-3 text-black">
         <div className="relative flex w-full items-center pl-1 sm:ml-0 sm:pr-2">
           <div className="group relative flex h-full w-12 items-center">
             <button
@@ -23,16 +23,16 @@ export function TopBar() {
               aria-expanded="false"
               aria-label="Toggle sidenav"
               onClick={openSidebar}
-              className="text-4xl text-white focus:outline-none"
+              className="text-4xl text-black focus:outline-none"
             >
               &#8801;
             </button>
           </div>
           <div className="container relative left-0 flex w-3/4">
             <div className="group relative ml-8 hidden w-full items-center md:flex lg:w-72">
-              <div className="absolute flex h-10 w-auto cursor-pointer items-center justify-center p-3 pr-2 text-sm uppercase text-gray-500 sm:hidden">
+              <div className="absolute flex h-10 w-auto cursor-pointer items-center justify-center p-3 pr-2 text-sm uppercase text-gray-700 sm:hidden">
                 <svg
-                  fill="none"
+                  fill="black"
                   className="relative h-5 w-5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -44,7 +44,7 @@ export function TopBar() {
                 </svg>
               </div>
               <svg
-                className="pointer-events-none absolute left-0 ml-4 hidden h-4 w-4 fill-white text-gray-100 group-hover:text-gray-400 sm:block"
+                className="pointer-events-none absolute left-0 ml-4 hidden h-4 w-4 fill-black text-gray-100 group-hover:text-gray-400 sm:block"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
               >
@@ -52,7 +52,7 @@ export function TopBar() {
               </svg>
               <input
                 type="text"
-                className="block w-full rounded-2xl bg-gray-800 py-1.5 pl-10 pr-4 leading-normal text-gray-400 opacity-90 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="block w-full rounded-2xl bg-gray-500 py-1.5 pl-10 pr-4 leading-normal text-gray-400 opacity-90 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Search"
               />
             </div>
@@ -88,13 +88,13 @@ export function TopBar() {
 
             <button
               type="button"
-              className="text-4xl text-white focus:outline-none"
+              className="text-4xl text-black focus:outline-none"
               onClick={() => {
                 dispatch(userLogout());
                 router.push("/");
               }}
             >
-              <LogoutIcon sx={{ color: "#FFFFFF" }} />
+              <LogoutIcon sx={{ color: "#000000" }} />
             </button>
           </div>
         </div>

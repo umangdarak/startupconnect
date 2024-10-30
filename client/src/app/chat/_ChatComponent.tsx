@@ -101,7 +101,7 @@ export default function ChatComponent(props: EachChatProps) {
 
   return (
     <div className="p-6 bg-darkblue h-full flex flex-col">
-      <h1 className="text-white mb-4">Chat</h1>
+      <h1 className="text-black mb-4">Chat</h1>
 
       {/* Messages container */}
       <div
@@ -118,7 +118,7 @@ export default function ChatComponent(props: EachChatProps) {
             <div
               className={`px-4 py-2 rounded-md ${
                 msg.senderId === props.senderId ? "bg-blue-500" : "bg-gray-500"
-              } text-white max-w-xs`}
+              } text-black max-w-xs`}
             >
               {msg.content}
             </div>

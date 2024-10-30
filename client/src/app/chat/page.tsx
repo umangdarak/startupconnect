@@ -74,7 +74,7 @@ export default function Page() {
   return (
     <div className="bg-darkblue w-full h-full">
     <div className="flex flex-row h-full gap-3">
-      <div className="flex flex-col w-48 border-r-2 border-gray-700 h-full bg-lightblue text-white">
+      <div className="flex flex-col w-48 border-r-2 border-gray-700 h-full bg-lightblue text-black">
         <h2 className="px-3 py-2">Chatnames</h2>
         {followers.map((follower) => (
           <div
@@ -85,14 +85,14 @@ export default function Page() {
             className="flex items-center gap-3 rounded-md bg-muted px-3 py-2 text-primary transition-colors hover:bg-lightgray hover:shadow-lg cursor-pointer"
           >
             <div className="flex-1 truncate">
-              <div className="font-medium text-white">{follower.name}</div>
+              <div className="font-medium text-black">{follower.name}</div>
             </div>
           </div>
         ))}
       </div>
       <div className="flex flex-col w-full h-full">
         {selected === "" ? (
-          <div className="text-center text-white mt-10">Let's Start Socializing!!</div>
+          <div className="text-center text-black mt-10">Let's Start Socializing!!</div>
         ) : authState.userType === "Investor" ? (
           <ChatComponent
             chatID={`${authState.user!._id}_${selected}`}
