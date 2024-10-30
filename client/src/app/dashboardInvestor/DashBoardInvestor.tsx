@@ -31,8 +31,34 @@ export default function DashBoardInvestor(
   const [data, setData] = useState<Project[]>([]);
 
   useEffect(() => {
-    getProjects();
-  }, []);
+    if(searchData){
+      getSearchProjects(searchData);
+    }else{
+    getProjects();}
+  }, [searchData]);
+
+  const getSearchProjects = async (title:string) => {
+    // Ensure the title is URL-encoded to handle special characters
+    const res = await fetch(`http://localhost:8000/search/projects?title=${encodeURIComponent(title)}`, {
+      method: "GET",
+    });
+  
+    if (res.ok) {
+      const properties = await res.json();
+      setData([]);
+      console.log(properties+"here");
+      
+      if(properties.length===0){
+        console.log("Came here");
+        
+        getProjects();
+      }else{
+      setData(properties);}
+    } else {
+      console.error("Failed to fetch properties");
+    }
+  };
+  
 
   const getProjects = async () => {
     const res = await fetch(`http://localhost:8000/post/allprojects`, {
@@ -101,7 +127,6 @@ export default function DashBoardInvestor(
     <div className="flex flex-col items-center w-full">
       
        {/* Flexbox to center cards vertically */}
-       {searchData&&<Text className="text-black">{searchData}</Text>}
     {data.map((project) => (
       <div className="card mb-4" key={project.startupId}>
         <div className="project-header">

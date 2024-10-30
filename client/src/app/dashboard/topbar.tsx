@@ -1,9 +1,7 @@
-// TopBar.tsx
 "use client";
 import { userLogout } from "@/lib/slices/authSlice";
-import { Button } from "@radix-ui/themes";
-import { useDashboardContext } from "./provider";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useDashboardContext } from "./provider";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/lib/store";
 import { useRouter } from "next/navigation";
@@ -22,7 +20,13 @@ export function TopBar({ setSearchData }: TopBarProps) {
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
-    setSearchData(event.target.value || null); // Update search data in parent component
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    // Check if the Enter key is pressed
+    if (event.key === "Enter") {
+      setSearchData(searchTerm || null); // Update search data in parent component
+    }
   };
 
   return (
@@ -40,18 +44,19 @@ export function TopBar({ setSearchData }: TopBarProps) {
               &#8801;
             </button>
           </div>
-          <div className="container relative left-0 flex w-3/4">
+          <div className="relative left-0 flex w-3/4">
             <div className="group relative ml-8 hidden w-full items-center md:flex lg:w-72">
               <input
                 type="text"
                 value={searchTerm}
-                onChange={handleSearch} // Handle changes in search input
-                className="block w-full rounded-2xl bg-gray-500 py-1.5 pl-10 pr-4 leading-normal text-gray-400 opacity-90 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onChange={handleSearch} // Update search term
+                onKeyPress={handleKeyPress} // Handle key press events
+                className="block w-full rounded-2xl border-2 border-black py-1.5 pl-10 pr-4 leading-normal text-gray-400 opacity-90 focus:outline-none focus:bg-transparent"
                 placeholder="Search"
               />
             </div>
           </div>
-          <div className="relative ml-5 flex w-full items-center justify-end p-1 sm:right-auto ">
+          <div className="relative ml-5 flex w-full items-center justify-end p-1 sm:right-auto">
             <button
               type="button"
               className="text-4xl text-black focus:outline-none"
