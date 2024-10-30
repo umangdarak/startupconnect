@@ -24,41 +24,47 @@ interface DashBoardInvestorProps {
   searchData: string | null; // Receive search data as a prop
 }
 
-export default function DashBoardInvestor(
-  { searchData }: DashBoardInvestorProps
-) {
+export default function DashBoardInvestor({
+  searchData,
+}: DashBoardInvestorProps) {
   const authState = useSelector((state: RootState) => state.auth);
   const [data, setData] = useState<Project[]>([]);
 
   useEffect(() => {
-    if(searchData){
+    if (searchData) {
       getSearchProjects(searchData);
-    }else{
-    getProjects();}
+    } else {
+      getProjects();
+    }
   }, [searchData]);
 
-  const getSearchProjects = async (title:string) => {
+  const getSearchProjects = async (title: string) => {
     // Ensure the title is URL-encoded to handle special characters
-    const res = await fetch(`http://localhost:8000/search/projects?title=${encodeURIComponent(title)}`, {
-      method: "GET",
-    });
-  
+    const res = await fetch(
+      `http://localhost:8000/search/projects?title=${encodeURIComponent(
+        title
+      )}`,
+      {
+        method: "GET",
+      }
+    );
+
     if (res.ok) {
       const properties = await res.json();
       setData([]);
-      console.log(properties+"here");
-      
-      if(properties.length===0){
+      console.log(properties + "here");
+
+      if (properties.length === 0) {
         console.log("Came here");
-        
+
         getProjects();
-      }else{
-      setData(properties);}
+      } else {
+        setData(properties);
+      }
     } else {
       console.error("Failed to fetch properties");
     }
   };
-  
 
   const getProjects = async () => {
     const res = await fetch(`http://localhost:8000/post/allprojects`, {
@@ -125,44 +131,83 @@ export default function DashBoardInvestor(
 
   return (
     <div className="flex flex-col items-center w-full">
-      
-       {/* Flexbox to center cards vertically */}
-    {data.map((project) => (
-      <div className="card mb-4" key={project.startupId}>
-        <div className="project-header">
-          <div className="image-container">
-            <Image
-              src={project.legalDocuments} // Use the URL directly
-              alt={project.startupId}
-              width={800} // Ensure the image fills the card width
-              height={150} // Fixed height for the image
-              className="object-cover"
-            />
+      <div className="flex flex-wrap bg-white">
+        <div className="w-full lg:w-full rounded-3xl bg-white p-6 mb-8">
+          <div className="flex items-center justify-between text-black mb-8">
+            {authState.user&&<p className="text-2xl font-bold">Welcome {authState.user.fullName}</p>}
           </div>
-          <div className="project-info">
-            <h2 className="project-title">{project.projectTitle}</h2>
+          <div className="max-w-full">
+            {data.map((project) => (
+              <div
+                className="relative grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8 border border-gray-300 transition-transform transform hover:scale-105"
+                key={project.startupId}
+              >
+                <div
+                  className="relative rounded-xl overflow-hidden bg-white text-gray-700 shadow-lg"
+                  style={{ height: "500px" }}
+                >
+                  <Image
+                    src={project.legalDocuments} // Use the URL directly
+                    alt={project.projectTitle} // Use project title for better accessibility
+                    layout="fill"
+                    objectFit="cover"
+                  />
+                </div>
+                <div className="p-8 flex flex-col justify-start h-full bg-white text-gray-700">
+                  <p className="text-2xl font-light leading-normal mb-4">
+                    {project.projectTitle}
+                  </p>
+                  <p className="text-base leading-relaxed mb-2 font-normal text-gray-500">
+                    {project.projectDescription}
+                  </p>
+                  <p>
+                    <strong>Patent Details:</strong> {project.patentDetails}
+                  </p>
+                  <p>
+                    <strong>Target Market:</strong> ${project.targetMarket}
+                  </p>
+                  <p>
+                    <strong>Business Model:</strong> {project.businessModel}
+                  </p>
+                  <p>
+                    <strong>Funding Goals:</strong> {project.fundingGoals}
+                  </p>
+                  <p>
+                    <strong>Use of Funds:</strong> {project.useOfFunds}
+                  </p>
+                  <p>
+                    <strong>Expected ROI:</strong> {project.expectedROI}
+                  </p>
+                  <Button
+                    onClick={() => handleFollow(project.startupId)}
+                    disabled={authState.user?.following?.includes(
+                      project.startupId
+                    )}
+                  >
+                    {authState.user?.following?.includes(project.startupId) ? (
+                      <>Following</>
+                    ) : (
+                      <>Follow</>
+                    )}
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+            transition={Bounce}
+          />
         </div>
-  
-        <div className="card__content">
-          <p className="card__description">{project.projectDescription}</p>
-          <p><strong>Patent Details:</strong> {project.patentDetails}</p>
-          <p><strong>Target Market:</strong> ${project.targetMarket}</p>
-          <p><strong>Business Model:</strong> {project.businessModel}</p>
-          <p><strong>Funding Goals:</strong> {project.fundingGoals}</p>
-          <p><strong>Use of Funds:</strong> {project.useOfFunds}</p>
-          <p><strong>Expected ROI:</strong> {project.expectedROI}</p>
-          <Button
-            onClick={() => handleFollow(project.startupId)}
-            disabled={authState.user?.following?.includes(project.startupId)}
-          >
-            {authState.user?.following?.includes(project.startupId)?<>Following</>:<>Follow</>}
-          </Button>
-        </div>
-        <ToastContainer position="bottom-right" autoClose={5000} hideProgressBar={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" transition={Bounce} />
       </div>
-    ))}
-  </div>
-  
+    </div>
   );
 }

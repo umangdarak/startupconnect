@@ -10,13 +10,17 @@ function Home() {
   const authState = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
-   
+    if(authState.authState){
+    console.log("Auth State Changed:", authState);
     if (authState.userType === 'Startup') {
       router.push("/dashboardStartup");
     } else if (authState.userType === 'Investor') {
       router.push("/dashboardInvestor");
-    }
+    } else {
+      console.log("Redirecting to landing page");
+    }}
   }, [authState]);
+  
 
   if (!authState.authState && !authState.userType) {
     // Show the globe if user is logged in but has no userType yet

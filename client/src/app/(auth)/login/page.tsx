@@ -2,7 +2,7 @@
 import { AlertDialog, Button, Flex, Text } from "@radix-ui/themes";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { motion, px } from "framer-motion";
+import { motion } from "framer-motion";
 import TextField from "@mui/material/TextField";
 import Link from "next/link";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -12,7 +12,6 @@ import { AppDispatch, RootState } from "@/lib/store";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "@/lib/slices/authSlice";
 import styled from "styled-components";
-
 
 export default function Login() {
   const router = useRouter();
@@ -27,9 +26,7 @@ export default function Login() {
     fetchError?: string;
   }>();
   const [alertVisible, setAlertVisible] = useState<boolean>(false);
-  const [otpEmailSent, setOtpEmailSent] = useState(false);
-  const [otpEmail, setOtpEmail] = useState("");
-  const [otpError, setOtpError] = useState("");
+  const [loading, setLoading] = useState<boolean>(false); // New loading state
 
   const validate = () => {
     const errors: { email?: string; password?: string } = {};
@@ -52,6 +49,7 @@ export default function Login() {
     const err = validate();
     setError(err);
     if (Object.keys(err).length === 0) {
+      setLoading(true); // Set loading to true
       try {
         const emailRes = await fetch(`http://localhost:8000/auth/login`, {
           method: "POST",
@@ -63,7 +61,7 @@ export default function Login() {
           }),
         });
         if (!emailRes.ok) {
-          throw new Error("Failed to send OTP to email");
+          throw new Error("Login failed");
         }
         const data = await emailRes.json();
         dispatch(
@@ -73,12 +71,15 @@ export default function Login() {
             userType: userType,
           })
         );
-        
-          router.push("/")
-       
+        if(userType==='Investor'){  router.push("/dashboardInvestor"); }
+        else{
+          router.push("/dashboardStartup");
+        }// Redirect after successful login
       } catch (error) {
-        console.error("Error sending OTP:", error);
+        console.error("Error during login:", error);
         setAlertVisible(true); // Show error alert
+      } finally {
+        setLoading(false); // Reset loading state
       }
     } else {
       setAlertVisible(true); // Show validation errors
@@ -86,35 +87,22 @@ export default function Login() {
   };
 
   const authState = useSelector((state: RootState) => state.auth);
-  
-  useEffect(() => {
-  if(authState.userType==='Startup'){
-      router.push("/dashboardStartup");
-    }else if(authState.userType==='Investor'){
-      router.push('/dashboardInvestor');
-    }else{
-
-    }
-  },[]);
-
 
   return (
     <div className="overflow-hidden">
       {!showForm ? (
         <div className="flex flex-row justify-center items-center" style={{ height: 'calc(100vh - 64px)' }}>
-
           <motion.div
             initial={{ opacity: 1, scale: 0 }}
             animate={{ opacity: showForm ? 0 : 1, scale: 1 }}
             transition={{ duration: 0.5, ease: "linear" }}
             className="flex flex-col justify-center items-center px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 rounded-full"
           >
-      
             <div className="p-10 styled">
-              <div className=" flex flex-row justify-center items-center">
-              <Text className="text-black font">
-                Are you an Investor or an Entrepreneur/Startup Company?
-              </Text>
+              <div className="flex flex-row justify-center items-center">
+                <Text className="text-black font">
+                  Are you an Investor or an Entrepreneur/Startup Company?
+                </Text>
               </div>
               <div className="flex flex-row justify-between w-full px-6 mt-8">
                 <button
@@ -124,7 +112,7 @@ export default function Login() {
                     setShowForm(true);
                   }}
                 >
-                Investor
+                  Investor
                 </button>
                 <button
                   className="button4"
@@ -133,12 +121,10 @@ export default function Login() {
                     setShowForm(true);
                   }}
                 >
-                    Entrepreneur/Startup
+                  Entrepreneur/Startup
                 </button>
               </div>
-              </div>
-            {/* </div>
-            </div> */}
+            </div>
           </motion.div>
         </div>
       ) : (
@@ -165,95 +151,47 @@ export default function Login() {
                     setUserType("");
                     setShowForm(false);
                   }}
-                  className=" button4"
+                  className="button4"
                 >
-                  <ArrowBackIosIcon fontSize="small"  />
+                  <ArrowBackIosIcon fontSize="small" />
                 </button>
                 <div className="w-full items-center justify-center">
                   <div className="text-center">
-                    <h1 className="text-3xl font-semibold text-customBlack">
-                      Login
-                    </h1>
+                    <h1 className="text-3xl font-semibold text-customBlack">Login</h1>
                   </div>
                   <div className="mt-5">
                     <div className="relative mt-6">
-                      
                       <StyledWrapper>
-                      <div className="group">
-          
-          <svg
-            fill="none"
-            viewBox="0 0 24 24"
-            height="24"
-            width="24"
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon"
-          >
-            <path
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              strokeWidth={1.5}
-              stroke="#141B34"
-              d="M7 8.5L9.94202 10.2394C11.6572 11.2535 12.3428 11.2535 14.058 10.2394L17 8.5"
-            />
-            <path
-              strokeLinejoin="round"
-              strokeWidth={1.5}
-              stroke="#141B34"
-              d="M2.01577 13.4756C2.08114 16.5412 2.11383 18.0739 3.24496 19.2094C4.37608 20.3448 5.95033 20.3843 9.09883 20.4634C11.0393 20.5122 12.9607 20.5122 14.9012 20.4634C18.0497 20.3843 19.6239 20.3448 20.7551 19.2094C21.8862 18.0739 21.9189 16.5412 21.9842 13.4756C22.0053 12.4899 22.0053 11.5101 21.9842 10.5244C21.9189 7.45886 21.8862 5.92609 20.7551 4.79066C19.6239 3.65523 18.0497 3.61568 14.9012 3.53657C12.9607 3.48781 11.0393 3.48781 9.09882 3.53656C5.95033 3.61566 4.37608 3.65521 3.24495 4.79065C2.11382 5.92608 2.08114 7.45885 2.01576 10.5244C1.99474 11.5101 1.99475 12.4899 2.01577 13.4756Z"
-            />
-          </svg>
-          <input
-            title="Inpit title"
-            className="input"
-            type="email"
-            id="email_field"
-                        required
-                        name="email"
-                        value={email}
-                        placeholder="Email Address"
-                        onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        </StyledWrapper>
+                        <div className="group">
+                          <input
+                            title="Inpit title"
+                            className="input"
+                            type="email"
+                            id="email_field"
+                            required
+                            name="email"
+                            value={email}
+                            placeholder="Email Address"
+                            onChange={(e) => setEmail(e.target.value)}
+                          />
+                        </div>
+                      </StyledWrapper>
                       {error?.email && <Text className="text-red-600">{error.email}</Text>}
                     </div>
                     <div className="relative mt-6">
-                      {/* <TextField
-                        type="password"
-                        required
-                        id="outlined-basic"
-                        error={error?.password ? true : false}
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                      /> */}
                       <StyledWrapper>
-      <div className="group">
-        <svg
-          stroke="currentColor"
-          strokeWidth={1.5}
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon"
-        >
-          <path
-            d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        </svg>
-        <input className="input" type="password" 
-         required
-         name="password"
-         value={password}
-         onChange={(e) => setPassword(e.target.value)}
-         placeholder="Password"
-    />
-      </div>
-    </StyledWrapper>
+                        <div className="group">
+                          <input
+                            className="input"
+                            type="password"
+                            required
+                            name="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+                          />
+                        </div>
+                      </StyledWrapper>
                       {error?.password && <Text className="text-red-600">{error.password}</Text>}
                     </div>
 
@@ -261,8 +199,9 @@ export default function Login() {
                       <button
                         className="button4"
                         onClick={handleSubmit}
+                        disabled={loading} // Disable button while loading
                       >
-                      Login
+                        {loading ? "Loading..." : "Login"} {/* Change button text based on loading state */}
                       </button>
                     </div>
                     <p className="text-center text-sm text-gray-500">
@@ -270,11 +209,9 @@ export default function Login() {
                       <Link
                         href="/register"
                         className="font-semibold text-gray-600 hover:text-customPurple hover:tracking-wider focus:text-gray-800 focus:outline-none"
-                      
                       >
                         Register
                       </Link>
-
                     </p>
                   </div>
                 </div>
@@ -283,7 +220,7 @@ export default function Login() {
           </motion.div>
         </div>
       )}
- 
+
       {alertVisible && (
         <AlertDialog.Root open={alertVisible}>
           <AlertDialog.Content maxWidth="450px">
@@ -291,18 +228,14 @@ export default function Login() {
             <AlertDialog.Description className="p-4 rounded">
               <Flex className="flex flex-col">
                 {error?.email && <Text className="m-2">{error.email}</Text>}
-                {error?.password && (
-                  <Text className="m-2">{error.password}</Text>
-                )}
-                {error?.fetchError && (
-                  <Text className="m-2">{error.fetchError}</Text>
-                )}
+                {error?.password && <Text className="m-2">{error.password}</Text>}
+                {error?.fetchError && <Text className="m-2">{error.fetchError}</Text>}
               </Flex>
             </AlertDialog.Description>
             <Flex className="flex flex-row justify-center items-center w-full">
               <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
-                <button  className="button4">
-                  <Text > Ok</Text>
+                <button className="button4">
+                  <Text>Ok</Text>
                 </button>
               </AlertDialog.Cancel>
             </Flex>
@@ -313,75 +246,22 @@ export default function Login() {
   );
 }
 
+// Styled Wrapper for input fields
 const StyledWrapper = styled.div`
   .group {
-  display: flex;
-  line-height: 30px;
-  align-items: center;
-  position: relative;
-  
-}
-
-.input_container {
-  width: 100%;
-  height: fit-content;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
-}
-
-
-.input_field {
-  width: auto;
-  height: 40px;
-  padding: 0 0 0 40px;
-  border-radius: 7px;
-  outline: none;
-  border: 1px solid #e5e5e5;
-  filter: drop-shadow(0px 1px 0px #efefef)
-    drop-shadow(0px 1px 0.5px rgba(239, 239, 239, 0.5));
-  transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
-}
-
-.input_field:focus {
-  border: 1px solid transparent;
-  box-shadow: 0px 0px 0px 2px #242424;
-  background-color: transparent;
-}
-
-
-
-.input {
-  width: 100%;
-  height: 45px;
-  line-height: 30px;
-  padding: 0 5rem;
-  padding-left: 3rem;
-  border: 2px solid transparent;
-  border-radius: 10px;
-  outline: none;
-  background-color: #f8fafc;
-  color: #0d0c22;
-  transition: .5s ease;
-}
-
-.input::placeholder {
-  color: #94a3b8;
-}
-
-.input:focus, input:hover {
-  outline: none;
-  border-color: rgba(129, 140, 248);
-  background-color: #fff;
-  box-shadow: 0 0 0 5px rgb(129 140 248 / 30%);
-}
-
-.icon {
-  position: absolute;
-  left: 1rem;
-  fill: none;
-  width: 1rem;
-  height: 1rem;
-}
+    position: relative;
+  }
+  .input {
+    font-family: "Inter", sans-serif;
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    transition: 0.3s;
+  }
+  .input:focus {
+    outline: none;
+    border-color: #9333ea;
+  }
 `;
