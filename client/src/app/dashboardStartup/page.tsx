@@ -154,8 +154,8 @@ export default function DashBoardStartup() {
     <div className="flex  flex-col w-full items-center h-screen justify-center">
       <Box className="flex flex-col w-screen items-center">
         <div className="text-center">
-          <h1 className="text-3xl font-semibold text-customBlack">
-            Project Ideas
+          <h1 className="text-2xl font-semibold text-customBlack mt-10">
+            New Post/Project Idea
           </h1>
         </div>
         <div>

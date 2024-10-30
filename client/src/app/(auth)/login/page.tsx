@@ -152,7 +152,7 @@ export default function Login() {
             <div className="flex justify-center items-cneter object-cover w-full h-full bg-white shadow-xl ring-1 ring-gray-900/5 sm:rounded-xl mt-1">
               <div className="w-1/2 h-full flex justify-center">
                 <Image
-                  src="/images/login2.png"
+                  src="/images/login.png"
                   alt="Login Image"
                   width={600}
                   height={600}
