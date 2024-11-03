@@ -383,8 +383,178 @@ export default function LandingPage() {
         </div>
         {/* END About Us SECTION */}
         {/* For Investors Section */}
+        <div
+          id="forinvestors"
+          className="relative w-full px-4 py-5 border-t border-gray-200 md:py-8 lg:py-10 xl:py-10 xl:px-0"
+        ></div>
+        <div className="relative w-full max-w-7xl mx-auto px-4 py-4">
+          {/* About Investors */}
+          <h2 className="my-5 text-base font-black sm:text-xl xl:text-5xl tracking-tight text-indigo-500 uppercase">
+            Investors
+          </h2>
+          <div className="flex flex-wrap justify-between items-start">
+            <h3 className="max-w-xl px-4 mt-4 text-2xl font-black leading-tight text-gray-900 sm:mt-10 sm:px-0 sm:text-l">
+              At Startup Connect, we empower investors to discover promising startups and
+              explore investment opportunities tailored to their interests. Our platform
+              offers a comprehensive view of startups’ profiles, enabling investors to
+              make informed decisions and contribute to the growth of innovative ideas.
+            </h3>
+            <img
+              src="/images/investor.avif"
+              alt="Investor Section Image"
+              className="w-1/2 max-w-3xl h-1/2 ml-10 mt-5 sm:mt-0"
+            />
+          </div>
+            <div style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif', color: '#333', padding: '40px', backgroundColor: '#fff' }}>
+          {/* What Can You Do Section */}
+          <section>
+            <h2 style={{ fontSize: '1.5rem', color: '#333', marginBottom: '20px' }}>What can you do?</h2>
+
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '60px', marginBottom: '40px' }}>
+              {/* Build your profile */}
+              <div style={{ textAlign: 'left', width: '30%' }}>
+                <div style={{ fontSize: '3rem', color: '#00a1a7' }}>👤</div>
+                <h3 style={{ fontSize: '1.2rem', color: '#333', fontWeight: 'bold', marginTop: '10px' }}>Build your profile</h3>
+                <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '10px' }}>
+                  Get instant visibility of Indian Startup ecosystem.
+                </p>
+                <a href="#" style={{ color: '#00a1a7', fontSize: '0.9rem', textDecoration: 'none' }}>
+                  A quick guide on how to create investor profile
+                </a>
+              </div>
+
+              {/* Create investment opportunities */}
+              <div style={{ textAlign: 'left', width: '30%' }}>
+                <div style={{ fontSize: '3rem', color: '#00a1a7' }}>💰</div>
+                <h3 style={{ fontSize: '1.2rem', color: '#333', fontWeight: 'bold', marginTop: '10px' }}>Create investment opportunities</h3>
+                <p style={{ fontSize: '0.9rem', color: '#666', marginBottom: '10px' }}>
+                  Identify matching startups based on your requirement.
+                </p>
+                <a href="#" style={{ color: '#00a1a7', fontSize: '0.9rem', textDecoration: 'none' }}>
+                  A quick guide to create investment opportunity
+                </a>
+              </div>
+            </div>
+
+        {/* Example profile card
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div style={{ backgroundColor: '#f5f5f5', padding: '20px', borderRadius: '10px', width: '70%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
+              <img src="https://example.com/logo.png" alt="Company Logo" style={{ width: '40px', height: '40px', borderRadius: '5px' }} />
+              <h3 style={{ fontSize: '1.2rem', color: '#333', margin: 0 }}>Sidbi Company</h3>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#666' }}>
+              <div>
+                <p><strong>Technology Focus:</strong> AdTech, 3D Printing</p>
+                <p><strong>Investor Type:</strong> Government</p>
+              </div>
+              <div>
+                <p><strong>Year of Establishment:</strong> 2000</p>
+                <p><strong>Employee Count:</strong> 51 to 200</p>
+              </div>
+              <div>
+                <p><strong>Headquarters:</strong> Delhi, India</p>
+                <p><strong>Website:</strong> <a href="https://sidbi.in" style={{ color: '#00a1a7', textDecoration: 'none' }}>sidbi.in</a></p>
+              </div>
+            </div>
+          </div>
+        </div> */}
+        
+      </section>
+      </div>
+    </div>
         {/* End Investors Section */}
         {/* For Startups Section */}
+        <div
+          id="forstartups"
+          className="relative w-full px-4 py-5 border-t border-gray-200 md:py-8 lg:py-10 xl:py-10 xl:px-0"
+        ></div>
+         <div className="relative w-full max-w-7xl mx-auto px-4 py-4">
+            <div style={{ textAlign: 'center', fontFamily: 'Arial, sans-serif', color: '#333' }}>
+          {/* How Does It Work Section */}
+          {/* About Startups */}
+          <h2 className="my-5 text-base font-black sm:text-xl xl:text-5xl tracking-tight text-indigo-500 uppercase">
+            Startups
+          </h2>
+          <div className="flex flex-wrap justify-between items-start">
+            <h3 className="max-w-xl px-4 mt-2 text-2xl font-black leading-tight text-gray-900 sm:mt-10 sm:px-0 sm:text-l">
+              For startups, Startup Connect serves as a launchpad to reach potential
+              investors and gain visibility within the Indian startup ecosystem. We support
+              startups in building robust profiles and presenting their unique value
+              propositions, helping them connect with investors who share their vision and
+              can fuel their journey toward success.
+            </h3>
+            <img
+              src="/images/startup.jpg"
+              alt="Startup Section Image"
+              className="w-1/2 max-w-3xl h-1/2 ml-10 mt-5 sm:mt-0"
+            />
+          </div>
+          <section style={{ padding: '40px', backgroundColor: '#f5f5f5' }}>
+            <h2 style={{ fontSize: '1.5rem', color: '#333', marginBottom: '10px' }}>How does it work?</h2>
+            <p style={{ fontSize: '1rem', color: '#666', marginBottom: '30px' }}>
+              We know all great innovations need a big voice to stand out from the noise and be spotted by the right
+              audience. So we offer you even more opportunities to get noticed.
+            </p>
+            
+            <div style={{ display: 'flex', justifyContent: 'space-around', gap: '20px' }}>
+              {/* Step 1 */}
+              <div
+                style={{
+                  backgroundColor: '#e0f7fa',
+                  padding: '20px',
+                  borderRadius: '10px',
+                  width: '30%',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                }}
+              >
+                <div style={{ fontSize: '1.5rem', color: '#00c0ff', fontWeight: 'bold' }}>1</div>
+                <h3 style={{ color: '#333', fontSize: '1.2rem', marginTop: '10px' }}>Create your profile</h3>
+                <p style={{ fontSize: '0.9rem', color: '#555' }}>
+                  Get instant visibility on our platform. Just so you know, you control what is, and what isn’t visible to
+                  your profile visitors.
+                </p>
+              </div>
+
+              {/* Step 2 */}
+              <div
+                style={{
+                  backgroundColor: '#e0f7fa',
+                  padding: '20px',
+                  borderRadius: '10px',
+                  width: '30%',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                }}
+              >
+                <div style={{ fontSize: '1.5rem', color: '#00c0ff', fontWeight: 'bold' }}>2</div>
+                <h3 style={{ color: '#333', fontSize: '1.2rem', marginTop: '10px' }}>Apply for Investments</h3>
+                <p style={{ fontSize: '0.9rem', color: '#555' }}>
+                  Search for the right investment partner, suitable for your business needs. Apply to meet the investment
+                  requirements of investors.
+                </p>
+              </div>
+
+              {/* Step 3 */}
+              <div
+                style={{
+                  backgroundColor: '#e0f7fa',
+                  padding: '20px',
+                  borderRadius: '10px',
+                  width: '30%',
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                }}
+              >
+                <div style={{ fontSize: '1.5rem', color: '#00c0ff', fontWeight: 'bold' }}>3</div>
+                <h3 style={{ color: '#333', fontSize: '1.2rem', marginTop: '10px' }}>Start unlocking investment opportunities</h3>
+                <p style={{ fontSize: '0.9rem', color: '#555' }}>
+                  Once your profile is validated, corporate investors and VCs seeking your innovation will be able to
+                  connect with you.
+                </p>
+              </div>
+            </div>
+      </section>
+      </div>
+    </div>
         {/* End Startups Section */}
         <footer className="px-4 pt-12 pb-8 text-white bg-white border-t border-gray-200">
           <div className="container flex flex-col justify-between max-w-6xl px-4 mx-auto overflow-hidden lg:flex-row">
@@ -416,7 +586,7 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a
-                    href="#forstartups"
+                    href="#forinvestors"
                     className="inline-block px-3 py-2 text-gray-500 no-underline hover:text-gray-600"
                   >
                     Investors
@@ -424,7 +594,7 @@ export default function LandingPage() {
                 </li>
                 <li>
                   <a
-                    href="#_"
+                    href="#forstartups"
                     className="inline-block px-3 py-2 text-gray-500 no-underline hover:text-gray-600"
                   />
                 </li>
