@@ -29,6 +29,7 @@ export default function RegisterStartup() {
   const [userotp, setUserotp] = useState<string>();
   const [otpverified, setOtpVerified] = useState<boolean>(false);
   const router=useRouter();
+  const [patentVerified,setPatentVerified]=useState<boolean>(false);
   const [errors, setErrors] = useState<{
     companyName?: string;
     fullName?: string;
@@ -80,15 +81,14 @@ export default function RegisterStartup() {
       errors.linkedInProfile = "LinkedIn Profile is required";
     
     if (!patentApplicationNumber){
-      errors.patentApplicationNumber = "LinkedIn Profile is required";
+      errors.patentApplicationNumber = "Patent Number is required";
     }
     
 
     return errors;
   };
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     const err = validate();
     setErrors(err);
     if (Object.keys(err).length === 0 && otpverified) {
@@ -119,6 +119,20 @@ export default function RegisterStartup() {
       setAlertVisible(true);
     }
   };
+
+const validatePatentId=async()=>{
+  try{
+  const res=await fetch(`http://localhost:8000/patent/${patentApplicationNumber}`,{
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if(res.ok){
+    const data=await res.json();
+    setPatentVerified(true);
+  }}catch(e){
+    console.log(e);
+  }
+}
 
   const requestotp = () => {
     if (!email) {
@@ -179,9 +193,8 @@ export default function RegisterStartup() {
             </h1>
           </div>
           <div className="mt-10 w-full bg-white shadow-2xl rounded-lg overflow-hidden">
-            <form
+            <div
               className="py-4 px-6 grid grid-cols-1 md:grid-cols-2 gap-4"
-              onSubmit={handleSubmit}
             >
               <div className="mb-4">
                 <label
@@ -431,6 +444,7 @@ export default function RegisterStartup() {
               </div>
 
               <div className="mb-4 col-span-2">
+                <div className="flex flex-row">
                 <label
                   className="block text-gray-700 font-bold mb-1 px-1"
                   htmlFor="Patent Application Number"
@@ -453,27 +467,31 @@ export default function RegisterStartup() {
                   size="small"
                   className="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
+                                  <button className="button2" onClick={validatePatentId}><Text className=" text-xs">Validate Patent Id</Text></button>
+
+                </div>
                 {errors?.patentApplicationNumber && (
                   <Text>{errors.patentApplicationNumber}</Text>
                 )}
+                {patentVerified?<>Patent Verified</>:<>PatentNotVerified</>}
               </div>
                 <div className="flex flex-row w-full justify-center items-center col-span-2
                 ">
               <button
-                type="submit"
                 className="button4"
+                onClick={handleSubmit}
               >
                 Submit
               </button>
               </div>
-            </form>
+            </div>
           </div>
         </Box>
       </div>
       {alertVisible && (
         <AlertDialog.Root open={alertVisible}>
           <AlertDialog.Content maxWidth="450px">
-            <AlertDialog.Title>Login Unsuccessful</AlertDialog.Title>
+            <AlertDialog.Title>Registration Unsuccessful</AlertDialog.Title>
             <AlertDialog.Description className="p-4 rounded">
               <Flex className="flex flex-col">
                 {errors?.companyName && (
@@ -501,9 +519,6 @@ export default function RegisterStartup() {
                 {errors?.linkedInProfile && (
                   <Text className="m-2">{errors.linkedInProfile}</Text>
                 )}
-                {errors?.patentApplicationNumber && (
-                  <Text className="m-2">{errors.patentApplicationNumber}</Text>
-                )}
                 {errors?.fetchError && (
                   <Text className="m-2">{errors.fetchError}</Text>
                 )}
@@ -514,12 +529,13 @@ export default function RegisterStartup() {
                   <Text className="m-2">{errors.patentApplicationNumber}</Text>
                 )}
                 {!otpverified&&<Text className="m-2">Otp Not Verified</Text>}
+                {!patentVerified&&<Text className="m-2">Patent Not Verified</Text>}
               </Flex>
             </AlertDialog.Description>
             <Flex className="flex flex-row justify-center items-center w-full">
               <AlertDialog.Cancel onClick={() => setAlertVisible(false)}>
                 <button className="button4">
-                  <Text className="text-white text-lg font-light"> Ok</Text>
+                  <Text > Ok</Text>
                 </button>
               </AlertDialog.Cancel>
             </Flex>

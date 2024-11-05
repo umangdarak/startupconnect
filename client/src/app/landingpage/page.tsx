@@ -1,19 +1,31 @@
 "use client";
-import Link from "next/link";
-import React from "react";
-import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
-import { useRouter } from "next/navigation";
+import { RootState } from "@/lib/store";
+import {useRouter,redirect} from "next/navigation";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 
 export default function LandingPage() {
-  const router=useRouter();
+  // useEffect(() => {
+  //   console.log('Component mounted');
+  //   return () => {
+  //     console.log('Component unmounted');
+  //   };
+  // }, []);
+const router=useRouter();
+  const authState = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    console.log("Auth state changed:", authState);
+    if (authState.authState) {
+      if (authState.userType === 'Startup') {
+        router.push("/dashboardStartup");
+      } else if (authState.userType === 'Investor') {
+        router.push("/dashboardInvestor");
+      }
+    }
+  }, [authState, router]);
     return (<div >
-
-
-        <br className=" mt-64"/>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Startup Connect</title>
       
         <link
           rel="stylesheet"
@@ -29,7 +41,7 @@ export default function LandingPage() {
           <div className="container flex items-center justify-center h-full max-w-8xl px-8 mx-auto sm:justify-between xl:px-0">
             <a
               href="/"
-              className="relative flex items-center inline-block h-5 h-full font-black leading-none"
+              className="relative flex items-center  h-5  font-black leading-none"
             >
               <img
                 src="images\logo.png"
@@ -42,7 +54,7 @@ export default function LandingPage() {
             </a>
             <nav
               id="nav"
-              className="absolute top-0 left-0 z-50 flex flex-col items-center justify-between hidden w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative"
+              className="absolute top-0 left-0 z-50 flex flex-col items-center justify-between  w-full h-64 pt-5 mt-24 text-sm text-gray-800 bg-white border-t border-gray-200 md:w-auto md:flex-row md:h-24 lg:text-base md:bg-transparent md:mt-0 md:border-none md:py-0 md:flex md:relative"
             >
               <a
                 href="#"
@@ -79,13 +91,13 @@ export default function LandingPage() {
             </nav>
             <div className="absolute left-0 flex-col items-center justify-center hidden w-full pb-8 mt-48 border-b border-gray-200 md:relative md:w-auto md:bg-transparent md:border-none md:mt-0 md:flex-row md:p-0 md:items-end md:flex md:justify-between">
               <button
-                onClick={()=>{router.push("/login")}}
+              onClick={()=>{router.push("/login")}}
                 className="relative z-40 px-3 py-2 mr-0 text-sm font-bold text-pink-500 md:px-5 lg:text-white sm:mr-3 md:mt-0"
               >
                 Login
               </button>
               <button
-                              onClick={()=>{router.push("/register")}}
+              onClick={()=>{router.push("/register")}}
 
                 className="relative z-40 inline-block w-auto h-full px-5 py-3 text-sm font-bold leading-none text-white transition-all transition duration-100 duration-300 bg-indigo-700 rounded shadow-md fold-bold lg:bg-white lg:text-indigo-700 sm:w-full lg:shadow-none hover:shadow-xl"
               >
@@ -176,7 +188,7 @@ export default function LandingPage() {
         </header>
         {/* End Header Section*/}
         {/* BEGIN HERO SECTION */}
-        <div className="relative items-center justify-center w-full overflow-x-hidden lg:pt-40 lg:pb-40 xl:pt-40 xl:pb-64">
+        <div className=" items-center justify-center w-full overflow-x-hidden lg:pt-40 lg:pb-40 xl:pt-40 xl:pb-64">
           <div className="container flex flex-col items-center justify-between h-full max-w-8xl px-8 mx-auto -mt-32 lg:flex-row xl:px-0">
             <div className="z-30 flex flex-col items-center w-full max-w-xl pt-48 text-center lg:items-start lg:w-1/2 lg:pt-20 xl:pt-30 lg:text-left">
               <h1 className="relative mb-1 text-5xl font-black leading-tight text-gray-900 sm:text-6xl xl:mb-4">
@@ -192,12 +204,12 @@ export default function LandingPage() {
                 to connect you with the right resources and networks. Join us and turn
                 your ideas into reality!"
               </p>
-              <Link
-                href="/register"
-                className="relative self-start inline-block w-auto px-8 py-4 mx-auto mt-0 text-base font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold lg:mx-0"
+              <button
+              onClick={()=>{router.push("/register")}}
+              className="relative self-start inline-block w-auto px-8 py-4 mx-auto mt-0 text-base font-bold text-white bg-indigo-600 border-t border-gray-200 rounded-md shadow-xl sm:mt-1 fold-bold lg:mx-0"
               >
                 Signup Today!
-              </Link>
+              </button>
               {/* Integrates with section */}
               <svg
                 className="absolute left-0 max-w-md mt-24 -ml-64 left-svg"
@@ -436,30 +448,6 @@ export default function LandingPage() {
               </div>
             </div>
 
-        {/* Example profile card
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <div style={{ backgroundColor: '#f5f5f5', padding: '20px', borderRadius: '10px', width: '70%', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '10px' }}>
-              <img src="https://example.com/logo.png" alt="Company Logo" style={{ width: '40px', height: '40px', borderRadius: '5px' }} />
-              <h3 style={{ fontSize: '1.2rem', color: '#333', margin: 0 }}>Sidbi Company</h3>
-            </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.9rem', color: '#666' }}>
-              <div>
-                <p><strong>Technology Focus:</strong> AdTech, 3D Printing</p>
-                <p><strong>Investor Type:</strong> Government</p>
-              </div>
-              <div>
-                <p><strong>Year of Establishment:</strong> 2000</p>
-                <p><strong>Employee Count:</strong> 51 to 200</p>
-              </div>
-              <div>
-                <p><strong>Headquarters:</strong> Delhi, India</p>
-                <p><strong>Website:</strong> <a href="https://sidbi.in" style={{ color: '#00a1a7', textDecoration: 'none' }}>sidbi.in</a></p>
-              </div>
-            </div>
-          </div>
-        </div> */}
-        
       </section>
       </div>
     </div>

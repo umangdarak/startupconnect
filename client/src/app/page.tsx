@@ -17,9 +17,8 @@ function Home() {
     } else if (authState.userType === 'Investor') {
       router.push("/dashboardInvestor");
     } else {
-      console.log("Redirecting to landing page");
     }}
-  }, [authState]);
+  }, [authState,router]);
   
 
   if (!authState.authState && !authState.userType) {

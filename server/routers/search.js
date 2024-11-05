@@ -11,9 +11,8 @@ router.get("/projects", async (req, res) => {
   }
 
   try {
-    // Perform a case-insensitive search using a regex
     const projects = await Project.find({
-      projectTitle: { $regex: new RegExp(title, 'i') }, // 'i' makes the search case-insensitive
+      projectTitle: { $regex: new RegExp(title, 'i') },
     });
 
     if (projects.length === 0) {

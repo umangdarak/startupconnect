@@ -52,11 +52,8 @@ export default function DashBoardInvestor({
     if (res.ok) {
       const properties = await res.json();
       setData([]);
-      console.log(properties + "here");
 
       if (properties.length === 0) {
-        console.log("Came here");
-
         getProjects();
       } else {
         setData(properties);
@@ -148,8 +145,10 @@ export default function DashBoardInvestor({
                 >
                   <Image
                     src={project.legalDocuments} // Use the URL directly
-                    alt={project.projectTitle} // Use project title for better accessibility
-                    layout="fill"
+                    alt={project.projectTitle} 
+                    // Use project title for better accessibility
+                    width={700}
+                    height={700}
                     objectFit="cover"
                   />
                 </div>

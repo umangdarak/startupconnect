@@ -86,8 +86,19 @@ export default function Login() {
     }
   };
 
+
   const authState = useSelector((state: RootState) => state.auth);
 
+  useEffect(() => {
+    console.log("Auth state changed:", authState);
+    if (authState.authState) {
+      if (authState.userType === 'Startup') {
+        router.push("/dashboardStartup");
+      } else if (authState.userType === 'Investor') {
+        router.push("/dashboardInvestor");
+      }
+    }
+  }, [authState, router]);
   return (
     <div className="overflow-hidden">
       {!showForm ? (
