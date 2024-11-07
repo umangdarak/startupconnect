@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { TextField, MenuItem, Box, Button } from '@mui/material';
-
+import { RootState } from "@/lib/store";
+import { useSelector } from "react-redux";
 const Overview: React.FC = () => {
   // State to manage edit mode and form values
+  const authState = useSelector((state: RootState) => state.auth);
+
   const [isEditing, setIsEditing] = useState(false);
   const [formValues, setFormValues] = useState({
     title: '',
@@ -59,7 +62,7 @@ const Overview: React.FC = () => {
           margin="normal"
           variant="outlined"
           name="title"
-          value={formValues.title}
+          value={formValues.title??authState.user?.companyName}
           onChange={handleChange}
           disabled={!isEditing}
         />

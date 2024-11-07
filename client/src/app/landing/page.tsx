@@ -3,6 +3,7 @@ import { RootState } from "@/lib/store";
 import {useRouter,redirect} from "next/navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 
 
 export default function LandingPage() {
@@ -625,7 +626,7 @@ const router=useRouter();
           </div>
           <div className="pt-2 pt-4 mt-2 text-center text-gray-600 border-t border-gray-100">
             Distributed By{" "}
-            <a href="https://www.cvr.ac.in/">CVR COLLEGE OF ENGINEERING</a>
+            <Link href="https://www.cvr.ac.in/">CVR COLLEGE OF ENGINEERING</Link>
           </div>
         </footer>
         {/* a little JS for the mobile nav button */}

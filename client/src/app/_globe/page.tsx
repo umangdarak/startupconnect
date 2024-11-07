@@ -397,7 +397,7 @@ export default function GlobeDemo() {
   const router=useRouter();
   useEffect(()=>{
     setInterval(()=>{
-      router.push("/landingpage");
+      router.push("/landing");
     },7000);
   },[])
   return (

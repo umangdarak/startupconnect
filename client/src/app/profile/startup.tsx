@@ -96,6 +96,8 @@ import Documents from "./documents";
 import Overview from "./overview";
 import { DashboardLayout } from "../dashboard/DashBoardLayout";
 
+import { RootState } from "@/lib/store";
+import { useSelector } from "react-redux";
 interface StartupProfileProps {
   startup: {
     companyName: string;
@@ -112,6 +114,7 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [profileData, setProfileData] = useState({ ...startup });
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const authState = useSelector((state: RootState) => state.auth);
 
   const handleEditToggle = () => setIsEditing(!isEditing);
   
@@ -179,7 +182,7 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
             fullWidth
             label="Company Name"
             name="companyName"
-            value={profileData.companyName}
+            value={profileData.companyName??authState.user?.companyName}
             onChange={handleChange}
             disabled={!isEditing}
             variant="outlined"
@@ -189,7 +192,7 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
             fullWidth
             label="Description"
             name="description"
-            value={profileData.description}
+            value={profileData.description??authState.user?.companyDescription}
             onChange={handleChange}
             disabled={!isEditing}
             variant="outlined"
@@ -233,7 +236,7 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
             fullWidth
             label="Sector"
             name="sector"
-            value={profileData.sector}
+            value={profileData.sector??authState.user?.industry}
             onChange={handleChange}
             disabled={!isEditing}
             variant="outlined"
