@@ -31,6 +31,7 @@ Router.post("/followreq", async (req, res) => {
       startupId: startupId,
     });
     const startup = await Startup.find({
+      _id:startupId,
       followers: investorId,
     });
     if (startup.length > 0) {

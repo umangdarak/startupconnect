@@ -11,37 +11,43 @@ export default function FollowRequests() {
     interface Follow {
         startupId: string;
         investorId: string;
+        name:string;
         createdAt: Date;
     }
     const [followRequests, setFollowRequests] = useState<Follow[]>([]);
 
-    const getRequests = async () => {
-        try {
-            const res = await fetch(`http://localhost:8000/follow/getfollowrequest`, {
-                method: "POST",
-                headers: { "Content-type": "application/json" },
-                body: JSON.stringify({
-                    startupId: authState.user!["_id"],
-                }),
-            });
-            if (res.ok) {
-                const data1 = await res.json();
-                setFollowRequests(data1);
-            } else {
-                toast.error(await res.json(), {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "dark",
-                    transition: Bounce,
-                });
-            }
-        } catch (e: any) {
-            toast.error(e.message || "An error occurred", {
+   const getRequests = async () => {
+    try {
+        const res = await fetch(`http://localhost:8000/follow/getfollowrequest`, {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify({
+                startupId: authState.user!["_id"],
+            }),
+        });
+        
+        if (res.ok) {
+            const data1 = await res.json();
+            console.log(data1);
+            
+            // Iterate over each follow request to fetch investor names
+            const followRequestsWithNames = await Promise.all(
+                data1.map(async (request:Follow) => {
+                    const res1 = await fetch(`http://localhost:8000/search/getnameinvestor?id=${encodeURIComponent(request.investorId)}`);
+                    if (res1.ok) {
+                        const data2 = await res1.json();
+                        return { ...request, name: data2.fullName };
+                    } else {
+                        console.error("Failed to fetch investor name.");
+                        return request; // Return request without name if fetching name fails
+                    }
+                })
+            );
+            
+            setFollowRequests(followRequestsWithNames);
+        } else {
+            const errorMsg = await res.json();
+            toast.error(errorMsg.message || "Failed to get follow requests", {
                 position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -53,7 +59,21 @@ export default function FollowRequests() {
                 transition: Bounce,
             });
         }
-    };
+    } catch (e: any) {
+        toast.error(e.message || "An error occurred", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+        });
+    }
+};
+
 
     const acceptFollow = async (startupId: string, investorId: string) => {
         try {
@@ -115,9 +135,15 @@ export default function FollowRequests() {
                 {followRequests.length > 0 ? (
                     followRequests.map((req) => (
                         <div key={req.investorId} className="bg-gray-700 p-2 rounded-md flex justify-between items-center">
-                            <Text className="text-white">
-                                {req.investorId} sent a follow request
+                           <div className='flex flex-row'>
+                            <Text className="text-white mx-2">
+                             {req.name}
                             </Text>
+                            <Text
+                            className="text-white">
+                             sent a follow request
+                            </Text>
+                            </div> 
                             <Button
                                 onClick={() => {
                                     acceptFollow(req.startupId, req.investorId);
