@@ -6,10 +6,10 @@ const Documents: React.FC = () => {
   return (
     <StyledDocuments>
       <h2>Documents</h2>
-      <Box className="documents-container">
+      <div className="documents-container">
         <DocumentUpload title="Pitch Deck" />
         <DocumentUpload title="Other Documents" />
-      </Box>
+      </div>
     </StyledDocuments>
   );
 };

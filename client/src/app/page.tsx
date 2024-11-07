@@ -21,12 +21,9 @@ function Home() {
   }, [authState,router]);
   
 
-  if (!authState.authState && !authState.userType) {
-    // Show the globe if user is logged in but has no userType yet
-    return <GlobeDemo />;
-  }
 
-  return null; // Return null when redirecting
+
+  return <GlobeDemo />; // Return null when redirecting
 }
 
 export default Home;

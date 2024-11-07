@@ -34,7 +34,14 @@ export default function Profile() {
                     }}
                 />
             ) : (
-                <StartupProfile />
+                <StartupProfile startup={{
+                    companyName: authState.user?.companyName,
+                    description: authState.user?.companyDescription,
+                    websiteUrl: "",
+                    country: "",
+                    city: "",
+                    sector: authState.user?.industry
+                  }}/>
             )}
         </>
     );

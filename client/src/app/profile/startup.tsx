@@ -1,103 +1,11 @@
-// "use client";
-// import { Box, Button, TextField, Typography } from "@mui/material";
-// import { useState } from "react";
-// import Documents from "./documents";
-// import Overview from "./overview";
-// import { DashboardLayout } from "../dashboard/DashBoardLayout";
-
-// export default function StartupProfile() {
-//   const [type, setType] = useState<string>("Overview");
-
-//   return (
-//     <Box sx={{ width: '100%', p: 3 }} className="bg-white">
-//       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
-//         <h1>Profile</h1>
-//         {/* <Button variant="contained" color="primary">Preview Profile</Button> */}
-//       </Box>
-//       <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
-//         <Box
-//           sx={{
-//             width: 150,
-//             height: 150,
-//             border: '1px dashed grey',
-//             display: 'flex',
-//             alignItems: 'center',
-//             justifyContent: 'center',
-//             flexDirection: 'column',
-//             mt: 2,
-//             mr: 3,
-//           }}
-//         >
-//           <Typography variant="body2" color="textSecondary">
-//             Drag & Drop
-//           </Typography>
-//           <Typography variant="body2" color="textSecondary">
-//             or
-//           </Typography>
-//           <Button variant="contained" size="small">Upload</Button>
-//         </Box>
-//         <Box sx={{ flexGrow: 1 }}>
-//           <TextField
-//             fullWidth
-//             label="Company Name"
-//             variant="outlined"
-//             margin="normal"
-//             disabled
-//           />
-//           <TextField
-//             fullWidth
-//             label="Add 1-2 sentences of description for the project that will be displayed to investors as a sneak peek on the platform, our newsletters, etc."
-//             variant="outlined"
-//             margin="normal"
-//             multiline
-//             rows={2}
-//           />
-//           <Box sx={{ display: 'flex', gap: 2 }}>
-//             <TextField
-//               fullWidth
-//               label="Website URL"
-//               variant="outlined"
-//               margin="normal"
-//             />
-//             <TextField
-//               fullWidth
-//               label="Country"
-//               variant="outlined"
-//               margin="normal"
-//             />
-//             <TextField
-//               fullWidth
-//               label="Type city"
-//               variant="outlined"
-//               margin="normal"
-//             />
-//           </Box>
-//           {/* <Button variant="contained" color="primary" sx={{ mt: 2 }}>
-//             Add sector
-//           </Button> */}
-//         </Box>
-//       </Box>
-//       <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
-//         <Button onClick={() => setType("Overview")} sx={{ textTransform: 'none', mr: 2 }}>
-//           Overview
-//         </Button>
-//         <Button onClick={() => setType("Documents")} sx={{ textTransform: 'none', mr: 2 }}>
-//           Documents
-//         </Button>
-//       </Box>
-//       {type === "Documents" ? <Documents /> : <Overview />}
-//     </Box>
-//   );
-// }
 "use client";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import Documents from "./documents";
 import Overview from "./overview";
-import { DashboardLayout } from "../dashboard/DashBoardLayout";
-
 import { RootState } from "@/lib/store";
 import { useSelector } from "react-redux";
+
 interface StartupProfileProps {
   startup: {
     companyName: string;
@@ -117,10 +25,10 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
   const authState = useSelector((state: RootState) => state.auth);
 
   const handleEditToggle = () => setIsEditing(!isEditing);
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setProfileData(prevData => ({
+    setProfileData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -138,26 +46,26 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
   };
 
   return (
-    <Box sx={{ width: '100%', p: 3 }} className="bg-white">
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+    <div style={{ width: "100%", padding: "24px", backgroundColor: "white" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
         <h1>Profile</h1>
         <Button variant="outlined" color="primary" onClick={handleEditToggle}>
           {isEditing ? "Save Changes" : "Edit"}
         </Button>
-      </Box>
+      </div>
 
-      <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 3 }}>
-        <Box
-          sx={{
-            width: 150,
-            height: 150,
-            border: '1px dashed grey',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            mt: 2,
-            mr: 3,
+      <div style={{ display: "flex", alignItems: "flex-start", marginBottom: "24px" }}>
+        <div
+          style={{
+            width: "150px",
+            height: "150px",
+            border: "1px dashed grey",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            marginTop: "16px",
+            marginRight: "24px",
           }}
         >
           <Typography variant="body2" color="textSecondary">
@@ -175,14 +83,14 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
           <Button variant="contained" size="small" onClick={() => document.getElementById("upload-input")?.click()}>
             Upload
           </Button>
-        </Box>
+        </div>
 
-        <Box sx={{ flexGrow: 1 }}>
+        <div style={{ flexGrow: 1 }}>
           <TextField
             fullWidth
             label="Company Name"
             name="companyName"
-            value={profileData.companyName??authState.user?.companyName}
+            value={profileData.companyName ?? authState.user?.companyName}
             onChange={handleChange}
             disabled={!isEditing}
             variant="outlined"
@@ -192,7 +100,7 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
             fullWidth
             label="Description"
             name="description"
-            value={profileData.description??authState.user?.companyDescription}
+            value={profileData.description ?? authState.user?.companyDescription}
             onChange={handleChange}
             disabled={!isEditing}
             variant="outlined"
@@ -200,7 +108,7 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
             multiline
             rows={2}
           />
-          <Box sx={{ display: 'flex', gap: 2 }}>
+          <div style={{ display: "flex", gap: "16px" }}>
             <TextField
               fullWidth
               label="Website URL"
@@ -231,32 +139,32 @@ const StartupProfile: React.FC<StartupProfileProps> = ({ startup }) => {
               variant="outlined"
               margin="normal"
             />
-          </Box>
+          </div>
           <TextField
             fullWidth
             label="Sector"
             name="sector"
-            value={profileData.sector??authState.user?.industry}
+            value={profileData.sector ?? authState.user?.industry}
             onChange={handleChange}
             disabled={!isEditing}
             variant="outlined"
             margin="normal"
           />
-        </Box>
-      </Box>
+        </div>
+      </div>
 
-      <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
-        <Button onClick={() => setType("Overview")} sx={{ textTransform: 'none', mr: 2 }}>
+      <div style={{ borderBottom: "1px solid #e0e0e0", marginBottom: "24px" }}>
+        <Button onClick={() => setType("Overview")} style={{ textTransform: "none", marginRight: "16px" }}>
           Overview
         </Button>
-        <Button onClick={() => setType("Documents")} sx={{ textTransform: 'none', mr: 2 }}>
+        <Button onClick={() => setType("Documents")} style={{ textTransform: "none", marginRight: "16px" }}>
           Documents
         </Button>
-      </Box>
+      </div>
 
       {type === "Documents" ? <Documents /> : <Overview />}
-    </Box>
+    </div>
   );
-}
+};
 
 export default StartupProfile;
